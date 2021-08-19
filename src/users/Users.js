@@ -4,7 +4,7 @@ import imgHeader from '../assets/img/img-header.png';
 import { context } from '../App';
 import CardCoffe from './cardsProducts/CardCoffe';
 
-const Guest = () => {
+const Users = () => {
   const { coffeeVariant } = useContext(context);
 
   const cardCoffee = coffeeVariant.map((coffee) => {
@@ -35,4 +35,4 @@ const Guest = () => {
   );
 };
 
-export default Guest;
+export default Users;

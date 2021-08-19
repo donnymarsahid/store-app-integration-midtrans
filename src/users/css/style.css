@@ -167,6 +167,16 @@ section.varian .container .row .col-md-3 .box-card img {
   cursor: pointer;
   position: relative;
 }
+section.varian .container .row .col-md-3 .box-card .image-card .whistlist {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: white;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  width: 50px;
+  height: 40px;
+}
 section.varian .container .row .col-md-3 .box-card .image-card .whistlist button {
   border: none;
   background-color: transparent;
