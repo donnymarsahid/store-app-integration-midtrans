@@ -1,11 +1,25 @@
 import React from 'react';
 import '../css/style.css';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import logoWaysBucks from '../../assets/img/logo-waysbucks.svg';
+import swal from 'sweetalert';
 
 const Navbar = () => {
+  const history = useHistory();
   const handlerLogout = () => {
-    window.location.reload();
+    swal({
+      title: 'Are you sure logout?',
+      text: 'You will be logged out of the user page',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true,
+    }).then((logout) => {
+      if (logout) {
+        localStorage.setItem('login_auth', false);
+        history.push('/');
+        window.location.reload();
+      }
+    });
   };
   return (
     <>
