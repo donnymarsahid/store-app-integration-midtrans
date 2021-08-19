@@ -148,4 +148,32 @@ section.varian .container .row .col-md-3 .box-card:hover {
 section.varian .container .row .col-md-3 .box-card .description {
   padding: 8px 8px 3px 8px;
 }
+section.varian .container .row .col-md-3 .box-card .overlay {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 100%;
+  height: 80%;
+  top: 0;
+  opacity: 0;
+  transition: 0.2s;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+section.varian .container .row .col-md-3 .box-card .overlay:hover {
+  opacity: 1;
+}
+section.varian .container .row .col-md-3 .box-card .overlay button {
+  background-color: transparent;
+  border-radius: 5px;
+  color: white;
+  border: 2px solid white;
+  padding: 5px 8px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  transition: 0.2s;
+}
+section.varian .container .row .col-md-3 .box-card .overlay button:hover {
+  background-color: var(--primaryColor);
+  border: 2px solid var(--primaryColor);
+}
 /* Section Varian End */

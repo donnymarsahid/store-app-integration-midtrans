@@ -13,6 +13,9 @@ const CardCoffe = ({ coffee }) => {
         <div class="box-card">
           <div class="image-card">
             <img src={`${IMG_URL}${coffee.image}`} alt={coffee.image} />
+            <div class="overlay d-flex justify-content-center align-items-center">
+              <button>ORDER NOW</button>
+            </div>
             <div class="whistlist d-flex align-items-center justify-content-center">
               <button class={`btn${coffee.id}`} onClick={handlerWhistlist}>
                 <i class="far fa-heart"></i>
