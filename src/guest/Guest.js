@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './css/style.css';
 import imgHeader from '../assets/img/img-header.png';
+import { context } from '../App';
+import CardCoffe from './cardsProducts/CardCoffe';
 
 const Guest = () => {
+  const { dataCoffee } = useContext(context);
+
+  const cardCoffee = dataCoffee.map((coffee) => {
+    return <CardCoffe coffee={coffee} key={coffee.id} />;
+  });
   return (
     <>
       <header>
@@ -18,6 +25,12 @@ const Guest = () => {
           </div>
         </div>
       </header>
+      <section class="varian">
+        <div class="container">
+          <h3>Coffee Variant</h3>
+          <div class="row">{cardCoffee}</div>
+        </div>
+      </section>
     </>
   );
 };

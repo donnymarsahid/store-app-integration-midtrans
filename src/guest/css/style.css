@@ -44,7 +44,6 @@ nav .container-navbar .access button.btn-register:hover {
 /* Header Start */
 header {
   margin-top: 100px;
-  margin-bottom: 200px;
   height: 450px;
 }
 header .container {
@@ -91,3 +90,62 @@ header .container .jumbotron button.btn-order:hover {
 }
 
 /* Header End */
+
+/* Section Varian Start */
+section.varian {
+  margin: 150px 0 100px 0;
+}
+section.varian .container h3 {
+  font-weight: 700;
+  color: var(--primaryColor);
+}
+section.varian .container .row .col-md-3 .box-card img {
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  cursor: pointer;
+  position: relative;
+}
+section.varian .container .row .col-md-3 .box-card .image-card .whistlist {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: white;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  width: 50px;
+  height: 40px;
+}
+section.varian .container .row .col-md-3 .box-card .image-card .whistlist button {
+  border: none;
+  background-color: transparent;
+}
+section.varian .container .row .col-md-3 .box-card .image-card .whistlist button.click-whistlist i {
+  font-weight: 600;
+}
+section.varian .container .row .col-md-3 .box-card .image-card .whistlist i {
+  color: var(--primaryColor);
+  font-size: 24px;
+}
+section.varian .row .col-md-3 h5 {
+  font-weight: 600;
+  color: var(--primaryColor);
+}
+section.varian .row .col-md-3 p {
+  font-weight: 500;
+  color: var(--primaryColor);
+}
+section.varian .container .row .col-md-3 .box-card {
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  transform: scale(0.98);
+  transition: 0.2s;
+  background-color: #f6dada52;
+}
+section.varian .container .row .col-md-3 .box-card:hover {
+  transform: scale(1);
+}
+section.varian .container .row .col-md-3 .box-card .description {
+  padding: 8px 8px 3px 8px;
+}
+/* Section Varian End */
