@@ -1,38 +1,62 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+
+:root {
+  --primaryColor: #bd0707;
+  --secondaryColor: #f6dada;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  font-family: 'Quicksand', sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Footer Start */
+footer {
+  width: 100%;
+  height: 350px;
+  background-color: var(--primaryColor);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+footer p {
+  font-weight: 400;
+  color: white;
+  font-size: 14px;
+}
+
+footer .container-footer {
+  width: 90%;
+  margin: auto;
+}
+
+footer .container-footer .col-md-4.footer-menu {
+  text-align: end;
+}
+footer .container-footer .col-md-4.footer-menu ul li {
+  list-style: none;
+}
+footer i {
+  color: white;
+  font-size: 28px;
+  background-color: transparent;
+  border-radius: 50px;
+  border: 2px solid white;
+  padding: 8px;
+  margin: 8px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+footer i:hover {
+  color: var(--primaryColor);
+  background-color: white;
+  border: 2px solid white;
+}
+footer a,
+footer .link-footer {
+  text-decoration: none;
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+footer a:hover,
+footer .link-footer p:hover {
+  text-decoration: none;
+  color: black;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* Footer End */

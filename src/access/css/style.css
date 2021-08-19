@@ -1,0 +1,46 @@
+/* Login-Register Start */
+.access-login-register {
+  width: 100%;
+  height: 100vh;
+}
+.access-login-register .box-access {
+  width: 500px;
+  height: 400px;
+  padding: 15px 50px 50px 50px;
+}
+
+.access-login-register .box-access h2 {
+  font-weight: 600;
+  color: var(--primaryColor);
+}
+
+.access-login-register .box-access input,
+.access-login-register .box-access button {
+  width: 100%;
+  padding: 8px 16px;
+  border-radius: 5px;
+  outline: none;
+}
+
+.access-login-register .box-access input {
+  border: 1.5px solid var(--primaryColor);
+  background-color: #e0c8c840;
+}
+
+.access-login-register .box-access button {
+  background-color: var(--primaryColor);
+  color: white;
+  border: none;
+  font-weight: 500;
+  font-size: 22px;
+  transition: 0.2s;
+}
+.access-login-register .box-access button:hover {
+  background-color: #d14545;
+}
+
+.access-login-register .box-access .click {
+  color: black;
+  font-weight: 500;
+}
+/* Login-Register End */
