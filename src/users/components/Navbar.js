@@ -21,10 +21,10 @@ const Navbar = () => {
               <Link to="/" class="text-decoration-none">
                 <li>Homepage</li>
               </Link>
-              <Link to="/" class="text-decoration-none">
-                <li>Coffe</li>
+              <Link to="/coffee" class="text-decoration-none">
+                <li>Coffee</li>
               </Link>
-              <Link to="/" className="link-router text-decoration-none">
+              <Link to="/all-menu" className="link-router text-decoration-none">
                 <li class="menu">
                   <p className="text-uppercase m-0">Menu</p>
                   <div class="box">

@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './guest/components/Navbar';
+import NavbarUsers from './users/components/Navbar';
 import Login from './access/Login';
 import Register from './access/Register';
 import './App.css';
@@ -13,6 +14,10 @@ import Users from './users/Users';
 import dataAccount from './data/account.json';
 import AllMenu from './guest/AllMenu';
 import Coffee from './guest/Coffee';
+import AllMenuUsers from './users/AllMenu';
+import CoffeeUsers from './users/Coffee';
+import ScrollToTop from './assets/components/ScrollToTop';
+import Cart from './users/Cart';
 
 function App() {
   const dataAccountAuth = JSON.parse(localStorage.getItem('user_auth'));
@@ -34,6 +39,7 @@ function App() {
     return (
       <Router>
         <context.Provider value={{ coffeeVariant, allCoffee }}>
+          <ScrollToTop />
           <Navbar />
           <Switch>
             <Route path="/" exact component={Guest} />
@@ -52,9 +58,14 @@ function App() {
     return (
       <>
         <Router>
-          <context.Provider value={{ coffeeVariant }}>
+          <context.Provider value={{ coffeeVariant, allCoffee }}>
+            <ScrollToTop />
+            <NavbarUsers />
             <Switch>
               <Route path="/" exact component={Users} />
+              <Route path="/all-menu" component={AllMenuUsers} />
+              <Route path="/coffee" component={CoffeeUsers} />
+              <Route path="/cart/:id" component={Cart} />
             </Switch>
             <Footer />
           </context.Provider>

@@ -17,6 +17,7 @@ const Login = () => {
     if (findAccountAuth) {
       localStorage.setItem('login_auth', true);
       history.push('/');
+      window.location.reload();
     } else {
       setStatus('email/password is wrong');
     }
