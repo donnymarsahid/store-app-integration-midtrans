@@ -3,6 +3,7 @@ import './css/style.css';
 import imgHeader from '../assets/img/img-header.png';
 import { context } from '../App';
 import CardCoffe from './cardsProducts/CardCoffe';
+import Navbar from './components/Navbar';
 
 const Users = () => {
   const { coffeeVariant } = useContext(context);
@@ -12,6 +13,7 @@ const Users = () => {
   });
   return (
     <>
+      <Navbar />
       <header>
         <div class="container d-flex align-items-center">
           <div class="jumbotron">

@@ -100,6 +100,38 @@ nav .navbar-link ul li.store .box p:hover::after,
 nav .navbar-link ul li.menu .box p:hover::after {
   width: 30%;
 }
+nav .access i {
+  font-size: 32px;
+  color: var(--primaryColor);
+  cursor: pointer;
+}
+
+nav .access .shop p {
+  color: var(--primaryColor);
+}
+nav .access .dropdown {
+  visibility: hidden;
+  background-color: white;
+  width: 160px;
+  position: absolute;
+  margin-left: -140px;
+  margin-top: -6px;
+  padding: 14px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+nav .access .profile:hover .dropdown {
+  visibility: visible;
+}
+
+nav .access .dropdown .text-decoration-none {
+  font-weight: 500;
+  color: var(--primaryColor);
+}
+
+nav .access .dropdown button {
+  background-color: var(--primaryColor);
+  color: white;
+}
 /* Navbar End */
 
 /* Header Start */

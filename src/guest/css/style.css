@@ -100,6 +100,9 @@ nav .navbar-link ul li.store .box p:hover::after,
 nav .navbar-link ul li.menu .box p:hover::after {
   width: 30%;
 }
+nav .navbar-link .text-decoration-none {
+  color: var(--primaryColor);
+}
 /* Navbar End */
 
 /* Header Start */

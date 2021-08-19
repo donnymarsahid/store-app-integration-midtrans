@@ -22,5 +22,30 @@
     "name": "clepon coffe",
     "price": "28.000",
     "image": "clepon-coffe.png"
+  },
+
+  {
+    "id": "asfcsac4b-91ce-5a89-88d6-1ce289408ac0",
+    "name": "coffe ice aren latte",
+    "price": "24.000",
+    "image": "coffe-ice-aren-latte.png"
+  },
+  {
+    "id": "asc1a3d5-74ee-4917-bad7-015475asc1dd1",
+    "name": "coffe ice extra regal",
+    "price": "29.000",
+    "image": "coffe-ice-extra-regal.png"
+  },
+  {
+    "id": "za23932dd-d8ff-4596-a64d-ffashfa4db3e",
+    "name": "pandan latte",
+    "price": "22.000",
+    "image": "pandan-latte.png"
+  },
+  {
+    "id": "41233b586-5dcc-4ds4-8c51-a836688a26csab",
+    "name": "iced roasted latte.png",
+    "price": "36.000",
+    "image": "iced-roasted-latte.png"
   }
 ]

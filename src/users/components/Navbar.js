@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import logoWaysBucks from '../../assets/img/logo-waysbucks.svg';
 
 const Navbar = () => {
+  const handlerLogout = () => {
+    window.location.reload();
+  };
   return (
     <>
       <nav class="fixed-top shadow-sm d-flex align-items-center">
@@ -14,23 +17,21 @@ const Navbar = () => {
             </Link>
           </div>
           <div class="navbar-link">
-            <ul class="d-flex m-0 p-0 ps-3 justify-content-lg-around">
+            <ul class="d-flex m-0 p-0 ps-4 justify-content-lg-around">
               <Link to="/" class="text-decoration-none">
                 <li>Homepage</li>
               </Link>
-              <Link to="/coffee" class="text-decoration-none">
+              <Link to="/" class="text-decoration-none">
                 <li>Coffe</li>
               </Link>
-              <div className="link-router text-decoration-none">
+              <Link to="/" className="link-router text-decoration-none">
                 <li class="menu">
                   <p className="text-uppercase m-0">Menu</p>
                   <div class="box">
-                    <Link to="/all-menu" class="text-decoration-none">
-                      <p class="pb-3 m-0">All Menu</p>
-                    </Link>
+                    <p class="pb-3 m-0">All Menu</p>
                   </div>
                 </li>
-              </div>
+              </Link>
               <Link to="/" className="link-router text-decoration-none">
                 <li class="store">
                   <p className="text-uppercase m-0">Store</p>
@@ -41,13 +42,21 @@ const Navbar = () => {
               </Link>
             </ul>
           </div>
-          <div class="access">
-            <Link to="/login">
-              <button class="btn-login me-3">Login</button>
-            </Link>
-            <Link to="/register">
-              <button class="btn-register">Register</button>
-            </Link>
+          <div class="access d-flex">
+            <div class="shop d-flex align-items-center">
+              <p class="fw-bold m-0">(0)</p>
+              <i class="fas fa-shopping-basket ms-1 me-4"></i>
+            </div>
+            <div class="profile">
+              <i class="fas fa-user-circle avatar"></i>
+              <div class="dropdown">
+                <Link to="/" class="text-decoration-none">
+                  Profile
+                </Link>
+                <hr />
+                <button onClick={handlerLogout}>Logout</button>
+              </div>
+            </div>
           </div>
         </div>
       </nav>
