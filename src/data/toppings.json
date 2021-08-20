@@ -2,41 +2,49 @@
   {
     "id": "f5b37-e0b8-42e0-8dcf-dc8c4aefc",
     "name": "bubble tea gelatin",
-    "image": "bubble-tea-gelatin.svg"
+    "image": "bubble-tea-gelatin.svg",
+    "price": "8000"
   },
   {
     "id": "adsb37-esdb8-4as0-8dcf-dc8sadeac",
     "name": "manggo",
-    "image": "manggo.svg"
+    "image": "manggo.svg",
+    "price": "5000"
   },
   {
     "id": "fsad37-e0asd-4sa0-8sadf-dcheaef",
     "name": "green coconut",
-    "image": "green-coconut.svg"
+    "image": "green-coconut.svg",
+    "price": "10000"
   },
   {
     "id": "sab37-sa8-4se0-sdcf-dhh8c4aepp",
     "name": "boba manggo",
-    "image": "boba-manggo.svg"
+    "image": "boba-manggo.svg",
+    "price": "12000"
   },
   {
     "id": "fsa37-sa0b8-22e0-8dcf-dc8c4aeoo",
     "name": "bill berry boba",
-    "image": "bill-berry-boba.svg"
+    "image": "bill-berry-boba.svg",
+    "price": "11000"
   },
   {
     "id": "assadb37-asb8-12e0-8dcf-dc8c4aezz",
     "name": "kiwi popping pearl",
-    "image": "kiwi-popping-pearl.svg"
+    "image": "kiwi-popping-pearl.svg",
+    "price": "8000"
   },
   {
     "id": "sacb37-sab8-232e0-8dcf-dc8c4aexx",
     "name": "macha cataloupe",
-    "image": "macha-cataloupe.svg"
+    "image": "macha-cataloupe.svg",
+    "price": "9000"
   },
   {
     "id": "hnb37-e0b8-42e0-8dcf-dc8c4aem",
     "name": "stawberry popping",
-    "image": "stawberry-popping.svg"
+    "image": "stawberry-popping.svg",
+    "price": "7000"
   }
 ]

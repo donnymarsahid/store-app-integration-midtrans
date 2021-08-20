@@ -2,25 +2,25 @@
   {
     "id": "1fc2844b-91ce-4a89-88d6-1ce289408a70",
     "name": "ice coffe palm sugar",
-    "price": "27.000",
+    "price": "27000",
     "image": "ice-coffe-palm-sugar.png"
   },
   {
     "id": "d4a1a3d5-74ee-4987-bad7-015475d11dd1",
     "name": "ice coffe green tea",
-    "price": "31.000",
+    "price": "31000",
     "image": "ice-coffe-green-tea.png"
   },
   {
     "id": "390932dd-d8ff-4c96-a64d-ff513fa4db3e",
     "name": "hanami latte",
-    "price": "29.000",
+    "price": "29000",
     "image": "hanami-latte.png"
   },
   {
     "id": "fb33b586-5dcc-44a4-8c51-a836688a261b",
     "name": "clepon coffe",
-    "price": "28.000",
+    "price": "28000",
     "image": "clepon-coffe.png"
   }
 ]

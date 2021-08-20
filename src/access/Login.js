@@ -16,6 +16,13 @@ const Login = () => {
 
     if (findAccountAuth) {
       localStorage.setItem('login_auth', true);
+      localStorage.setItem(
+        'user_transaction',
+        JSON.stringify({
+          ...findAccountAuth,
+          order: [],
+        })
+      );
       history.push('/');
       window.location.reload();
     } else {

@@ -18,6 +18,7 @@ import AllMenuUsers from './users/AllMenu';
 import CoffeeUsers from './users/Coffee';
 import ScrollToTop from './assets/components/ScrollToTop';
 import DetailPage from './users/DetailPage';
+import Checkout from './users/Checkout';
 
 function App() {
   const dataAccountAuth = JSON.parse(localStorage.getItem('user_auth'));
@@ -31,7 +32,7 @@ function App() {
   useEffect(() => {
     setCoffeeVariant(dataCoffeeVariant);
     setAllCoffee(dataAllCoffee);
-  }, [coffeeVariant, account]);
+  }, [coffeeVariant, allCoffee, account]);
 
   if (!login) {
     localStorage.setItem('login_auth', false);
@@ -66,6 +67,7 @@ function App() {
               <Route path="/all-menu" component={AllMenuUsers} />
               <Route path="/coffee" component={CoffeeUsers} />
               <Route path="/detail-page/:id" component={DetailPage} />
+              <Route path="/checkout" component={Checkout} />
             </Switch>
             <Footer />
           </context.Provider>

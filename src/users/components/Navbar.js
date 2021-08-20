@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../css/style.css';
 import { Link, useHistory } from 'react-router-dom';
 import logoWaysBucks from '../../assets/img/logo-waysbucks.svg';
 import swal from 'sweetalert';
+import { useState } from 'react/cjs/react.development';
 
 const Navbar = () => {
   const history = useHistory();
+  const [totalCart, setTotalCart] = useState(0);
+
   const handlerLogout = () => {
     swal({
       title: 'Are you sure logout?',
@@ -16,11 +19,18 @@ const Navbar = () => {
     }).then((logout) => {
       if (logout) {
         localStorage.setItem('login_auth', false);
+        localStorage.clear('coffee_variant');
+        localStorage.clear('coffee_all');
+        localStorage.clear('user_transaction');
         history.push('/');
         window.location.reload();
       }
     });
   };
+  const cart = JSON.parse(localStorage.getItem('user_transaction'));
+  useEffect(() => {
+    setTotalCart(cart.order.length);
+  }, [cart]);
   return (
     <>
       <nav className="fixed-top shadow-sm d-flex align-items-center">
@@ -58,7 +68,7 @@ const Navbar = () => {
           </div>
           <div className="access d-flex">
             <div className="shop d-flex align-items-center">
-              <p className="fw-bold m-0">(0)</p>
+              <p className="fw-bold m-0">({totalCart})</p>
               <i className="fas fa-shopping-basket ms-1 me-4"></i>
             </div>
             <div className="profile">

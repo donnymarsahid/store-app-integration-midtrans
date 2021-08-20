@@ -289,6 +289,10 @@ section.detail-page .container h1 {
   color: var(--primaryColor);
   font-weight: 700;
 }
+section.detail-page .container h3 {
+  color: var(--primaryColor);
+  font-weight: 700;
+}
 section.detail-page .container p {
   color: var(--primaryColor);
   font-weight: 600;
@@ -307,12 +311,13 @@ section.detail-page .container .toppings p {
   font-size: 14px;
   cursor: pointer;
   transition: 0.2s;
+  padding: 3px;
 }
 section.detail-page .container .toppings p:hover {
   background-color: wheat;
-  padding: 2px;
+  padding: 3px;
 }
-section.detail-page .container button {
+section.detail-page .container button.btn-total {
   width: 100%;
   border: none;
   background-color: var(--primaryColor);
@@ -323,7 +328,25 @@ section.detail-page .container button {
   font-size: 18px;
   transition: 0.2s;
 }
-section.detail-page .container button:hover {
+section.detail-page .container button.btn-total:hover {
   background-color: #d14545;
+}
+section.detail-page .col-md-7 button.quantity {
+  border: none;
+  background-color: var(--primaryColor);
+  color: white;
+  font-weight: 500;
+  padding: 5px 15px;
+  border-radius: 2px;
+  transition: 0.2s;
+}
+section.detail-page .col-md-7 button.quantity:hover {
+  background-color: #d14545;
+}
+section.detail-page .container .quantity p {
+  background-color: rgb(255, 242, 219);
+  font-weight: 700;
+  font-size: 18px;
+  padding: 3.5px 20px;
 }
 /* Detail pPage End */
