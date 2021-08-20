@@ -11,10 +11,10 @@ const AllMenu = () => {
   });
   return (
     <>
-      <section class="all-menu varian">
-        <div class="container">
+      <section className="all-menu varian">
+        <div className="container">
           <h3>All Menu</h3>
-          <div class="row">{cardsAllCoffee}</div>
+          <div className="row">{cardsAllCoffee}</div>
         </div>
       </section>
     </>

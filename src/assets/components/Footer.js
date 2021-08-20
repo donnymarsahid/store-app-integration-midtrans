@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 const Footer = () => {
   return (
     <>
-      <footer class="d-flex align-items-center">
-        <div class="container-footer">
-          <div class="row">
-            <div class="col-md-4 call">
+      <footer className="d-flex align-items-center">
+        <div className="container-footer">
+          <div className="row">
+            <div className="col-md-4 call">
               <p>CONTACT ME</p>
               <p>
                 <a href="/">
@@ -16,25 +16,25 @@ const Footer = () => {
                 <a href="/">Email : donnymrshd.94@gmail.com</a>
               </p>
             </div>
-            <div class="col-md-4 text-center sosmed">
+            <div className="col-md-4 text-center sosmed">
               <p>FOLLOW ME</p>
               <a href="http://instagram.com/donnymrshd">
-                <i class="fab fa-instagram"></i>
+                <i className="fab fa-instagram"></i>
               </a>
               <a href="https://www.linkedin.com/in/donny-marsahid/">
-                <i class="fab fa-linkedin"></i>
+                <i className="fab fa-linkedin"></i>
               </a>
               <a href="https://twitter.com/donny_mrshd">
-                <i class="fab fa-twitter"></i>
+                <i className="fab fa-twitter"></i>
               </a>
               <a href="https://dribbble.com/donnymrshd">
-                <i class="fab fa-dribbble"></i>
+                <i className="fab fa-dribbble"></i>
               </a>
               <a href="https://github.com/donnymarsahid">
-                <i class="fab fa-github"></i>
+                <i className="fab fa-github"></i>
               </a>
             </div>
-            <div class="col-md-4 footer-menu">
+            <div className="col-md-4 footer-menu">
               <p>AVAILABLE</p>
               <ul>
                 <li>
@@ -49,7 +49,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <p class="text-center mt-5">&copy; copyright 2021 | Donny`Marsahid</p>
+            <p className="text-center mt-5">&copy; copyright 2021 | Donny`Marsahid</p>
           </div>
         </div>
       </footer>

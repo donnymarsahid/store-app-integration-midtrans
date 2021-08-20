@@ -6,47 +6,47 @@ import logoWaysBucks from '../../assets/img/logo-waysbucks.svg';
 const Navbar = () => {
   return (
     <>
-      <nav class="fixed-top shadow-sm d-flex align-items-center">
-        <div class="container-navbar d-flex justify-content-between align-items-center">
-          <div class="logo-brand">
+      <nav className="fixed-top shadow-sm d-flex align-items-center">
+        <div className="container-navbar d-flex justify-content-between align-items-center">
+          <div className="logo-brand">
             <Link to="/">
               <img src={logoWaysBucks} alt="logo-waysbucks" />
             </Link>
           </div>
-          <div class="navbar-link">
-            <ul class="d-flex m-0 p-0 ps-3 justify-content-lg-around">
-              <Link to="/" class="text-decoration-none">
+          <div className="navbar-link">
+            <ul className="d-flex m-0 p-0 ps-3 justify-content-lg-around">
+              <Link to="/" className="text-decoration-none">
                 <li>Homepage</li>
               </Link>
-              <Link to="/coffee" class="text-decoration-none">
+              <Link to="/coffee" className="text-decoration-none">
                 <li>Coffe</li>
               </Link>
               <div className="link-router text-decoration-none">
-                <li class="menu">
+                <li className="menu">
                   <p className="text-uppercase m-0">Menu</p>
-                  <div class="box">
-                    <Link to="/all-menu" class="text-decoration-none">
-                      <p class="pb-3 m-0">All Menu</p>
+                  <div className="box">
+                    <Link to="/all-menu" className="text-decoration-none">
+                      <p className="pb-3 m-0">All Menu</p>
                     </Link>
                   </div>
                 </li>
               </div>
               <Link to="/" className="link-router text-decoration-none">
-                <li class="store">
+                <li className="store">
                   <p className="text-uppercase m-0">Store</p>
-                  <div class="box">
-                    <p class="pb-3 m-0">Location</p>
+                  <div className="box">
+                    <p className="pb-3 m-0">Location</p>
                   </div>
                 </li>
               </Link>
             </ul>
           </div>
-          <div class="access">
+          <div className="access">
             <Link to="/login">
-              <button class="btn-login me-3">Login</button>
+              <button className="btn-login me-3">Login</button>
             </Link>
             <Link to="/register">
-              <button class="btn-register">Register</button>
+              <button className="btn-register">Register</button>
             </Link>
           </div>
         </div>

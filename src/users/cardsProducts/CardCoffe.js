@@ -10,23 +10,23 @@ const CardCoffe = ({ coffee }) => {
   }
   return (
     <>
-      <div class="col-md-3">
-        <div class="box-card">
-          <div class="image-card">
+      <div className="col-md-3">
+        <div className="box-card">
+          <div className="image-card">
             <img src={`${IMG_URL}${coffee.image}`} alt={coffee.image} />
-            <div class="overlay d-flex justify-content-center align-items-center">
-              <Link to={`/cart/${coffee.id}`}>
+            <div className="overlay d-flex justify-content-center align-items-center">
+              <Link to={`/detail-page/${coffee.id}`}>
                 <button>ORDER NOW</button>
               </Link>
             </div>
-            <div class="whistlist d-flex align-items-center justify-content-center">
-              <button class={`btn${coffee.id}`} onClick={handlerWhistlist}>
-                <i class="far fa-heart"></i>
+            <div className="whistlist d-flex align-items-center justify-content-center">
+              <button className={`btn${coffee.id}`} onClick={handlerWhistlist}>
+                <i className="far fa-heart"></i>
               </button>
             </div>
           </div>
-          <div class="description">
-            <h5 class="text-capitalize">{coffee.name}</h5>
+          <div className="description">
+            <h5 className="text-capitalize">{coffee.name}</h5>
             <p>Rp.{coffee.price}</p>
           </div>
         </div>

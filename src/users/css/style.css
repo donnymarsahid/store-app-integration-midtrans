@@ -1,3 +1,8 @@
+:root {
+  --primaryColor: #bd0707;
+  --secondaryColor: #f6dada;
+}
+
 /* Navbar Start */
 nav {
   width: 100%;
@@ -270,3 +275,55 @@ section.varian .container .row .col-md-3 .box-card .overlay button:hover {
   border: 2px solid var(--primaryColor);
 }
 /* Section Varian End */
+
+/* Detail pPage Start */
+section.detail-page {
+  margin: 150px 0 150px 0;
+}
+
+section.detail-page .container .col-md-4 img {
+  width: 100%;
+}
+
+section.detail-page .container h1 {
+  color: var(--primaryColor);
+  font-weight: 700;
+}
+section.detail-page .container p {
+  color: var(--primaryColor);
+  font-weight: 600;
+}
+section.detail-page .container .toppings .col-md-3 img {
+  width: 75px;
+  height: 85px;
+  cursor: pointer;
+  transform: scale(0.9);
+  transition: 0.2s;
+}
+section.detail-page .container .toppings .col-md-3 img:hover {
+  transform: scale(1);
+}
+section.detail-page .container .toppings p {
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+section.detail-page .container .toppings p:hover {
+  background-color: wheat;
+  padding: 2px;
+}
+section.detail-page .container button {
+  width: 100%;
+  border: none;
+  background-color: var(--primaryColor);
+  color: white;
+  font-weight: 500;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 18px;
+  transition: 0.2s;
+}
+section.detail-page .container button:hover {
+  background-color: #d14545;
+}
+/* Detail pPage End */

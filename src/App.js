@@ -17,7 +17,7 @@ import Coffee from './guest/Coffee';
 import AllMenuUsers from './users/AllMenu';
 import CoffeeUsers from './users/Coffee';
 import ScrollToTop from './assets/components/ScrollToTop';
-import Cart from './users/Cart';
+import DetailPage from './users/DetailPage';
 
 function App() {
   const dataAccountAuth = JSON.parse(localStorage.getItem('user_auth'));
@@ -34,8 +34,8 @@ function App() {
   }, [coffeeVariant, account]);
 
   if (!login) {
-    localStorage.setItem('user_auth', JSON.stringify(dataAccount));
     localStorage.setItem('login_auth', false);
+    localStorage.setItem('user_auth', JSON.stringify(dataAccount));
     return (
       <Router>
         <context.Provider value={{ coffeeVariant, allCoffee }}>
@@ -65,7 +65,7 @@ function App() {
               <Route path="/" exact component={Users} />
               <Route path="/all-menu" component={AllMenuUsers} />
               <Route path="/coffee" component={CoffeeUsers} />
-              <Route path="/cart/:id" component={Cart} />
+              <Route path="/detail-page/:id" component={DetailPage} />
             </Switch>
             <Footer />
           </context.Provider>

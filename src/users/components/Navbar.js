@@ -23,48 +23,48 @@ const Navbar = () => {
   };
   return (
     <>
-      <nav class="fixed-top shadow-sm d-flex align-items-center">
-        <div class="container-navbar d-flex justify-content-between align-items-center">
-          <div class="logo-brand">
+      <nav className="fixed-top shadow-sm d-flex align-items-center">
+        <div className="container-navbar d-flex justify-content-between align-items-center">
+          <div className="logo-brand">
             <Link to="/">
               <img src={logoWaysBucks} alt="logo-waysbucks" />
             </Link>
           </div>
-          <div class="navbar-link">
-            <ul class="d-flex m-0 p-0 ps-4 justify-content-lg-around">
-              <Link to="/" class="text-decoration-none">
+          <div className="navbar-link">
+            <ul className="d-flex m-0 p-0 ps-4 justify-content-lg-around">
+              <Link to="/" className="text-decoration-none">
                 <li>Homepage</li>
               </Link>
-              <Link to="/coffee" class="text-decoration-none">
+              <Link to="/coffee" className="text-decoration-none">
                 <li>Coffee</li>
               </Link>
               <Link to="/all-menu" className="link-router text-decoration-none">
-                <li class="menu">
+                <li className="menu">
                   <p className="text-uppercase m-0">Menu</p>
-                  <div class="box">
-                    <p class="pb-3 m-0">All Menu</p>
+                  <div className="box">
+                    <p className="pb-3 m-0">All Menu</p>
                   </div>
                 </li>
               </Link>
               <Link to="/" className="link-router text-decoration-none">
-                <li class="store">
+                <li className="store">
                   <p className="text-uppercase m-0">Store</p>
-                  <div class="box">
-                    <p class="pb-3 m-0">Location</p>
+                  <div className="box">
+                    <p className="pb-3 m-0">Location</p>
                   </div>
                 </li>
               </Link>
             </ul>
           </div>
-          <div class="access d-flex">
-            <div class="shop d-flex align-items-center">
-              <p class="fw-bold m-0">(0)</p>
-              <i class="fas fa-shopping-basket ms-1 me-4"></i>
+          <div className="access d-flex">
+            <div className="shop d-flex align-items-center">
+              <p className="fw-bold m-0">(0)</p>
+              <i className="fas fa-shopping-basket ms-1 me-4"></i>
             </div>
-            <div class="profile">
-              <i class="fas fa-user-circle avatar"></i>
-              <div class="dropdown">
-                <Link to="/" class="text-decoration-none">
+            <div className="profile">
+              <i className="fas fa-user-circle avatar"></i>
+              <div className="dropdown">
+                <Link to="/" className="text-decoration-none">
                   Profile
                 </Link>
                 <hr />

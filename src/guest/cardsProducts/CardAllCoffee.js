@@ -5,18 +5,18 @@ const CardAllCoffee = ({ coffee }) => {
   const IMG_URL = 'images/coffee/';
   return (
     <>
-      <div class="col-md-3 mb-4">
-        <div class="box-card">
-          <div class="image-card">
+      <div className="col-md-3 mb-4">
+        <div className="box-card">
+          <div className="image-card">
             <img src={`${IMG_URL}${coffee.image}`} alt={coffee.image} />
-            <div class="overlay d-flex justify-content-center align-items-center">
+            <div className="overlay d-flex justify-content-center align-items-center">
               <Link to="/login">
                 <button>ORDER NOW</button>
               </Link>
             </div>
           </div>
-          <div class="description">
-            <h5 class="text-capitalize">{coffee.name}</h5>
+          <div className="description">
+            <h5 className="text-capitalize">{coffee.name}</h5>
             <p>Rp.{coffee.price}</p>
           </div>
         </div>

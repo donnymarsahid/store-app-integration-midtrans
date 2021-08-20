@@ -10,10 +10,10 @@ const Coffee = () => {
   });
   return (
     <>
-      <section class="varian coffee">
-        <div class="container">
+      <section className="varian coffee">
+        <div className="container">
           <h3>Coffee Variant</h3>
-          <div class="row">{cardCoffee}</div>
+          <div className="row">{cardCoffee}</div>
         </div>
       </section>
     </>

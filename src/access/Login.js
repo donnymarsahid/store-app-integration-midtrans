@@ -20,6 +20,9 @@ const Login = () => {
       window.location.reload();
     } else {
       setStatus('email/password is wrong');
+      setTimeout(() => {
+        setStatus('');
+      }, 4000);
     }
   };
 
