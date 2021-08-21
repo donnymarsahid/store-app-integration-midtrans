@@ -47,7 +47,6 @@ const DetailPage = () => {
   //   history.push('/cart');
   //   window.location.reload();
   // };
-
   const handlerGetTopping = (e) => {
     e.preventDefault();
     console.log(getTopping);
