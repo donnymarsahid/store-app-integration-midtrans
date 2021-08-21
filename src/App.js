@@ -18,7 +18,7 @@ import AllMenuUsers from './users/AllMenu';
 import CoffeeUsers from './users/Coffee';
 import ScrollToTop from './assets/components/ScrollToTop';
 import DetailPage from './users/DetailPage';
-import Checkout from './users/Checkout';
+import Cart from './users/Cart';
 
 function App() {
   const dataAccountAuth = JSON.parse(localStorage.getItem('user_auth'));
@@ -67,7 +67,7 @@ function App() {
               <Route path="/all-menu" component={AllMenuUsers} />
               <Route path="/coffee" component={CoffeeUsers} />
               <Route path="/detail-page/:id" component={DetailPage} />
-              <Route path="/checkout" component={Checkout} />
+              <Route path="/cart" component={Cart} />
             </Switch>
             <Footer />
           </context.Provider>

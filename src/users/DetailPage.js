@@ -71,7 +71,7 @@ const DetailPage = () => {
         ],
       })
     );
-    history.push('/checkout');
+    history.push('/cart');
     window.location.reload();
   };
 

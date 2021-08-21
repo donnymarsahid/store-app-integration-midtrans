@@ -19,7 +19,7 @@ const Navbar = () => {
                 <li>Homepage</li>
               </Link>
               <Link to="/coffee" className="text-decoration-none">
-                <li>Coffe</li>
+                <li>Coffee</li>
               </Link>
               <div className="link-router text-decoration-none">
                 <li className="menu">

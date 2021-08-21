@@ -1,13 +1,13 @@
 import React from 'react';
 
-const Checkout = () => {
+const Cart = () => {
   return (
     <>
       <div class="checkout" style={{ marginTop: '150px', height: '100vh' }}>
-        <h1>checkout</h1>
+        <h1>cart</h1>
       </div>
     </>
   );
 };
 
-export default Checkout;
+export default Cart;
