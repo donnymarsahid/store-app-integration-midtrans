@@ -41,6 +41,7 @@ const DetailPage = () => {
       setQuantity(quantity);
     }
   };
+
   const findTopping = dataToppings.find((data) => data.id === getTopping);
   if (findTopping !== undefined) {
     $('.click-topping').on('click', () => {
