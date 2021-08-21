@@ -114,6 +114,22 @@ nav .access i {
 nav .access .shop p {
   color: var(--primaryColor);
 }
+nav .access .shop {
+  position: relative;
+}
+nav .access .shop span {
+  background-color: var(--primaryColor);
+  color: white;
+  font-weight: 700;
+  padding: 0 0 0 1px;
+  border-radius: 50px;
+  width: 18px;
+  height: 18px;
+  font-size: 14px;
+  position: absolute;
+  top: 5px;
+  left: 18px;
+}
 nav .access .dropdown {
   visibility: hidden;
   background-color: white;

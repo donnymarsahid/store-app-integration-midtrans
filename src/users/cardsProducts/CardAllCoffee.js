@@ -9,6 +9,17 @@ const CardAllCoffee = ({ coffee }) => {
     $(`.btn${coffee.id}`).toggleClass('click-whistlist');
   }
 
+  const parsingPrice = coffee.price
+    .toString()
+    .split('')
+    .reverse()
+    .join('')
+    .match(/\d{1,3}/g)
+    .join('.')
+    .split('')
+    .reverse()
+    .join('');
+
   return (
     <>
       <div className="col-md-3 mb-4">
@@ -28,7 +39,7 @@ const CardAllCoffee = ({ coffee }) => {
           </div>
           <div className="description">
             <h5 className="text-capitalize">{coffee.name}</h5>
-            <p>Rp.{coffee.price}</p>
+            <p>Rp.{parsingPrice}</p>
           </div>
         </div>
       </div>

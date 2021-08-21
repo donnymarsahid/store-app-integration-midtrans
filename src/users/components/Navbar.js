@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import '../css/style.css';
 import { Link, useHistory } from 'react-router-dom';
 import logoWaysBucks from '../../assets/img/logo-waysbucks.svg';
+import cartIcon from '../../assets/img/cart.svg';
 import swal from 'sweetalert';
 import { useState } from 'react/cjs/react.development';
 
@@ -41,24 +42,23 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="navbar-link">
-            <ul className="d-flex m-0 p-0 ps-4 justify-content-lg-around">
-              <Link to="/" className="text-decoration-none">
-                <li>Homepage</li>
+            <ul className="d-flex m-0 p-0 ps-3 justify-content-lg-around">
+              <Link to="/coffee" className="text-decoration-none ">
+                <li className="fw-bolder">Coffee</li>
               </Link>
-              <Link to="/coffee" className="text-decoration-none">
-                <li>Coffee</li>
-              </Link>
-              <Link to="/all-menu" className="link-router text-decoration-none">
+              <div className="link-router text-decoration-none">
                 <li className="menu">
-                  <p className="text-uppercase m-0">Menu</p>
+                  <p className="text-uppercase m-0 fw-bolder">Menu</p>
                   <div className="box">
-                    <p className="pb-3 m-0">All Menu</p>
+                    <Link to="/all-menu" className="text-decoration-none">
+                      <p className="pb-3 m-0">All Menu</p>
+                    </Link>
                   </div>
                 </li>
-              </Link>
+              </div>
               <Link to="/" className="link-router text-decoration-none">
                 <li className="store">
-                  <p className="text-uppercase m-0">Store</p>
+                  <p className="text-uppercase m-0 fw-bolder">Store</p>
                   <div className="box">
                     <p className="pb-3 m-0">Location</p>
                   </div>
@@ -68,8 +68,10 @@ const Navbar = () => {
           </div>
           <div className="access d-flex">
             <div className="shop d-flex align-items-center">
-              <p className="fw-bold m-0">({totalCart})</p>
-              <i className="fas fa-shopping-basket ms-1 me-4"></i>
+              <Link to="/cart">
+                <img src={cartIcon} alt="cart" className="me-5" width="30px" />
+                <span className="d-flex justify-content-center align-items-center">{totalCart}</span>
+              </Link>
             </div>
             <div className="profile">
               <i className="fas fa-user-circle avatar"></i>
