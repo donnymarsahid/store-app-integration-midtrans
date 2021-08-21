@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import './css/style.css';
 import dataAccount from '../data/account.json';
 import { v4 as uuidv4 } from 'uuid';
@@ -40,7 +39,10 @@ const Register = () => {
       localStorage.setItem('user_auth', JSON.stringify(dataAccount));
       setStatus(
         <>
-          Success Register Please <Link to="/login">Login</Link>
+          success register please
+          <span className="fw-bold text-decoration-underline" data-bs-dismiss="modal">
+            Login
+          </span>
         </>
       );
       setTimeout(() => {
@@ -51,63 +53,83 @@ const Register = () => {
 
   return (
     <>
-      <div class="access-login-register d-flex justify-content-center align-items-center">
-        <div class="box-access">
-          <h2>Register</h2>
-          {status && (
-            <div class="alert alert-success" role="alert">
-              {status}
+      <div className="modal register" tabindex="-1" id="exampleModalRegister">
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header d-flex justify-content-between">
+              <span></span>
+              <i className="fas fa-times" data-bs-dismiss="modal"></i>
             </div>
-          )}
-          <form onSubmit={handlerRegister}>
-            <input
-              type="text"
-              id="fullname"
-              placeHolder="Full Name"
-              class="mt-3 mb-3"
-              onChange={(e) => {
-                setFullname(e.target.value);
-              }}
-            />
-            <br />
-            <input
-              type="email"
-              id="email"
-              placeHolder="Email"
-              class="mt-3 mb-3"
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-            />
-            <br />
-            <input
-              type="password"
-              id="password"
-              placeHolder="Password"
-              class="mb-4"
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-            />
-            <br />
-            <input
-              type="password"
-              id="confrim-password"
-              placeHolder="Confirm Password"
-              class="mb-4"
-              onChange={(e) => {
-                setConfirmPassword(e.target.value);
-              }}
-            />
-            <br />
-            <button type="submit">Register</button>
-          </form>
-          <p class="text-center mt-3">
-            Already have an account ? click {''}
-            <Link to="/login" class="click">
-              here
-            </Link>
-          </p>
+            <div className="modal-body register">
+              <div className="access-login-register d-flex justify-content-center align-items-center">
+                <div className="box-access">
+                  <h2>Register</h2>
+                  {status && (
+                    <div className="alert alert-success" role="alert">
+                      {status}
+                    </div>
+                  )}
+                  <form onSubmit={handlerRegister}>
+                    <input
+                      type="text"
+                      id="fullname"
+                      placeHolder="Full Name"
+                      className="mt-3 mb-3"
+                      onChange={(e) => {
+                        setFullname(e.target.value);
+                      }}
+                      autoComplete="off"
+                      required
+                    />
+                    <br />
+                    <input
+                      type="email"
+                      id="email"
+                      placeHolder="Email"
+                      className="mt-3 mb-3"
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                      }}
+                      autoComplete="off"
+                      required
+                    />
+                    <br />
+                    <input
+                      type="password"
+                      id="password"
+                      placeHolder="Password"
+                      className="mb-4"
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                      }}
+                      autoComplete="off"
+                      required
+                    />
+                    <br />
+                    <input
+                      type="password"
+                      id="confrim-password"
+                      placeHolder="Confirm Password"
+                      className="mb-4"
+                      onChange={(e) => {
+                        setConfirmPassword(e.target.value);
+                      }}
+                      autoComplete="off"
+                      required
+                    />
+                    <br />
+                    <button type="submit">Register</button>
+                  </form>
+                  <p className="text-center mt-3 d-flex justify-content-center">
+                    Already have an account ? click
+                    <p className="ps-1 click m-0 text-decoration-underline" data-bs-dismiss="modal" style={{ cursor: 'pointer' }}>
+                      here
+                    </p>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>

@@ -15,15 +15,12 @@ const Navbar = () => {
           </div>
           <div className="navbar-link">
             <ul className="d-flex m-0 p-0 ps-3 justify-content-lg-around">
-              <Link to="/" className="text-decoration-none">
-                <li>Homepage</li>
-              </Link>
-              <Link to="/coffee" className="text-decoration-none">
-                <li>Coffee</li>
+              <Link to="/coffee" className="text-decoration-none ">
+                <li className="fw-bolder">Coffee</li>
               </Link>
               <div className="link-router text-decoration-none">
                 <li className="menu">
-                  <p className="text-uppercase m-0">Menu</p>
+                  <p className="text-uppercase m-0 fw-bolder">Menu</p>
                   <div className="box">
                     <Link to="/all-menu" className="text-decoration-none">
                       <p className="pb-3 m-0">All Menu</p>
@@ -33,7 +30,7 @@ const Navbar = () => {
               </div>
               <Link to="/" className="link-router text-decoration-none">
                 <li className="store">
-                  <p className="text-uppercase m-0">Store</p>
+                  <p className="text-uppercase m-0 fw-bolder">Store</p>
                   <div className="box">
                     <p className="pb-3 m-0">Location</p>
                   </div>
@@ -42,12 +39,12 @@ const Navbar = () => {
             </ul>
           </div>
           <div className="access">
-            <Link to="/login">
-              <button className="btn-login me-3">Login</button>
-            </Link>
-            <Link to="/register">
-              <button className="btn-register">Register</button>
-            </Link>
+            <button className="btn-login me-3" data-bs-toggle="modal" data-bs-target="#exampleModalLogin">
+              Login
+            </button>
+            <button className="btn-register" data-bs-toggle="modal" data-bs-target="#exampleModalRegister">
+              Register
+            </button>
           </div>
         </div>
       </nav>

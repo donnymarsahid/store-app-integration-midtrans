@@ -4,6 +4,8 @@ import imgHeader from '../assets/img/img-header.png';
 import { context } from '../App';
 import CardCoffe from './cardsProducts/CardCoffe';
 import { Link } from 'react-router-dom';
+import Login from '../access/Login';
+import Register from '../access/Register';
 
 const Guest = () => {
   const { coffeeVariant } = useContext(context);
@@ -11,6 +13,7 @@ const Guest = () => {
   const cardCoffee = coffeeVariant.map((coffee) => {
     return <CardCoffe coffee={coffee} key={coffee.id} />;
   });
+
   return (
     <>
       <header>
@@ -34,6 +37,8 @@ const Guest = () => {
           <div className="row">{cardCoffee}</div>
         </div>
       </section>
+      <Login />
+      <Register />
     </>
   );
 };
