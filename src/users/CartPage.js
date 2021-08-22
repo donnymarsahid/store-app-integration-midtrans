@@ -1,5 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
+import uploadFile from '../assets/img/upload-file.svg';
+import emptyCart from '../assets/img/empty-cart.svg';
 
 const CartPage = () => {
   const [removeOrder, setRemoveOrder] = useState();
@@ -17,12 +19,11 @@ const CartPage = () => {
 
   if (dataCart.order.length === 0) {
     return (
-      <div>
-        <h1>halo</h1>
-        <h1>halo</h1>
-        <h1>halo</h1>
-        <h1>halo</h1>
-      </div>
+      <section className="cart-page-null d-flex align-items-center justify-content-center flex-column">
+        <img src={emptyCart} alt="empty-cart" width="150px" />
+        <h1>Empty Cart :(</h1>
+        <button class="btn-empty">Order Now</button>
+      </section>
     );
   }
 
@@ -92,19 +93,30 @@ const CartPage = () => {
                 <h5>Review Your Order</h5>
               </div>
               <div className="parent-list">{listDataCart}</div>
-              <div className="sub-total d-flex justify-content-between">
-                <div className="detail mt-3">
-                  <p>Subtotal</p>
-                  <p>Quantity</p>
+              <div class="row">
+                <div class="col-md-8">
+                  <div className="sub-total d-flex justify-content-between">
+                    <div className="detail mt-3">
+                      <p>Subtotal</p>
+                      <p>Quantity</p>
+                    </div>
+                    <div className="detail-2 mt-3 text-end">
+                      <p>Rp.{parsingPriceTotal}</p>
+                      <p>{quantity}</p>
+                    </div>
+                  </div>
+                  <div className="total d-flex justify-content-between">
+                    <p>Total</p>
+                    <p>Rp.{parsingPriceTotal}</p>
+                  </div>
                 </div>
-                <div className="detail-2 mt-3 text-end">
-                  <p>Rp.{parsingPriceTotal}</p>
-                  <p>{quantity}</p>
+                <div class="col-md-4">
+                  <input type="file" name="upload" id="upload" className="d-none" />
+                  <label for="upload" className="upload-struck d-flex flex-column align-items-center justify-content-center">
+                    <img src={uploadFile} alt="uploadFile" />
+                    <p>Attache Of Transaction</p>
+                  </label>
                 </div>
-              </div>
-              <div className="total d-flex justify-content-between">
-                <p>Total</p>
-                <p>Rp.{parsingPriceTotal}</p>
               </div>
             </div>
             <div className="col-md-5">

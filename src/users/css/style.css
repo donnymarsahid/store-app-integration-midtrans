@@ -445,4 +445,39 @@ section.cart-page .container .col-md-7 .total p {
   font-size: 22px;
 }
 
+section.cart-page .container label.upload-struck {
+  background-color: #e0c8c840;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  border: 2px solid var(--primaryColor);
+}
+section.cart-page .container label.upload-struck p {
+  font-weight: 500;
+  padding-top: 8px;
+  color: var(--primaryColor);
+}
+section.cart-page-null {
+  height: 100vh;
+}
+section.cart-page-null h1 {
+  color: var(--primaryColor);
+  font-weight: 700;
+  font-size: 36px;
+  margin: 10px 0 10px 0;
+}
+section.cart-page-null button.btn-empty {
+  background-color: var(--primaryColor);
+  border: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  font-size: 20px;
+  padding: 8px 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.219);
+}
+section.cart-page-null button.btn-empty:hover {
+  background-color: #d14545;
+}
+
 /* Cart Page End */
