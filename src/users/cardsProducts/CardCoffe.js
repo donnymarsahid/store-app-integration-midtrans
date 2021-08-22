@@ -1,12 +1,11 @@
 import React from 'react';
-import $ from 'jquery';
 import { Link } from 'react-router-dom';
 
 const CardCoffe = ({ coffee }) => {
   const IMG_URL = 'images/coffee/';
 
   function handlerWhistlist() {
-    $(`.btn${coffee.id}`).toggleClass('click-whistlist');
+    document.querySelector(`.btn${coffee.id}`).classList.toggle('click-whistlist');
   }
 
   const parsingPrice = coffee.price

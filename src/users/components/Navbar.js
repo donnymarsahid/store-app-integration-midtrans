@@ -68,7 +68,7 @@ const Navbar = () => {
           </div>
           <div className="access d-flex">
             <div className="shop d-flex align-items-center">
-              <Link to="/cart">
+              <Link to="/cart-page">
                 <img src={cartIcon} alt="cart" className="me-5" width="30px" />
                 <span className="d-flex justify-content-center align-items-center">{totalCart}</span>
               </Link>

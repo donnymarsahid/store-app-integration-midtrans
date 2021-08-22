@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 const DetailPage = () => {
   const params = useParams();
+  const history = useHistory();
   const [getTopping, setGetTopping] = useState([]);
   const [getPriceTopping, setGetPriceTopping] = useState([]);
 
@@ -26,42 +27,28 @@ const DetailPage = () => {
   const IMG_URL = '/images/coffee/';
   const IMG_URL_TOPPINGS = '/images/toppings/';
 
-  const findTopping = dataToppings.find((data) => data.id === getTopping);
-
-  const history = useHistory();
-
-  // const handlerAddCart = () => {
-  //   localStorage.setItem(
-  //     'user_transaction',
-  //     JSON.stringify({
-  //       ...getDataUserTransaction,
-  //       order: [
-  //         {
-  //           name: findAllCoffee.name,
-  //           price: findAllCoffee.price,
-  //           topping: findTopping.name,
-  //         },
-  //       ],
-  //     })
-  //   );
-  //   history.push('/cart');
-  //   window.location.reload();
-  // };
-  const handlerGetTopping = (e) => {
-    e.preventDefault();
-    console.log(getTopping);
-    console.log(getPriceTopping);
+  const handlerAddCart = () => {
+    getDataUserTransaction.order.push({
+      name: findAllCoffee.name,
+      price: parseInt(findAllCoffee.price),
+      image: findAllCoffee.image,
+      topping: getTopping,
+      priceTopping: getPriceTopping,
+    });
+    localStorage.setItem('user_transaction', JSON.stringify(getDataUserTransaction));
+    history.push('/cart-page');
+    window.location.reload();
   };
 
   useEffect(() => {
-    const checkboxes = document.querySelectorAll('.checkbox');
+    const selectToppings = document.querySelectorAll('.checkbox');
     let toppingArray = [];
     let toppingPrice = [];
-    for (let checkbox of checkboxes) {
+    for (let checkbox of selectToppings) {
       checkbox.addEventListener('click', function () {
         if (this.checked === true) {
           toppingArray.push(this.name);
-          toppingPrice.push(this.value);
+          toppingPrice.push(parseInt(this.value));
           setGetTopping(toppingArray);
           setGetPriceTopping(toppingPrice);
         } else {
@@ -102,7 +89,7 @@ const DetailPage = () => {
             <div className="col-md-7">
               <h1 className="text-capitalize">{findAllCoffee.name}</h1>
               <p>Rp.{parsingPrice}</p>
-              <form onSubmit={handlerGetTopping}>
+              <form onSubmit={handlerAddCart}>
                 <div className="toppings mt-3">
                   <div className="row">{listToppings}</div>
                 </div>

@@ -292,7 +292,7 @@ section.varian .container .row .col-md-3 .box-card .overlay button:hover {
 }
 /* Section Varian End */
 
-/* Detail pPage Start */
+/* Detail Page Start */
 section.detail-page {
   margin: 150px 0 150px 0;
 }
@@ -365,4 +365,84 @@ section.detail-page .container .quantity p {
   font-size: 18px;
   padding: 3.5px 20px;
 }
-/* Detail pPage End */
+/* Detail Page End */
+
+/* Cart Page Start */
+section.cart-page {
+  margin-top: 150px;
+  height: 100vh;
+}
+
+section.cart-page .container .col-md-7,
+section.cart-page .container .col-md-5 {
+  height: 100%;
+}
+
+section.cart-page .container .col-md-7 .title h1 {
+  font-weight: 700;
+  color: var(--primaryColor);
+}
+section.cart-page .container .col-md-7 .title h5 {
+  font-weight: 600;
+  color: var(--primaryColor);
+  margin-bottom: 10px;
+}
+section.cart-page .container .col-md-7 .title,
+section.cart-page .container .col-md-7 .parent-list {
+  border-bottom: 2px solid #974a4a;
+  margin-bottom: 20px;
+}
+section.cart-page .container .col-md-7 .list-cart img {
+  width: 90px;
+  border-radius: 10px;
+}
+section.cart-page .container .col-md-7 .list-cart p {
+  font-weight: 600;
+  color: var(--primaryColor);
+}
+section.cart-page .container .col-md-7 .list-cart i {
+  color: var(--primaryColor);
+  font-size: 20px;
+  cursor: pointer;
+}
+section.cart-page .container .col-md-5 input {
+  border: 2px solid var(--primaryColor);
+  outline: none;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: #e0c8c840;
+}
+section.cart-page .container .col-md-5 #address {
+  resize: none;
+  height: 120px;
+  border: 2px solid var(--primaryColor);
+  outline: none;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: #e0c8c840;
+}
+section.cart-page .container .col-md-5 button.btn-pay {
+  border: none;
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 30px;
+  color: white;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: var(--primaryColor);
+}
+section.cart-page .container .col-md-7 .sub-total {
+  border-top: 1.5px solid #974a4a;
+  border-bottom: 1.5px solid #974a4a;
+  margin-bottom: 8px;
+}
+section.cart-page .container .col-md-7 .sub-total p,
+section.cart-page .container .col-md-7 .total p {
+  font-weight: 600;
+  color: var(--primaryColor);
+}
+section.cart-page .container .col-md-7 .total p {
+  font-size: 22px;
+}
+
+/* Cart Page End */
