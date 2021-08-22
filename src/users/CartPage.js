@@ -1,22 +1,13 @@
 import React from 'react';
-import { useState } from 'react';
 import uploadFile from '../assets/img/upload-file.svg';
 import emptyCart from '../assets/img/empty-cart.svg';
 import { Link } from 'react-router-dom';
 
 const CartPage = () => {
-  const [removeOrder, setRemoveOrder] = useState();
-
   const dataCart = JSON.parse(localStorage.getItem('user_transaction'));
   const IMG_URL = '/images/coffee/';
   const arrayTotal = [];
   const quantity = dataCart.order.length;
-
-  const handlerRemoveCart = () => {
-    dataCart.order.splice(removeOrder, 1);
-    localStorage.setItem('user_transaction', JSON.stringify(dataCart));
-    window.location.reload();
-  };
 
   if (dataCart.order.length === 0) {
     return (
@@ -29,8 +20,40 @@ const CartPage = () => {
       </section>
     );
   }
-
   const listDataCart = dataCart.order.map((item, index) => {
+    if (item.priceTopping.length === 0) {
+      const parsingPrice = item.price
+        .toString()
+        .split('')
+        .reverse()
+        .join('')
+        .match(/\d{1,3}/g)
+        .join('.')
+        .split('')
+        .reverse()
+        .join('');
+      const handlerRemoveCart = () => {
+        dataCart.order.splice(index, 1);
+        console.log(index);
+        localStorage.setItem('user_transaction', JSON.stringify(dataCart));
+        window.location.reload();
+      };
+      arrayTotal.push(item.price);
+      return (
+        <div className="list-cart mb-3 d-flex align-items-center justify-content-between">
+          <div className="image-description d-flex align-items-center">
+            <img src={`${IMG_URL}${item.image}`} alt="" className="me-3" />
+            <div className="description">
+              <p className="text-capitalize">{item.name}</p>
+            </div>
+          </div>
+          <div className="price-remove text-end">
+            <p>Rp.{parsingPrice}</p>
+            <i className="fas fa-trash" onClick={handlerRemoveCart}></i>
+          </div>
+        </div>
+      );
+    }
     const itemTopping = item.topping.map((topping) => <p>{topping},</p>);
     const amountToppingPrice = item.priceTopping.reduce((acc, curr) => {
       return acc + curr;
@@ -46,7 +69,12 @@ const CartPage = () => {
       .split('')
       .reverse()
       .join('');
-
+    const handlerRemoveCart = () => {
+      dataCart.order.splice(index, 1);
+      console.log(index);
+      localStorage.setItem('user_transaction', JSON.stringify(dataCart));
+      window.location.reload();
+    };
     arrayTotal.push(amountCoffeTopping);
     return (
       <div className="list-cart mb-3 d-flex align-items-center justify-content-between">
@@ -59,13 +87,7 @@ const CartPage = () => {
         </div>
         <div className="price-remove text-end">
           <p>Rp.{parsingPrice}</p>
-          <i
-            className="fas fa-trash"
-            onChange={() => {
-              setRemoveOrder(index);
-            }}
-            onClick={handlerRemoveCart}
-          ></i>
+          <i className="fas fa-trash" onClick={handlerRemoveCart}></i>
         </div>
       </div>
     );

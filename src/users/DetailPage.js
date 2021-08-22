@@ -27,6 +27,8 @@ const DetailPage = () => {
   const IMG_URL = '/images/coffee/';
   const IMG_URL_TOPPINGS = '/images/toppings/';
 
+  let [allPrice, setAllPrice] = useState(findAllCoffee.price);
+
   const handlerAddCart = () => {
     getDataUserTransaction.order.push({
       name: findAllCoffee.name,
@@ -44,6 +46,7 @@ const DetailPage = () => {
     const selectToppings = document.querySelectorAll('.checkbox');
     let toppingArray = [];
     let toppingPrice = [];
+    let priceAll = [parseInt(allPrice)];
     for (let checkbox of selectToppings) {
       checkbox.addEventListener('click', function () {
         if (this.checked === true) {
@@ -51,8 +54,14 @@ const DetailPage = () => {
           toppingPrice.push(parseInt(this.value));
           setGetTopping(toppingArray);
           setGetPriceTopping(toppingPrice);
-        } else {
-          console.log('you unchecked');
+          priceAll.push(parseInt(this.value));
+          const total = priceAll.reduce((acc, curr) => acc + curr);
+          setAllPrice(total);
+        }
+        if (this.checked === false) {
+          priceAll = priceAll.filter((data) => data !== parseInt(this.value));
+          const total = priceAll.reduce((acc, curr) => acc + curr);
+          setAllPrice(total);
         }
       });
     }
@@ -96,7 +105,7 @@ const DetailPage = () => {
                 <div className="total d-flex justify-content-lg-between mt-2">
                   <h3>Total</h3>
                   <p className="price-total">
-                    <h4 className="text-end">Rp.{parsingPrice}</h4>
+                    <h4 className="text-end">Rp.{allPrice}</h4>
                   </p>
                 </div>
                 <button className="btn-total" onClick="">
