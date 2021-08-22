@@ -1,0 +1,117 @@
+:root {
+  --primaryColor: #bd0707;
+  --secondaryColor: #f6dada;
+}
+/* Admin Start */
+section.admin {
+  height: 100vh;
+  margin-top: 140px;
+}
+section.admin h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--primaryColor);
+  margin-bottom: 16px;
+}
+section.admin .col-md-4 {
+  transform: scale(0.8);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.205);
+  padding: 0;
+  transition: 0.2s;
+  cursor: pointer;
+  border-radius: 8px;
+}
+section.admin .col-md-4 h5 {
+  font-size: 20px;
+  color: var(--primaryColor);
+  font-weight: 600;
+}
+section.admin .col-md-4 p {
+  color: var(--primaryColor);
+  font-weight: 500;
+}
+section.admin .col-md-4:hover {
+  transform: scale(0.85);
+}
+section.admin .col-md-4 button {
+  background-color: var(--primaryColor);
+  border: none;
+  padding: 8px;
+  font-weight: 600;
+  border-radius: 5px;
+  color: white;
+}
+section.admin .col-md-4 img {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+/* Admin End */
+/* Add Product Start */
+section.add-product {
+  height: 100vh;
+  margin-top: 150px;
+}
+section.add-product h1 {
+  color: var(--primaryColor);
+  font-weight: 700;
+  font-size: 32px;
+}
+section.add-product input {
+  padding: 8px;
+  border-radius: 8px;
+  background-color: #e0c8c840;
+  border: 2px solid var(--primaryColor);
+  font-weight: 600;
+  color: #68323280;
+  outline: none;
+}
+
+section.add-product label.label-upload {
+  padding: 8px;
+  border-radius: 8px;
+  background-color: #e0c8c840;
+  border: 2px solid var(--primaryColor);
+  font-weight: 600;
+  color: #68323280;
+  cursor: pointer;
+}
+section.add-product button.btn-add-product {
+  padding: 8px;
+  border-radius: 8px;
+  background-color: var(--primaryColor);
+  border: 2px solid var(--primaryColor);
+  font-weight: 600;
+  color: white;
+  font-size: 18px;
+  margin-top: 50px;
+}
+section.add-product .col-md-5 img {
+  width: 350px;
+  border-radius: 10px;
+}
+/* Add Product End */
+
+/* Income Start */
+section.income-transaction {
+  margin-top: 150px;
+  height: 100vh;
+}
+section.income-transaction h1 {
+  font-weight: 700;
+  font-size: 32px;
+  color: var(--primaryColor);
+}
+section.income-transaction table {
+  border: 2px solid #828282;
+}
+section.income-transaction table tr td,
+section.income-transaction table tr th {
+  border-right: 2px solid #828282;
+}
+section.income-transaction table tr {
+  border-bottom: 2px solid #828282;
+}
+section.income-transaction table thead {
+  background-color: #e5e5e5;
+}
+/* Income End */

@@ -79,7 +79,7 @@ const DetailPage = () => {
           />
           <input type="checkbox" name={`${topping.name}`} value={`${topping.price}`} className="checkbox" />
           <img src={`${IMG_URL_TOPPINGS}${topping.image}`} alt={topping.image} />
-          <label for={`${topping.name}`} className="click-topping">
+          <label for={`#${topping.name}`} className="click-topping">
             {topping.name}
           </label>
         </div>

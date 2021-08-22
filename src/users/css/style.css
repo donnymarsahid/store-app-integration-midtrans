@@ -481,3 +481,41 @@ section.cart-page-null button.btn-empty:hover {
 }
 
 /* Cart Page End */
+
+/* Profile Start */
+section.profile {
+  margin-top: 150px;
+  height: 100vh;
+}
+section.profile .col-md-6 img.profile {
+  border-radius: 8px;
+}
+section.profile .col-md-6 h3,
+section.profile .col-md-6 h6 {
+  font-weight: 600;
+  color: var(--primaryColor);
+}
+section.profile .col-md-6 p {
+  font-weight: 600;
+  color: var(--primaryColor);
+}
+section.profile .col-md-6 img.coffee {
+  width: 100px;
+  border-radius: 8px;
+}
+section.profile .col-md-6 img.logo {
+  width: 75px;
+}
+section.profile .col-md-6 img.barcode {
+  width: 90px;
+}
+section.profile .col-md-6.transaction p {
+  font-size: 14px;
+  margin: 0;
+}
+section.profile .col-md-6.transaction .box-transaction {
+  background-color: #f6dada;
+  border-radius: 10px;
+  padding: 20px;
+}
+/* Profile End */
