@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import uploadFile from '../assets/img/upload-file.svg';
 import emptyCart from '../assets/img/empty-cart.svg';
+import { Link } from 'react-router-dom';
 
 const CartPage = () => {
   const [removeOrder, setRemoveOrder] = useState();
@@ -22,7 +23,9 @@ const CartPage = () => {
       <section className="cart-page-null d-flex align-items-center justify-content-center flex-column">
         <img src={emptyCart} alt="empty-cart" width="150px" />
         <h1>Empty Cart :(</h1>
-        <button class="btn-empty">Order Now</button>
+        <Link to="/all-menu">
+          <button class="btn-empty">Order Now</button>
+        </Link>
       </section>
     );
   }
