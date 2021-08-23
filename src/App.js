@@ -22,24 +22,29 @@ import AddProduct from './admin/AddProduct';
 import AddTopping from './admin/AddTopping';
 import IncomeTransaction from './admin/IncomeTransaction';
 import Admin from './admin/Admin';
+import dataAdmin from './data/admin.json';
+import NavbarAdmin from './admin/components/NavbarAdmin';
 
 function App() {
   const dataAccountAuth = JSON.parse(localStorage.getItem('user_auth'));
+  const dataAdminAuth = JSON.parse(localStorage.getItem('admin_auth'));
   const loginAuth = JSON.parse(localStorage.getItem('login_auth'));
 
   const [coffeeVariant, setCoffeeVariant] = useState([]);
   const [allCoffee, setAllCoffee] = useState([]);
   const [account] = useState(dataAccountAuth);
+  const [accountAdmin] = useState(dataAdminAuth);
   const [login] = useState(loginAuth);
 
   useEffect(() => {
     setCoffeeVariant(dataCoffeeVariant);
     setAllCoffee(dataAllCoffee);
-  }, [coffeeVariant, allCoffee, account]);
+  }, [coffeeVariant, allCoffee, account, accountAdmin]);
 
   if (!login) {
     localStorage.setItem('login_auth', false);
     localStorage.setItem('user_auth', JSON.stringify(dataAccount));
+    localStorage.setItem('admin_auth', JSON.stringify(dataAdmin));
     return (
       <Router>
         <context.Provider value={{ coffeeVariant, allCoffee }}>
@@ -56,13 +61,13 @@ function App() {
     );
   }
 
-  if (login) {
+  if (login && login !== 'admin') {
     return (
       <>
         <Router>
           <context.Provider value={{ coffeeVariant, allCoffee }}>
             <ScrollToTop />
-            {/* <NavbarUsers /> */}
+            <NavbarUsers />
             <Switch>
               <Route path="/" exact component={Users} />
               <Route path="/all-menu" component={AllMenuUsers} />
@@ -70,15 +75,29 @@ function App() {
               <Route path="/detail-page/:id" component={DetailPage} />
               <Route path="/cart-page" component={CartPage} />
               <Route path="/profile" component={Profile} />
-              <Route path="/admin/add-product" component={AddProduct} />
-              <Route path="/admin/add-topping" component={AddTopping} />
-              <Route path="/admin/income-transaction" component={IncomeTransaction} />
-              <Route path="/admin" component={Admin} />
             </Switch>
             <Footer />
           </context.Provider>
         </Router>
       </>
+    );
+  }
+
+  if (login === 'admin') {
+    return (
+      <Router>
+        <context.Provider>
+          <ScrollToTop />
+          <NavbarAdmin />
+          <Switch>
+            <Route path="/admin" exact component={Admin} />
+            <Route path="/admin/add-product" component={AddProduct} />
+            <Route path="/admin/add-topping" component={AddTopping} />
+            <Route path="/admin/income-transaction" component={IncomeTransaction} />
+          </Switch>
+          <Footer />
+        </context.Provider>
+      </Router>
     );
   }
 }

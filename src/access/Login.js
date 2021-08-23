@@ -12,8 +12,15 @@ const Login = () => {
   const handlerLogin = (e) => {
     e.preventDefault();
     const dataAccountAuth = JSON.parse(localStorage.getItem('user_auth'));
+    const dataAdminAuth = JSON.parse(localStorage.getItem('admin_auth'));
     const findAccountAuth = dataAccountAuth.find((data) => data.email === email && data.password === password);
+    const findAdminAuth = dataAdminAuth.find((data) => data.email === email && data.password === password);
 
+    if (findAdminAuth) {
+      localStorage.setItem('login_auth', JSON.stringify('admin'));
+      history.push('/admin');
+      window.location.reload();
+    }
     if (findAccountAuth) {
       localStorage.setItem('login_auth', true);
       localStorage.setItem(

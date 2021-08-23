@@ -13,7 +13,19 @@ const DetailPage = () => {
   const getDataUserTransaction = JSON.parse(localStorage.getItem('user_transaction'));
 
   const findAllCoffee = dataAllCoffee.find((data) => data.id === params.id);
-  const parsingPrice = parseInt(findAllCoffee.price)
+  let [allPrice, setAllPrice] = useState(findAllCoffee.price);
+
+  const parsingPrice = allPrice
+    .toString()
+    .split('')
+    .reverse()
+    .join('')
+    .match(/\d{1,3}/g)
+    .join('.')
+    .split('')
+    .reverse()
+    .join('');
+  const allCoffePrice = findAllCoffee.price
     .toString()
     .split('')
     .reverse()
@@ -26,8 +38,6 @@ const DetailPage = () => {
 
   const IMG_URL = '/images/coffee/';
   const IMG_URL_TOPPINGS = '/images/toppings/';
-
-  let [allPrice, setAllPrice] = useState(findAllCoffee.price);
 
   const handlerAddCart = () => {
     getDataUserTransaction.order.push({
@@ -60,6 +70,10 @@ const DetailPage = () => {
         }
         if (this.checked === false) {
           priceAll = priceAll.filter((data) => data !== parseInt(this.value));
+          toppingArray = toppingArray.filter((data) => data !== this.name);
+          toppingPrice = toppingPrice.filter((data) => data !== parseInt(this.value));
+          setGetTopping(toppingArray);
+          setGetPriceTopping(toppingPrice);
           const total = priceAll.reduce((acc, curr) => acc + curr);
           setAllPrice(total);
         }
@@ -97,7 +111,7 @@ const DetailPage = () => {
             </div>
             <div className="col-md-7">
               <h1 className="text-capitalize">{findAllCoffee.name}</h1>
-              <p>Rp.{parsingPrice}</p>
+              <p>Rp.{allCoffePrice}</p>
               <form onSubmit={handlerAddCart}>
                 <div className="toppings mt-3">
                   <div className="row">{listToppings}</div>
@@ -105,7 +119,7 @@ const DetailPage = () => {
                 <div className="total d-flex justify-content-lg-between mt-2">
                   <h3>Total</h3>
                   <p className="price-total">
-                    <h4 className="text-end">Rp.{allPrice}</h4>
+                    <h4 className="text-end">Rp.{parsingPrice}</h4>
                   </p>
                 </div>
                 <button className="btn-total" onClick="">

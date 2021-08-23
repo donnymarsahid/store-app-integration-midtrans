@@ -6,7 +6,7 @@ import cartIcon from '../../assets/img/cart.svg';
 import swal from 'sweetalert';
 import { useState } from 'react/cjs/react.development';
 
-const Navbar = () => {
+const NavbarAdmin = () => {
   const history = useHistory();
 
   const handlerLogout = () => {
@@ -32,21 +32,21 @@ const Navbar = () => {
       <nav className="fixed-top shadow-sm d-flex align-items-center">
         <div className="container-navbar d-flex justify-content-between align-items-center">
           <div className="logo-brand">
-            <Link to="/">
+            <Link to="/admin">
               <img src={logoWaysBucks} alt="logo-waysbucks" />
             </Link>
           </div>
           <div className="navbar-link">
             <ul className="d-flex m-0 me-4 p-0 justify-content-lg-around">
-              <Link to="/coffee" className="text-decoration-none ">
+              <Link to="/admin/income-transaction" className="text-decoration-none ">
                 <li className="fw-bolder">IncomeTransaction</li>
               </Link>
-              <div className="link-router text-decoration-none ms-5 me-5">
+              <Link to="/admin/add-product" className="link-router text-decoration-none ms-5 me-5">
                 <li className="menu">
                   <p className="text-uppercase m-0 fw-bolder">AddProduct</p>
                 </li>
-              </div>
-              <Link to="/" className="link-router text-decoration-none">
+              </Link>
+              <Link to="/admin/add-topping" className="link-router text-decoration-none">
                 <li className="store">
                   <p className="text-uppercase m-0 fw-bolder">AddTopping</p>
                 </li>
@@ -71,4 +71,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default NavbarAdmin;

@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from './components/Navbar';
 import addProduct from '../assets/img/add-product.svg';
 import addTopping from '../assets/img/add-topping.svg';
 import transaction from '../assets/img/transaction.svg';
@@ -8,13 +7,12 @@ import { Link } from 'react-router-dom';
 const Admin = () => {
   return (
     <>
-      <Navbar />
       <section className="admin">
         <div class="container">
           <h1 className="text-center">Admin Waysbucks</h1>
           <div class="row">
             <div class="col-md-4">
-              <Link to="/" className="text-decoration-none">
+              <Link to="/admin/income-transaction" className="text-decoration-none">
                 <div width="18rem">
                   <img src={transaction} class="card-img-top" alt="transaction" />
                   <div class="card-body">
@@ -26,7 +24,7 @@ const Admin = () => {
               </Link>
             </div>
             <div class="col-md-4">
-              <Link to="/" className="text-decoration-none">
+              <Link to="/admin/add-product" className="text-decoration-none">
                 <div width="18rem">
                   <img src={addProduct} class="card-img-top" alt="add-product" />
                   <div class="card-body">
@@ -38,7 +36,7 @@ const Admin = () => {
               </Link>
             </div>
             <div class="col-md-4">
-              <Link to="/" className="text-decoration-none">
+              <Link to="/admin/add-topping" className="text-decoration-none">
                 <div width="18rem">
                   <img src={addTopping} class="card-img-top" alt="add-topping" />
                   <div class="card-body">
