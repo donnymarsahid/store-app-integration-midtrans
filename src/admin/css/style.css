@@ -119,6 +119,22 @@ section.income-transaction tr td {
   font-weight: 600;
   text-transform: capitalize;
 }
+section.income-transaction button.btn-cancel {
+  border: none;
+  background-color: var(--primaryColor);
+  color: white;
+  border-radius: 3px;
+  padding: 3px 8px;
+  font-weight: 500;
+}
+section.income-transaction button.btn-approve {
+  border: none;
+  background-color: #0acf83;
+  color: white;
+  border-radius: 3px;
+  padding: 3px 8px;
+  font-weight: 500;
+}
 
 section.add-product img.img-upload {
   width: 200px;

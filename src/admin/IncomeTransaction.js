@@ -1,25 +1,70 @@
 import React from 'react';
 import './css/style.css';
-import success from '../assets/img/success.svg';
-import cancel from '../assets/img/cancel.svg';
 import { useContext } from 'react/cjs/react.development';
 import { context } from '../App';
+import swal from 'sweetalert';
 
 const IncomeTransaction = () => {
   const { transaction } = useContext(context);
 
   const IMG_URL = '/images/actions/';
 
-  const cardTransaction = transaction.map((data) => {
+  const cardTransaction = transaction.map((data, index) => {
+    const handlerApprove = () => {
+      const findApprove = transaction.find((data) => data.action === '');
+      swal({
+        title: 'Success Approve',
+        text: 'checked status',
+        icon: 'success',
+        button: 'Aww yiss!',
+      });
+      transaction.splice(index, 1);
+      findApprove.status = 'success';
+      findApprove.action = 'success.svg';
+      localStorage.setItem('user_transaction', JSON.stringify([...transaction, findApprove]));
+      window.location.reload();
+    };
+
+    const handlerCancel = () => {
+      swal({
+        title: 'Are you cancel order?',
+        text: 'Once deleted, you will not be able to recover this imaginary order',
+        icon: 'warning',
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          const findApprove = transaction.find((data) => data.action === '');
+          transaction.splice(index, 1);
+          findApprove.status = 'cancel';
+          findApprove.action = 'cancel.svg';
+          localStorage.setItem('user_transaction', JSON.stringify([...transaction, findApprove]));
+          window.location.reload();
+        } else {
+          swal('Your imaginary file is safe!');
+        }
+      });
+    };
+
     return (
       <tr>
-        <th scope="row">2</th>
+        <th scope="row">{index + 1}</th>
         <td>{data.name}</td>
         <td>{data.address}</td>
         <td>{data.postcode}</td>
         <td>{data.income}</td>
         <td>{data.status}</td>
         <td className="text-center">
+          {data.action === '' && (
+            <>
+              <button className="me-2 btn-cancel" onClick={handlerCancel}>
+                cancel
+              </button>
+              <button className="btn-approve" onClick={handlerApprove}>
+                approve
+              </button>
+            </>
+          )}
           <img src={`${IMG_URL}${data.action}`} alt={data.action} />
         </td>
       </tr>

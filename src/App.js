@@ -28,6 +28,7 @@ import dataAdmin from './data/admin.json';
 import NavbarAdmin from './admin/components/NavbarAdmin';
 
 import { v4 as uuidv4 } from 'uuid';
+import NoMatch from './404/NoMatch';
 
 function App() {
   const loginAuth = JSON.parse(localStorage.getItem('login_auth'));
@@ -81,6 +82,7 @@ function App() {
             <Route path="/" exact component={Guest} />
             <Route path="/all-menu" component={AllMenu} />
             <Route path="/coffee" component={Coffee} />
+            <Route path="/*" component={NoMatch} />
           </Switch>
           <Footer />
         </context.Provider>
@@ -102,6 +104,7 @@ function App() {
               <Route path="/detail-page/:id" component={DetailPage} />
               <Route path="/cart-page" component={CartPage} />
               <Route path="/profile" component={Profile} />
+              <Route path="/*" component={NoMatch} />
             </Switch>
             <Footer />
           </context.Provider>
@@ -121,6 +124,7 @@ function App() {
             <Route path="/admin/add-product" component={AddProduct} />
             <Route path="/admin/add-topping" component={AddTopping} />
             <Route path="/admin/income-transaction" component={IncomeTransaction} />
+            <Route path="/*" component={NoMatch} />
           </Switch>
           <Footer />
         </context.Provider>
