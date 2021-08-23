@@ -56,7 +56,7 @@ const AddTopping = () => {
                 </button>
               </form>
             </div>
-            <div class="col-md-5 d-flex justify-content-center align-items-center ">
+            <div class="col-md-5 d-flex justify-content-center align-items-center">
               <img src={`${IMG_URL}${upload}`} alt="topping" className="img-upload" />
             </div>
           </div>
