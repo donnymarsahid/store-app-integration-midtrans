@@ -15,7 +15,7 @@ const Register = () => {
   const { fullname, email, password, confirmPassword } = newAccount;
 
   const [status, setStatus] = useState('');
-  const dataAccountAuth = JSON.parse(localStorage.getItem('account'));
+  const dataAccountAuth = JSON.parse(localStorage.getItem('user_auth'));
 
   const handlerInput = (e) => {
     setNewAccount({ ...newAccount, [e.target.name]: e.target.value });
@@ -38,6 +38,7 @@ const Register = () => {
         }, 4000);
         return false;
       }
+      setStatus('success register please login');
       addAccount(fullname, email, password);
     }
   };

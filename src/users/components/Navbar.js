@@ -75,7 +75,7 @@ const Navbar = () => {
             </div>
             <div className="profile">
               <div className="btn-group dropstart">
-                <img src={`${IMG_URL_PROFILE}${dataUser.image}`} alt="profile" width="30px" className="img-profile" data-bs-toggle="dropdown" aria-expanded="false" />
+                <img src={`${IMG_URL_PROFILE}${dataUser.image}`} alt="profile" width="30px" className="img-profile" data-bs-toggle="dropdown" />
                 <ul className="dropdown-menu">
                   <Link to="/profile" className="text-decoration-none">
                     <li className="li-profile">

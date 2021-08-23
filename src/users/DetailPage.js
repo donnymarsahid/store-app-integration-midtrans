@@ -89,7 +89,7 @@ const DetailPage = () => {
   const listToppings = dataToppings.map((topping) => {
     return (
       <div className="col-md-3 d-flex flex-column align-items-center">
-        <div class="box-check">
+        <div class="box-check d-flex flex-column align-items-center">
           <input
             type="hidden"
             onChange={() => {
@@ -98,9 +98,7 @@ const DetailPage = () => {
           />
           <input type="checkbox" name={`${topping.name}`} value={`${topping.price}`} className="checkbox" />
           <img src={`${IMG_URL_TOPPINGS}${topping.image}`} alt={topping.image} />
-          <label for={`#${topping.name}`} className="click-topping">
-            {topping.name}
-          </label>
+          <label className="click-topping">{topping.name}</label>
         </div>
       </div>
     );

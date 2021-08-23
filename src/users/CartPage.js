@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import uploadFile from '../assets/img/upload-file.svg';
 import emptyCart from '../assets/img/empty-cart.svg';
 import { Link } from 'react-router-dom';
@@ -26,11 +26,6 @@ const CartPage = () => {
   const handlerImage = (e) => {
     setNewUserTransaction({ ...newUserTransaction, [e.target.name]: e.target.files[0].name });
   };
-
-  if (image !== '') {
-    swal('Success Upload', 'receipt has been received', 'success');
-  }
-
   const dataCart = JSON.parse(localStorage.getItem('user_order'));
   const IMG_URL = '/images/coffee/';
   const arrayTotal = [];
@@ -129,6 +124,7 @@ const CartPage = () => {
 
   const handlerPay = (e) => {
     e.preventDefault();
+    console.log(image);
     swal('Thank you for ordering in us ,please wait to verify your order');
     addUserTransaction(name, address, postcode, parsingPriceTotal);
   };
@@ -163,7 +159,7 @@ const CartPage = () => {
                     </div>
                   </div>
                   <div class="col-md-4">
-                    <input type="file" name="upload" id="upload" className="d-none" required onChange={(e) => handlerImage(e)} />
+                    <input type="file" name="image" id="upload" className="d-none" required onChange={(e) => handlerImage(e)} />
                     <label for="upload" className="upload-struck d-flex flex-column align-items-center justify-content-center">
                       <img src={uploadFile} alt="uploadFile" />
                       <p>Attache Of Transaction</p>

@@ -3,9 +3,11 @@ import '../css/style.css';
 import { Link, useHistory } from 'react-router-dom';
 import logoWaysBucks from '../../assets/img/logo-waysbucks.svg';
 import swal from 'sweetalert';
+import logout from '../../assets/img/logout.svg';
 
 const NavbarAdmin = () => {
   const history = useHistory();
+  const IMG_URL_PROFILE = '/images/';
 
   const handlerLogout = () => {
     swal({
@@ -51,13 +53,22 @@ const NavbarAdmin = () => {
           </div>
           <div className="access d-flex">
             <div className="profile">
-              <i className="fas fa-user-circle avatar"></i>
-              <div className="dropdown">
-                <Link to="/" className="text-decoration-none">
-                  Profile
-                </Link>
-                <hr />
-                <button onClick={handlerLogout}>Logout</button>
+              <div className="btn-group dropstart">
+                <img src={`${IMG_URL_PROFILE}profile.png`} alt="profile" width="30px" className="img-profile" data-bs-toggle="dropdown" />
+                <ul className="dropdown-menu">
+                  <Link className="text-decoration-none">
+                    <li className="li-profile">
+                      <p className="ps-3 pt-2">
+                        <i class="far fa-user pe-2"></i> Admin
+                      </p>
+                    </li>
+                  </Link>
+                  <li className="logout" onClick={handlerLogout}>
+                    <p className="ps-3 pt-3">
+                      <img src={logout} alt="logout" width="25px" /> Logout
+                    </p>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>

@@ -303,6 +303,20 @@ section.detail-page {
   margin: 150px 0 150px 0;
 }
 
+section.detail-page .box-check {
+  position: relative;
+}
+section.detail-page .box-check .checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+section.detail-page .box-check label {
+  font-weight: 600;
+  color: var(--primaryColor);
+  font-size: 14px;
+}
+
 section.detail-page .container .col-md-4 img {
   width: 100%;
 }
@@ -485,6 +499,13 @@ section.cart-page-null button.btn-empty {
 }
 section.cart-page-null button.btn-empty:hover {
   background-color: #d14545;
+}
+section.cart-page p.alert {
+  font-weight: 600;
+  color: var(--primaryColor);
+  background-color: wheat;
+  padding: 0;
+  margin-top: 8px;
 }
 
 /* Cart Page End */
