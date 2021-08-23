@@ -76,7 +76,7 @@ const Navbar = () => {
             <div className="profile">
               <i className="fas fa-user-circle avatar"></i>
               <div className="dropdown">
-                <Link to="/" className="text-decoration-none">
+                <Link to="/profile" className="text-decoration-none">
                   Profile
                 </Link>
                 <hr />

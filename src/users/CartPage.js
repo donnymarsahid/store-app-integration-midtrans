@@ -2,6 +2,7 @@ import React from 'react';
 import uploadFile from '../assets/img/upload-file.svg';
 import emptyCart from '../assets/img/empty-cart.svg';
 import { Link } from 'react-router-dom';
+import CardCart from './cardsProducts/CardCart';
 
 const CartPage = () => {
   const dataCart = JSON.parse(localStorage.getItem('user_transaction'));
@@ -54,7 +55,7 @@ const CartPage = () => {
         </div>
       );
     }
-    const itemTopping = item.topping.map((topping) => <p>{topping},</p>);
+    const itemTopping = item.topping.map((topping) => <>{topping},</>);
     const amountToppingPrice = item.priceTopping.reduce((acc, curr) => {
       return acc + curr;
     });
@@ -76,21 +77,7 @@ const CartPage = () => {
       window.location.reload();
     };
     arrayTotal.push(amountCoffeTopping);
-    return (
-      <div className="list-cart mb-3 d-flex align-items-center justify-content-between">
-        <div className="image-description d-flex align-items-center">
-          <img src={`${IMG_URL}${item.image}`} alt="" className="me-3" />
-          <div className="description">
-            <p className="text-capitalize">{item.name}</p>
-            <p className="d-flex">Topping: {itemTopping}</p>
-          </div>
-        </div>
-        <div className="price-remove text-end">
-          <p>Rp.{parsingPrice}</p>
-          <i className="fas fa-trash" onClick={handlerRemoveCart}></i>
-        </div>
-      </div>
-    );
+    return <CardCart item={item} parsingPrice={parsingPrice} handlerRemoveCart={handlerRemoveCart} itemTopping={itemTopping} />;
   });
   const amountArrayTotal = arrayTotal.reduce((acc, curr) => {
     return acc + curr;
