@@ -4,6 +4,7 @@ import clip from '../assets/img/clip.svg';
 import { useContext, useState } from 'react';
 import { context } from '../App';
 import { useHistory } from 'react-router';
+import swal from 'sweetalert';
 
 const AddProduct = () => {
   const history = useHistory();
@@ -31,6 +32,12 @@ const AddProduct = () => {
 
   const handlerSubmit = (e) => {
     e.preventDefault();
+    swal({
+      title: 'Success Add Product',
+      text: 'checked product',
+      icon: 'success',
+      button: 'Aww yiss!',
+    });
     localStorage.setItem('add_product', 'upload.png');
     addCoffee(name, price, image);
     history.push('/admin');

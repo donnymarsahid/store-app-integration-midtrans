@@ -19,9 +19,9 @@ const Login = () => {
 
     if (findAdminAuth) {
       localStorage.setItem('login_auth', JSON.stringify('admin'));
-      history.push('/admin');
       localStorage.setItem('add_product', 'upload.png');
       localStorage.setItem('add_topping', 'upload.png');
+      history.push('/admin');
       window.location.reload();
     }
     if (findAccountAuth) {

@@ -308,6 +308,7 @@ section.detail-page .box-check {
 }
 section.detail-page .box-check .checkbox {
   position: absolute;
+  z-index: 999;
   top: 0;
   left: 0;
 }

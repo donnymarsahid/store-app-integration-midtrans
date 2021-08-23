@@ -4,6 +4,7 @@ import clip from '../assets/img/clip.svg';
 import { useContext, useState } from 'react';
 import { context } from '../App';
 import { useHistory } from 'react-router';
+import swal from 'sweetalert';
 
 const AddTopping = () => {
   const history = useHistory();
@@ -31,6 +32,12 @@ const AddTopping = () => {
 
   const handlerSubmit = (e) => {
     e.preventDefault();
+    swal({
+      title: 'Success Add Topping',
+      text: 'checked topping',
+      icon: 'success',
+      button: 'Aww yiss!',
+    });
     localStorage.setItem('add_product', 'upload.png');
     addToppings(name, price, image);
     history.push('/admin');
