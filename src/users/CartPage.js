@@ -3,6 +3,7 @@ import uploadFile from '../assets/img/upload-file.svg';
 import emptyCart from '../assets/img/empty-cart.svg';
 import { Link } from 'react-router-dom';
 import CardCart from './cardsProducts/CardCart';
+import swal from 'sweetalert';
 
 const CartPage = () => {
   const dataCart = JSON.parse(localStorage.getItem('user_transaction'));
@@ -21,7 +22,25 @@ const CartPage = () => {
       </section>
     );
   }
+
   const listDataCart = dataCart.order.map((item, index) => {
+    const handlerRemoveCart = () => {
+      swal({
+        title: 'Delete Cart?',
+        text: 'if you delete you have to reorder',
+        icon: 'warning',
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          dataCart.order.splice(index, 1);
+          localStorage.setItem('user_transaction', JSON.stringify(dataCart));
+          window.location.reload();
+        } else {
+          swal('Cart is safe');
+        }
+      });
+    };
     if (item.priceTopping.length === 0) {
       const parsingPrice = item.price
         .toString()
@@ -33,12 +52,7 @@ const CartPage = () => {
         .split('')
         .reverse()
         .join('');
-      const handlerRemoveCart = () => {
-        dataCart.order.splice(index, 1);
-        console.log(index);
-        localStorage.setItem('user_transaction', JSON.stringify(dataCart));
-        window.location.reload();
-      };
+
       arrayTotal.push(item.price);
       return (
         <div className="list-cart mb-3 d-flex align-items-center justify-content-between">
@@ -70,12 +84,6 @@ const CartPage = () => {
       .split('')
       .reverse()
       .join('');
-    const handlerRemoveCart = () => {
-      dataCart.order.splice(index, 1);
-      console.log(index);
-      localStorage.setItem('user_transaction', JSON.stringify(dataCart));
-      window.location.reload();
-    };
     arrayTotal.push(amountCoffeTopping);
     return <CardCart item={item} parsingPrice={parsingPrice} handlerRemoveCart={handlerRemoveCart} itemTopping={itemTopping} />;
   });

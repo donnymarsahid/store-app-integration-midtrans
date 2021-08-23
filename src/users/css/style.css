@@ -370,7 +370,7 @@ section.detail-page .container .quantity p {
 /* Cart Page Start */
 section.cart-page {
   margin-top: 150px;
-  height: 100vh;
+  margin-bottom: 50px;
 }
 
 section.cart-page .container .col-md-7,
