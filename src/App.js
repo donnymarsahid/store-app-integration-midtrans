@@ -29,6 +29,7 @@ import NavbarAdmin from './admin/components/NavbarAdmin';
 
 import { v4 as uuidv4 } from 'uuid';
 import NoMatch from './404/NoMatch';
+import Store from './guest/Store';
 
 function App() {
   const loginAuth = JSON.parse(localStorage.getItem('login_auth'));
@@ -82,6 +83,7 @@ function App() {
             <Route path="/" exact component={Guest} />
             <Route path="/all-menu" component={AllMenu} />
             <Route path="/coffee" component={Coffee} />
+            <Route path="/store" component={Store} />
             <Route path="/*" component={NoMatch} />
           </Switch>
           <Footer />
@@ -104,6 +106,7 @@ function App() {
               <Route path="/detail-page/:id" component={DetailPage} />
               <Route path="/cart-page" component={CartPage} />
               <Route path="/profile" component={Profile} />
+              <Route path="/store" component={Store} />
               <Route path="/*" component={NoMatch} />
             </Switch>
             <Footer />

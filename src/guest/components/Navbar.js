@@ -28,7 +28,7 @@ const Navbar = () => {
                   </div>
                 </li>
               </div>
-              <Link to="/" className="link-router text-decoration-none">
+              <Link to="/store" className="link-router text-decoration-none">
                 <li className="store">
                   <p className="text-uppercase m-0 fw-bolder">Store</p>
                   <div className="box">

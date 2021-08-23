@@ -231,3 +231,26 @@ section.varian .container .row .col-md-3 .box-card .overlay button:hover {
   border: 2px solid var(--primaryColor);
 }
 /* Section Varian End */
+
+/* Store Start */
+section.store {
+  margin: 150px 0 150px 0;
+}
+section.store h1 {
+  color: #bd0707;
+  font-weight: 700;
+  font-size: 36px;
+}
+section.store p {
+  color: #bd0707;
+  font-weight: 600;
+}
+section.store i {
+  color: #bd0707;
+  font-size: 28px;
+}
+section.store h3 {
+  color: #bd0707;
+  font-weight: 600;
+}
+/* Store End */
