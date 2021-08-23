@@ -9,6 +9,8 @@ import { useState } from 'react/cjs/react.development';
 const Navbar = () => {
   const history = useHistory();
   const [totalCart, setTotalCart] = useState(0);
+  const dataUser = JSON.parse(localStorage.getItem('user_transaction'));
+  const IMG_URL_PROFILE = '/images/';
 
   const handlerLogout = () => {
     swal({
@@ -74,7 +76,7 @@ const Navbar = () => {
               </Link>
             </div>
             <div className="profile">
-              <i className="fas fa-user-circle avatar"></i>
+              <img src={`${IMG_URL_PROFILE}${dataUser.image}`} alt="profile" width="30px" className="img-profile" />
               <div className="dropdown">
                 <Link to="/profile" className="text-decoration-none">
                   Profile

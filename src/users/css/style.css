@@ -9,6 +9,10 @@ nav {
   height: 80px;
   background-color: white;
 }
+nav .container-navbar .access img.img-profile {
+  cursor: pointer;
+  border-radius: 50px;
+}
 nav .container-navbar {
   width: 90%;
   margin: auto;
@@ -451,6 +455,7 @@ section.cart-page .container label.upload-struck {
   height: 100%;
   border-radius: 5px;
   border: 2px solid var(--primaryColor);
+  cursor: pointer;
 }
 section.cart-page .container label.upload-struck p {
   font-weight: 500;

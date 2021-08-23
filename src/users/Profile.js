@@ -1,12 +1,23 @@
 import React from 'react';
-import profile from '../assets/img/profile.png';
 import logo from '../assets/img/logo-waysbucks.svg';
 import barcode from '../assets/img/barcode.svg';
+import { useState } from 'react/cjs/react.development';
 
 const Profile = () => {
   const dataUser = JSON.parse(localStorage.getItem('user_transaction'));
-  const IMG_URL = '/images/coffee';
-  console.log(dataUser.order);
+  const [uploadProfile, setUploadProfile] = useState('');
+  const IMG_URL_PROFILE = '/images/';
+
+  if (uploadProfile !== '') {
+    localStorage.setItem(
+      'user_transaction',
+      JSON.stringify({
+        ...dataUser,
+        image: uploadProfile,
+      })
+    );
+    window.location.reload();
+  }
 
   // if (dataUser.order.length === 0) {
   //   return (
@@ -42,7 +53,18 @@ const Profile = () => {
               <div class="title-image">
                 <h3 className="mb-3">My Profile</h3>
                 <div class="detail d-flex ">
-                  <img src={profile} alt="profile" className="profile" />
+                  <input
+                    type="file"
+                    name="upload"
+                    id="upload"
+                    className="d-none"
+                    onChange={(e) => {
+                      setUploadProfile(e.target.files[0].name);
+                    }}
+                  />
+                  <label for="upload">
+                    <img src={`${IMG_URL_PROFILE}${dataUser.image}`} alt="profile" className="profile" />
+                  </label>
                   <div class="text ps-4">
                     <p>Full Name : {dataUser.fullname}</p>
                     <p>Email : {dataUser.email}</p>

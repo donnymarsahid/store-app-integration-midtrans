@@ -10,6 +10,7 @@ import dataAllCoffee from './data/allCoffee.json';
 import { createContext } from 'react';
 import Users from './users/Users';
 import dataAccount from './data/account.json';
+import dataToppings from './data/toppings.json';
 import AllMenu from './guest/AllMenu';
 import Coffee from './guest/Coffee';
 import AllMenuUsers from './users/AllMenu';
@@ -25,29 +26,47 @@ import Admin from './admin/Admin';
 import dataAdmin from './data/admin.json';
 import NavbarAdmin from './admin/components/NavbarAdmin';
 
-function App() {
-  const dataAccountAuth = JSON.parse(localStorage.getItem('user_auth'));
-  const dataAdminAuth = JSON.parse(localStorage.getItem('admin_auth'));
-  const loginAuth = JSON.parse(localStorage.getItem('login_auth'));
+import { v4 as uuidv4 } from 'uuid';
 
-  const [coffeeVariant, setCoffeeVariant] = useState([]);
-  const [allCoffee, setAllCoffee] = useState([]);
-  const [account] = useState(dataAccountAuth);
-  const [accountAdmin] = useState(dataAdminAuth);
+function App() {
+  const loginAuth = JSON.parse(localStorage.getItem('login_auth'));
   const [login] = useState(loginAuth);
+  const [coffeeVariant, setCoffeeVariant] = useState(dataCoffeeVariant);
+  const [allCoffee, setAllCoffee] = useState(dataAllCoffee);
+  const [toppings, setToppings] = useState(dataToppings);
+  const [account, setAccount] = useState(dataAccount);
 
   useEffect(() => {
-    setCoffeeVariant(dataCoffeeVariant);
-    setAllCoffee(dataAllCoffee);
-  }, [coffeeVariant, allCoffee, account, accountAdmin]);
+    setAccount(JSON.parse(localStorage.getItem('user_auth')));
+    setAllCoffee(JSON.parse(localStorage.getItem('all_coffee')));
+    setToppings(JSON.parse(localStorage.getItem('toppings')));
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('user_auth', JSON.stringify(account));
+    localStorage.setItem('all_coffee', JSON.stringify(allCoffee));
+    localStorage.setItem('coffee_variant', JSON.stringify(coffeeVariant));
+    localStorage.setItem('toppings', JSON.stringify(toppings));
+  });
+
+  const addAccount = (fullname, email, password) => {
+    setAccount([...account, { id: uuidv4(), fullname, email, password }]);
+  };
+
+  const addCoffee = (name, price, image) => {
+    setAllCoffee([...allCoffee, { id: uuidv4(), name, price, image }]);
+  };
+
+  const addToppings = (name, price, image) => {
+    setToppings([...toppings, { id: uuidv4(), name, price, image }]);
+  };
 
   if (!login) {
     localStorage.setItem('login_auth', false);
-    localStorage.setItem('user_auth', JSON.stringify(dataAccount));
     localStorage.setItem('admin_auth', JSON.stringify(dataAdmin));
     return (
       <Router>
-        <context.Provider value={{ coffeeVariant, allCoffee }}>
+        <context.Provider value={{ coffeeVariant, allCoffee, addAccount }}>
           <ScrollToTop />
           <Navbar />
           <Switch>
@@ -86,7 +105,7 @@ function App() {
   if (login === 'admin') {
     return (
       <Router>
-        <context.Provider>
+        <context.Provider value={{ addCoffee, addToppings }}>
           <ScrollToTop />
           <NavbarAdmin />
           <Switch>

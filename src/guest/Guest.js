@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import './css/style.css';
 import imgHeader from '../assets/img/img-header.png';
 import { context } from '../App';
@@ -8,12 +8,7 @@ import Login from '../access/Login';
 import Register from '../access/Register';
 
 const Guest = () => {
-  const { coffeeVariant, allCoffee } = useContext(context);
-
-  useEffect(() => {
-    localStorage.setItem('coffee_variant', JSON.stringify(coffeeVariant));
-    localStorage.setItem('all_coffee', JSON.stringify(allCoffee));
-  }, [coffeeVariant, allCoffee]);
+  const { coffeeVariant } = useContext(context);
 
   const cardCoffee = coffeeVariant.map((coffee) => {
     return <CardCoffe coffee={coffee} key={coffee.id} />;

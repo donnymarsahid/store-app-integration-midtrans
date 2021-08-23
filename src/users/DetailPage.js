@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import dataToppings from '../data/toppings.json';
 import { useState } from 'react';
 
 const DetailPage = () => {
@@ -8,6 +7,8 @@ const DetailPage = () => {
   const history = useHistory();
   const [getTopping, setGetTopping] = useState([]);
   const [getPriceTopping, setGetPriceTopping] = useState([]);
+
+  const dataToppings = JSON.parse(localStorage.getItem('toppings'));
 
   const dataAllCoffee = JSON.parse(localStorage.getItem('all_coffee'));
   const getDataUserTransaction = JSON.parse(localStorage.getItem('user_transaction'));

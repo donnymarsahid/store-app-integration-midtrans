@@ -4,8 +4,20 @@ import emptyCart from '../assets/img/empty-cart.svg';
 import { Link } from 'react-router-dom';
 import CardCart from './cardsProducts/CardCart';
 import swal from 'sweetalert';
+import { useState } from 'react/cjs/react.development';
 
 const CartPage = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [poscode, setPoscode] = useState('');
+  const [address, setAddress] = useState('');
+  const [image, setImage] = useState('');
+
+  if (image !== '') {
+    swal('Success Upload', 'receipt has been received', 'success');
+  }
+
   const dataCart = JSON.parse(localStorage.getItem('user_transaction'));
   const IMG_URL = '/images/coffee/';
   const arrayTotal = [];
@@ -102,56 +114,135 @@ const CartPage = () => {
     .reverse()
     .join('');
 
+  const handlerPay = (e) => {
+    e.preventDefault();
+    swal('Thank you for ordering in us ,please wait to verify your order');
+    localStorage.setItem(
+      'user_transaction',
+      JSON.stringify({
+        ...dataCart,
+        transaction: [
+          {
+            name: name,
+            email: email,
+            phone: phone,
+            poscode: poscode,
+            address: address,
+            struck: image,
+          },
+        ],
+      })
+    );
+  };
+
   return (
     <>
       <section className="cart-page">
         <div className="container">
-          <div className="row">
-            <div className="col-md-7">
-              <div className="title">
-                <h1>My Cart</h1>
-                <h5>Review Your Order</h5>
-              </div>
-              <div className="parent-list">{listDataCart}</div>
-              <div class="row">
-                <div class="col-md-8">
-                  <div className="sub-total d-flex justify-content-between">
-                    <div className="detail mt-3">
-                      <p>Subtotal</p>
-                      <p>Quantity</p>
+          <form onSubmit={handlerPay}>
+            <div className="row">
+              <div className="col-md-7">
+                <div className="title">
+                  <h1>My Cart</h1>
+                  <h5>Review Your Order</h5>
+                </div>
+                <div className="parent-list">{listDataCart}</div>
+                <div class="row">
+                  <div class="col-md-8">
+                    <div className="sub-total d-flex justify-content-between">
+                      <div className="detail mt-3">
+                        <p>Subtotal</p>
+                        <p>Quantity</p>
+                      </div>
+                      <div className="detail-2 mt-3 text-end">
+                        <p>Rp.{parsingPriceTotal}</p>
+                        <p>{quantity}</p>
+                      </div>
                     </div>
-                    <div className="detail-2 mt-3 text-end">
+                    <div className="total d-flex justify-content-between">
+                      <p>Total</p>
                       <p>Rp.{parsingPriceTotal}</p>
-                      <p>{quantity}</p>
                     </div>
                   </div>
-                  <div className="total d-flex justify-content-between">
-                    <p>Total</p>
-                    <p>Rp.{parsingPriceTotal}</p>
+                  <div class="col-md-4">
+                    <input
+                      type="file"
+                      name="upload"
+                      id="upload"
+                      className="d-none"
+                      required
+                      onChange={(e) => {
+                        setImage(e.target.files[0].name);
+                      }}
+                    />
+                    <label for="upload" className="upload-struck d-flex flex-column align-items-center justify-content-center">
+                      <img src={uploadFile} alt="uploadFile" />
+                      <p>Attache Of Transaction</p>
+                    </label>
                   </div>
                 </div>
-                <div class="col-md-4">
-                  <input type="file" name="upload" id="upload" className="d-none" />
-                  <label for="upload" className="upload-struck d-flex flex-column align-items-center justify-content-center">
-                    <img src={uploadFile} alt="uploadFile" />
-                    <p>Attache Of Transaction</p>
-                  </label>
-                </div>
               </div>
-            </div>
-            <div className="col-md-5">
-              <form className="d-flex flex-column">
-                <input type="text" name="name" id="name" placeHolder="Name" className="mb-4" required />
-                <input type="email" name="email" id="email" placeHolder="Email" className="mb-4" required />
-                <input type="number" name="phone" id="phone" placeHolder="Phone" className="mb-4" required />
-                <input type="number" name="posCode" id="posCode" placeHolder="Pos Code" className="mb-4" required />
-                <textarea name="address" id="address" cols="30" rows="10" placeHolder="Address"></textarea>
+              <div className="col-md-5 d-flex flex-column">
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeHolder="Name"
+                  className="mb-4"
+                  required
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                />
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeHolder="Email"
+                  className="mb-4"
+                  required
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                />
+                <input
+                  type="number"
+                  name="phone"
+                  id="phone"
+                  placeHolder="Phone"
+                  className="mb-4"
+                  required
+                  onChange={(e) => {
+                    setPhone(e.target.value);
+                  }}
+                />
+                <input
+                  type="number"
+                  name="posCode"
+                  id="posCode"
+                  placeHolder="Pos Code"
+                  className="mb-4"
+                  required
+                  onChange={(e) => {
+                    setPoscode(e.target.value);
+                  }}
+                />
+                <textarea
+                  name="address"
+                  id="address"
+                  cols="30"
+                  rows="10"
+                  placeHolder="Address"
+                  onChange={(e) => {
+                    setAddress(e.target.value);
+                  }}
+                ></textarea>
                 <button type="submit" className="btn-pay">
                   Pay
                 </button>
-              </form>
+              </div>
             </div>
-          </div>
+          </form>
         </div>
       </section>
     </>

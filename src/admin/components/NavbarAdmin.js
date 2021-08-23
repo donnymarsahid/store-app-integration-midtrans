@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import '../css/style.css';
 import { Link, useHistory } from 'react-router-dom';
 import logoWaysBucks from '../../assets/img/logo-waysbucks.svg';
-import cartIcon from '../../assets/img/cart.svg';
 import swal from 'sweetalert';
-import { useState } from 'react/cjs/react.development';
 
 const NavbarAdmin = () => {
   const history = useHistory();
@@ -19,14 +17,12 @@ const NavbarAdmin = () => {
     }).then((logout) => {
       if (logout) {
         localStorage.setItem('login_auth', false);
-        localStorage.clear('coffee_variant');
-        localStorage.clear('coffee_all');
-        localStorage.clear('user_transaction');
         history.push('/');
         window.location.reload();
       }
     });
   };
+
   return (
     <>
       <nav className="fixed-top shadow-sm d-flex align-items-center">

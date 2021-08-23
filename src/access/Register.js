@@ -1,16 +1,25 @@
 import React, { useState } from 'react';
 import './css/style.css';
-import dataAccount from '../data/account.json';
-import { v4 as uuidv4 } from 'uuid';
+import { useContext } from 'react/cjs/react.development';
+import { context } from '../App';
 
 const Register = () => {
-  const [fullname, setFullname] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const { addAccount } = useContext(context);
+  const [newAccount, setNewAccount] = useState({
+    fullname: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+
+  const { fullname, email, password, confirmPassword } = newAccount;
 
   const [status, setStatus] = useState('');
-  const dataAccountAuth = JSON.parse(localStorage.getItem('user_auth'));
+  const dataAccountAuth = JSON.parse(localStorage.getItem('account'));
+
+  const handlerInput = (e) => {
+    setNewAccount({ ...newAccount, [e.target.name]: e.target.value });
+  };
 
   const handlerRegister = (e) => {
     e.preventDefault();
@@ -29,25 +38,7 @@ const Register = () => {
         }, 4000);
         return false;
       }
-      dataAccount.push({
-        id: uuidv4(),
-        fullname: fullname,
-        email: email,
-        password: password,
-        confirmPassword: confirmPassword,
-      });
-      localStorage.setItem('user_auth', JSON.stringify(dataAccount));
-      setStatus(
-        <>
-          success register please
-          <span className="fw-bold text-decoration-underline" data-bs-dismiss="modal">
-            Login
-          </span>
-        </>
-      );
-      setTimeout(() => {
-        setStatus('');
-      }, 4000);
+      addAccount(fullname, email, password);
     }
   };
 
@@ -70,53 +61,13 @@ const Register = () => {
                     </div>
                   )}
                   <form onSubmit={handlerRegister}>
-                    <input
-                      type="text"
-                      id="fullname"
-                      placeHolder="Full Name"
-                      className="mt-3 mb-3"
-                      onChange={(e) => {
-                        setFullname(e.target.value);
-                      }}
-                      autoComplete="off"
-                      required
-                    />
+                    <input type="text" name="fullname" id="fullname" placeHolder="Full Name" className="mt-3 mb-3" onChange={(e) => handlerInput(e)} autoComplete="off" required />
                     <br />
-                    <input
-                      type="email"
-                      id="email"
-                      placeHolder="Email"
-                      className="mt-3 mb-3"
-                      onChange={(e) => {
-                        setEmail(e.target.value);
-                      }}
-                      autoComplete="off"
-                      required
-                    />
+                    <input type="email" name="email" id="email" placeHolder="Email" className="mt-3 mb-3" onChange={(e) => handlerInput(e)} autoComplete="off" required />
                     <br />
-                    <input
-                      type="password"
-                      id="password"
-                      placeHolder="Password"
-                      className="mb-4"
-                      onChange={(e) => {
-                        setPassword(e.target.value);
-                      }}
-                      autoComplete="off"
-                      required
-                    />
+                    <input type="password" name="password" id="password" placeHolder="Password" className="mb-4" onChange={(e) => handlerInput(e)} autoComplete="off" required />
                     <br />
-                    <input
-                      type="password"
-                      id="confrim-password"
-                      placeHolder="Confirm Password"
-                      className="mb-4"
-                      onChange={(e) => {
-                        setConfirmPassword(e.target.value);
-                      }}
-                      autoComplete="off"
-                      required
-                    />
+                    <input type="password" name="confirmPassword" id="confrim-password" placeHolder="Confirm Password" className="mb-4" onChange={(e) => handlerInput(e)} autoComplete="off" required />
                     <br />
                     <button type="submit">Register</button>
                   </form>

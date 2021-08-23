@@ -114,4 +114,8 @@ section.income-transaction table tr {
 section.income-transaction table thead {
   background-color: #e5e5e5;
 }
+
+section.add-product img.img-upload {
+  width: 200px;
+}
 /* Income End */
