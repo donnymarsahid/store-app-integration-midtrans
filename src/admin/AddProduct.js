@@ -44,7 +44,7 @@ const AddProduct = () => {
             <div class="col-md-7">
               <h1>Products</h1>
               <form className="d-flex flex-column" onSubmit={handlerSubmit}>
-                <input type="text" name="name" id="name" placeHolder="Name Product" onChange={(e) => handlerInput(e)} />
+                <input type="text" name="name" id="name" placeHolder="Name Product " onChange={(e) => handlerInput(e)} />
                 <input type="number" name="price" id="price" placeHolder="Price" className="mt-4 mb-4" onChange={(e) => handlerInput(e)} />
                 <input type="file" name="image" id="image" className="d-none" onChange={(e) => handlerFile(e)} />
                 <label for="image" className="label-upload mb-4 d-flex justify-content-between">
