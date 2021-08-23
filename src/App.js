@@ -11,6 +11,7 @@ import { createContext } from 'react';
 import Users from './users/Users';
 import dataAccount from './data/account.json';
 import dataToppings from './data/toppings.json';
+import dataTransaction from './data/transaction.json';
 import AllMenu from './guest/AllMenu';
 import Coffee from './guest/Coffee';
 import AllMenuUsers from './users/AllMenu';
@@ -34,12 +35,14 @@ function App() {
   const [coffeeVariant, setCoffeeVariant] = useState(dataCoffeeVariant);
   const [allCoffee, setAllCoffee] = useState(dataAllCoffee);
   const [toppings, setToppings] = useState(dataToppings);
+  const [transaction, setTransaction] = useState(dataTransaction);
   const [account, setAccount] = useState(dataAccount);
 
   useEffect(() => {
     setAccount(JSON.parse(localStorage.getItem('user_auth')));
     setAllCoffee(JSON.parse(localStorage.getItem('all_coffee')));
     setToppings(JSON.parse(localStorage.getItem('toppings')));
+    setTransaction(JSON.parse(localStorage.getItem('user_transaction')));
   }, []);
 
   useEffect(() => {
@@ -47,6 +50,7 @@ function App() {
     localStorage.setItem('all_coffee', JSON.stringify(allCoffee));
     localStorage.setItem('coffee_variant', JSON.stringify(coffeeVariant));
     localStorage.setItem('toppings', JSON.stringify(toppings));
+    localStorage.setItem('user_transaction', JSON.stringify(transaction));
   });
 
   const addAccount = (fullname, email, password) => {
@@ -59,6 +63,10 @@ function App() {
 
   const addToppings = (name, price, image) => {
     setToppings([...toppings, { id: uuidv4(), name, price, image }]);
+  };
+
+  const addUserTransaction = (name, address, postcode, income) => {
+    setTransaction([...transaction, { id: uuidv4(), name, address, postcode, income, status: 'waiting approve', action: '' }]);
   };
 
   if (!login) {
@@ -84,7 +92,7 @@ function App() {
     return (
       <>
         <Router>
-          <context.Provider value={{ coffeeVariant, allCoffee }}>
+          <context.Provider value={{ coffeeVariant, allCoffee, addUserTransaction }}>
             <ScrollToTop />
             <NavbarUsers />
             <Switch>
@@ -105,7 +113,7 @@ function App() {
   if (login === 'admin') {
     return (
       <Router>
-        <context.Provider value={{ addCoffee, addToppings }}>
+        <context.Provider value={{ addCoffee, addToppings, transaction }}>
           <ScrollToTop />
           <NavbarAdmin />
           <Switch>

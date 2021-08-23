@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useState } from 'react';
+import moment from 'moment';
 
 const DetailPage = () => {
+  const date = moment(Date.now()).format('LL');
   const params = useParams();
   const history = useHistory();
   const [getTopping, setGetTopping] = useState([]);
@@ -11,7 +13,7 @@ const DetailPage = () => {
   const dataToppings = JSON.parse(localStorage.getItem('toppings'));
 
   const dataAllCoffee = JSON.parse(localStorage.getItem('all_coffee'));
-  const getDataUserTransaction = JSON.parse(localStorage.getItem('user_transaction'));
+  const getDataUserTransaction = JSON.parse(localStorage.getItem('user_order'));
 
   const findAllCoffee = dataAllCoffee.find((data) => data.id === params.id);
   let [allPrice, setAllPrice] = useState(findAllCoffee.price);
@@ -47,8 +49,10 @@ const DetailPage = () => {
       image: findAllCoffee.image,
       topping: getTopping,
       priceTopping: getPriceTopping,
+      subtotal: parseInt(allPrice),
+      date: date,
     });
-    localStorage.setItem('user_transaction', JSON.stringify(getDataUserTransaction));
+    localStorage.setItem('user_order', JSON.stringify(getDataUserTransaction));
     history.push('/cart-page');
     window.location.reload();
   };

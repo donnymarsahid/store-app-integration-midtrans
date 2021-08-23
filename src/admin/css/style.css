@@ -115,6 +115,11 @@ section.income-transaction table thead {
   background-color: #e5e5e5;
 }
 
+section.income-transaction tr td {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
 section.add-product img.img-upload {
   width: 200px;
 }

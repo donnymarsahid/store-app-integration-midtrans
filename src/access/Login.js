@@ -26,7 +26,7 @@ const Login = () => {
     if (findAccountAuth) {
       localStorage.setItem('login_auth', true);
       localStorage.setItem(
-        'user_transaction',
+        'user_order',
         JSON.stringify({
           ...findAccountAuth,
           order: [],

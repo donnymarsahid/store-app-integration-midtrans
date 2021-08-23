@@ -9,7 +9,7 @@ import { useState } from 'react/cjs/react.development';
 const Navbar = () => {
   const history = useHistory();
   const [totalCart, setTotalCart] = useState(0);
-  const dataUser = JSON.parse(localStorage.getItem('user_transaction'));
+  const dataUser = JSON.parse(localStorage.getItem('user_order'));
   const IMG_URL_PROFILE = '/images/';
 
   const handlerLogout = () => {
@@ -22,15 +22,12 @@ const Navbar = () => {
     }).then((logout) => {
       if (logout) {
         localStorage.setItem('login_auth', false);
-        localStorage.clear('coffee_variant');
-        localStorage.clear('coffee_all');
-        localStorage.clear('user_transaction');
         history.push('/');
         window.location.reload();
       }
     });
   };
-  const cart = JSON.parse(localStorage.getItem('user_transaction'));
+  const cart = JSON.parse(localStorage.getItem('user_order'));
   useEffect(() => {
     setTotalCart(cart.order.length);
   }, [cart]);

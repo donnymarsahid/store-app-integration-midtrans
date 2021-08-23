@@ -4,13 +4,14 @@ import barcode from '../assets/img/barcode.svg';
 import { useState } from 'react/cjs/react.development';
 
 const Profile = () => {
-  const dataUser = JSON.parse(localStorage.getItem('user_transaction'));
+  const dataUser = JSON.parse(localStorage.getItem('user_order'));
   const [uploadProfile, setUploadProfile] = useState('');
   const IMG_URL_PROFILE = '/images/';
+  const IMG_URL = '/images/coffee/';
 
   if (uploadProfile !== '') {
     localStorage.setItem(
-      'user_transaction',
+      'user_order',
       JSON.stringify({
         ...dataUser,
         image: uploadProfile,
@@ -19,27 +20,47 @@ const Profile = () => {
     window.location.reload();
   }
 
-  // if (dataUser.order.length === 0) {
-  //   return (
-  //     <div className="d-flex justify-content-center align-items-center">
-  //       <h5>No Transaction</h5>
-  //     </div>
-  //   );
-  // }
+  const totalArray = [];
+  const total = [];
 
   const cardTransaction = dataUser.order.map((item) => {
+    totalArray.push(item.subtotal);
+    const resultTotal = totalArray.reduce((acc, curr) => acc + curr);
     const topping = item.topping.map((topping) => <p>{topping},</p>);
+    const parsingTotal = resultTotal
+      .toString()
+      .split('')
+      .reverse()
+      .join('')
+      .match(/\d{1,3}/g)
+      .join('.')
+      .split('')
+      .reverse()
+      .join('');
+
+    const parsingSubtotal = item.subtotal
+      .toString()
+      .split('')
+      .reverse()
+      .join('')
+      .match(/\d{1,3}/g)
+      .join('.')
+      .split('')
+      .reverse()
+      .join('');
+
+    total.push(parsingTotal);
     return (
       <div class="list d-flex mb-3">
-        <img src="/images/coffee/hanami-latte.png" alt="coffee" className="coffee" />
+        <img src={`${IMG_URL}${item.image}`} alt="coffee" className="coffee" />
         <div class="detail-transaction ps-3">
           <h6>{item.name}</h6>
-          <p>Saturday 15 2021</p>
+          <p>{item.date}</p>
           <div class="topping d-flex">
             <p>Topping : </p>
             <p>{topping}</p>
           </div>
-          <p>{item.price}</p>
+          <p>{parsingSubtotal}</p>
         </div>
       </div>
     );
@@ -80,7 +101,7 @@ const Profile = () => {
                   <div class="col-md-4 d-flex flex-column justify-content-center align-items-center">
                     <img src={logo} alt="logo" className="logo" />
                     <img src={barcode} alt="barcode" className="barcode mt-3 mb-3" />
-                    <p>Sub Total : 60.000</p>
+                    <p>Sub Total : Rp. {total[1]}</p>
                   </div>
                 </div>
               </div>

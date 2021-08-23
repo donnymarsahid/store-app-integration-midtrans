@@ -4,21 +4,34 @@ import emptyCart from '../assets/img/empty-cart.svg';
 import { Link } from 'react-router-dom';
 import CardCart from './cardsProducts/CardCart';
 import swal from 'sweetalert';
-import { useState } from 'react/cjs/react.development';
+import { useContext, useState } from 'react/cjs/react.development';
+import { context } from '../App';
 
 const CartPage = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [poscode, setPoscode] = useState('');
-  const [address, setAddress] = useState('');
-  const [image, setImage] = useState('');
+  const { addUserTransaction } = useContext(context);
+
+  const [newUserTransaction, setNewUserTransaction] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    postcode: '',
+    address: '',
+    image: '',
+  });
+
+  const { name, email, phone, postcode, address, image } = newUserTransaction;
+  const handlerInput = (e) => {
+    setNewUserTransaction({ ...newUserTransaction, [e.target.name]: e.target.value });
+  };
+  const handlerImage = (e) => {
+    setNewUserTransaction({ ...newUserTransaction, [e.target.name]: e.target.files[0].name });
+  };
 
   if (image !== '') {
     swal('Success Upload', 'receipt has been received', 'success');
   }
 
-  const dataCart = JSON.parse(localStorage.getItem('user_transaction'));
+  const dataCart = JSON.parse(localStorage.getItem('user_order'));
   const IMG_URL = '/images/coffee/';
   const arrayTotal = [];
   const quantity = dataCart.order.length;
@@ -46,7 +59,7 @@ const CartPage = () => {
       }).then((willDelete) => {
         if (willDelete) {
           dataCart.order.splice(index, 1);
-          localStorage.setItem('user_transaction', JSON.stringify(dataCart));
+          localStorage.setItem('user_order', JSON.stringify(dataCart));
           window.location.reload();
         } else {
           swal('Cart is safe');
@@ -117,22 +130,7 @@ const CartPage = () => {
   const handlerPay = (e) => {
     e.preventDefault();
     swal('Thank you for ordering in us ,please wait to verify your order');
-    localStorage.setItem(
-      'user_transaction',
-      JSON.stringify({
-        ...dataCart,
-        transaction: [
-          {
-            name: name,
-            email: email,
-            phone: phone,
-            poscode: poscode,
-            address: address,
-            struck: image,
-          },
-        ],
-      })
-    );
+    addUserTransaction(name, address, postcode, parsingPriceTotal);
   };
 
   return (
@@ -165,16 +163,7 @@ const CartPage = () => {
                     </div>
                   </div>
                   <div class="col-md-4">
-                    <input
-                      type="file"
-                      name="upload"
-                      id="upload"
-                      className="d-none"
-                      required
-                      onChange={(e) => {
-                        setImage(e.target.files[0].name);
-                      }}
-                    />
+                    <input type="file" name="upload" id="upload" className="d-none" required onChange={(e) => handlerImage(e)} />
                     <label for="upload" className="upload-struck d-flex flex-column align-items-center justify-content-center">
                       <img src={uploadFile} alt="uploadFile" />
                       <p>Attache Of Transaction</p>
@@ -183,60 +172,11 @@ const CartPage = () => {
                 </div>
               </div>
               <div className="col-md-5 d-flex flex-column">
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  placeHolder="Name"
-                  className="mb-4"
-                  required
-                  onChange={(e) => {
-                    setName(e.target.value);
-                  }}
-                />
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  placeHolder="Email"
-                  className="mb-4"
-                  required
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
-                />
-                <input
-                  type="number"
-                  name="phone"
-                  id="phone"
-                  placeHolder="Phone"
-                  className="mb-4"
-                  required
-                  onChange={(e) => {
-                    setPhone(e.target.value);
-                  }}
-                />
-                <input
-                  type="number"
-                  name="posCode"
-                  id="posCode"
-                  placeHolder="Pos Code"
-                  className="mb-4"
-                  required
-                  onChange={(e) => {
-                    setPoscode(e.target.value);
-                  }}
-                />
-                <textarea
-                  name="address"
-                  id="address"
-                  cols="30"
-                  rows="10"
-                  placeHolder="Address"
-                  onChange={(e) => {
-                    setAddress(e.target.value);
-                  }}
-                ></textarea>
+                <input type="text" name="name" id="name" placeHolder="Name" className="mb-4" required onChange={(e) => handlerInput(e)} />
+                <input type="email" name="email" id="email" placeHolder="Email" className="mb-4" required onChange={(e) => handlerInput(e)} />
+                <input type="number" name="phone" id="phone" placeHolder="Phone" className="mb-4" required onChange={(e) => handlerInput(e)} />
+                <input type="number" name="postcode" id="postcode" placeHolder="Pos Code" className="mb-4" required onChange={(e) => handlerInput(e)} />
+                <textarea name="address" id="address" cols="30" rows="10" placeHolder="Address" onChange={(e) => handlerInput(e)}></textarea>
                 <button type="submit" className="btn-pay">
                   Pay
                 </button>

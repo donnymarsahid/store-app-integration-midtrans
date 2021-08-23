@@ -1,7 +1,30 @@
 import React from 'react';
 import './css/style.css';
+import success from '../assets/img/success.svg';
+import cancel from '../assets/img/cancel.svg';
+import { useContext } from 'react/cjs/react.development';
+import { context } from '../App';
 
 const IncomeTransaction = () => {
+  const { transaction } = useContext(context);
+
+  const IMG_URL = '/images/actions/';
+
+  const cardTransaction = transaction.map((data) => {
+    return (
+      <tr>
+        <th scope="row">2</th>
+        <td>{data.name}</td>
+        <td>{data.address}</td>
+        <td>{data.postcode}</td>
+        <td>{data.income}</td>
+        <td>{data.status}</td>
+        <td className="text-center">
+          <img src={`${IMG_URL}${data.action}`} alt={data.action} />
+        </td>
+      </tr>
+    );
+  });
   return (
     <>
       <section className="income-transaction">
@@ -19,26 +42,7 @@ const IncomeTransaction = () => {
                 <th scope="col">Action</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>@fat</td>
-              </tr>
-            </tbody>
+            <tbody>{cardTransaction}</tbody>
           </table>
         </div>
       </section>
