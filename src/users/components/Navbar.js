@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import '../css/style.css';
 import { Link, useHistory } from 'react-router-dom';
 import logoWaysBucks from '../../assets/img/logo-waysbucks.svg';
+import logout from '../../assets/img/logout.svg';
 import cartIcon from '../../assets/img/cart.svg';
 import swal from 'sweetalert';
 import { useState } from 'react/cjs/react.development';
@@ -73,13 +74,22 @@ const Navbar = () => {
               </Link>
             </div>
             <div className="profile">
-              <img src={`${IMG_URL_PROFILE}${dataUser.image}`} alt="profile" width="30px" className="img-profile" />
-              <div className="dropdown">
-                <Link to="/profile" className="text-decoration-none">
-                  Profile
-                </Link>
-                <hr />
-                <button onClick={handlerLogout}>Logout</button>
+              <div className="btn-group dropstart">
+                <img src={`${IMG_URL_PROFILE}${dataUser.image}`} alt="profile" width="30px" className="img-profile" data-bs-toggle="dropdown" aria-expanded="false" />
+                <ul className="dropdown-menu">
+                  <Link to="/profile" className="text-decoration-none">
+                    <li className="li-profile">
+                      <p className="ps-3 pt-2">
+                        <i class="far fa-user pe-2"></i> Profile
+                      </p>
+                    </li>
+                  </Link>
+                  <li className="logout" onClick={handlerLogout}>
+                    <p className="ps-3 pt-3">
+                      <img src={logout} alt="logout" width="25px" /> Logout
+                    </p>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>

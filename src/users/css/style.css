@@ -134,18 +134,20 @@ nav .access .shop span {
   top: 5px;
   left: 18px;
 }
-nav .access .dropdown {
-  visibility: hidden;
-  background-color: white;
-  width: 160px;
-  position: absolute;
-  margin-left: -140px;
-  margin-top: -6px;
-  padding: 14px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+nav .access .profile ul.dropdown-menu li p {
+  font-weight: 600;
+  color: var(--primaryColor);
+  padding-bottom: 2px;
 }
-nav .access .profile:hover .dropdown {
-  visibility: visible;
+nav .access .profile ul.dropdown-menu .logout {
+  cursor: pointer;
+}
+nav .access .profile ul.dropdown-menu li p i {
+  color: var(--primaryColor);
+  font-size: 22px;
+}
+nav .access .profile ul.dropdown-menu li.li-profile {
+  border-bottom: 2px solid #a8a8a8;
 }
 
 nav .access .dropdown .text-decoration-none {
