@@ -16,6 +16,7 @@ const Guest = () => {
 
   return (
     <>
+      <title>WaysBucks</title>
       <header>
         <div className="container d-flex align-items-center">
           <div className="jumbotron">
@@ -86,13 +87,18 @@ const Guest = () => {
                   <i class="fas fa-clock"></i> 08:00AM - 21:00PM
                 </p>
                 <p>
-                  <i class="fas fa-envelope"></i> waysbuckscoffee@gmail.com
+                  <a href="/store" className="text-decoration-none">
+                    <i class="fas fa-envelope"></i> waysbuckscoffee@gmail.com
+                  </a>
                 </p>
                 <p>
-                  <i class="fas fa-phone"></i> 0838-7223-9021
+                  <a href="/store" className="text-decoration-none">
+                    <i class="fas fa-phone"></i> 0838-7223-9021
+                  </a>
                 </p>
                 <div class="google-maps">
                   <iframe
+                    title="location waysbucks"
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15866.743262628099!2d106.78790077041022!3d-6.172803545112276!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f660d0866193%3A0x9f26e23cd7e3c120!2sTomang%2C%20Kec.%20Grogol%20petamburan%2C%20Kota%20Jakarta%20Barat%2C%20Daerah%20Khusus%20Ibukota%20Jakarta!5e0!3m2!1sid!2sid!4v1630503627792!5m2!1sid!2sid"
                     width="400"
                     height="350"
@@ -109,9 +115,13 @@ const Guest = () => {
       <section className="register-now text-center">
         <p className="text-uppercase">register now</p>
         <p>Register an account so you can order coffee</p>
-        <button className="btn-register">Register</button>
+        <button className="btn-register" data-bs-toggle="modal" data-bs-target="#exampleModalRegister">
+          Register
+        </button>
         <p className="mt-2 mb-2">OR</p>
-        <button className="btn-login">Login</button>
+        <button className="btn-login" data-bs-toggle="modal" data-bs-target="#exampleModalLogin">
+          Login
+        </button>
       </section>
       <Login />
       <Register />

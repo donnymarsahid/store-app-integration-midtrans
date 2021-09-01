@@ -15,7 +15,7 @@ const CardCart = ({ item, parsingPrice, handlerRemoveCart, itemTopping }) => {
         </div>
       </div>
       <div className="price-remove text-end">
-        <p>Rp.{parsingPrice}</p>
+        <p>{parsingPrice}</p>
         <i className="fas fa-trash" onClick={handlerRemoveCart}></i>
       </div>
     </div>

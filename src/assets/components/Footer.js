@@ -49,7 +49,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <p className="text-center mt-5">&copy; copyright 2021 | Donny`Marsahid</p>
+            <p className="text-center mt-5">&copy; copyright 2021 | WaysBucks `DonnyMarsahid</p>
           </div>
         </div>
       </footer>

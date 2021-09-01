@@ -241,6 +241,32 @@ section.varian .container .row .col-md-3 .box-card .overlay button:hover {
 section.store {
   margin: 150px 0 150px 0;
 }
+
+section.store .about-store {
+  margin-bottom: 150px;
+}
+section.store .about-store .box-coffee-journey {
+  margin-top: 50px;
+}
+
+section.store .about-store .box-coffee-journey {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.26);
+  border-radius: 10px;
+  width: 400px;
+  height: 400px;
+  padding: 30px;
+  transform: scale(0.98);
+  transition: 0.2s;
+}
+section.store .about-store .box-coffee-journey:hover {
+  transform: scale(1);
+}
+section.store .about-store .box-coffee-journey p.title {
+  font-size: 20px;
+  font-weight: 700;
+  padding-top: 10px;
+  color: var(--primaryColor);
+}
 section.store h1 {
   color: #bd0707;
   font-weight: 700;
@@ -250,9 +276,8 @@ section.store p {
   color: #bd0707;
   font-weight: 600;
 }
-section.store i {
-  color: #bd0707;
-  font-size: 28px;
+section.store a {
+  color: var(--primaryColor);
 }
 section.store h3 {
   color: #bd0707;
@@ -291,8 +316,12 @@ section.store h3 {
   font-weight: 700;
   color: var(--primaryColor);
 }
+.location a {
+  color: var(--primaryColor);
+}
 .location .detail h3 {
   font-weight: 600;
+  font-size: 24px;
 }
 .location .detail h3,
 .location .detail p,

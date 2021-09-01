@@ -301,14 +301,14 @@ section.varian .container .row .col-md-3 .box-card .overlay button:hover {
 /* Detail Page Start */
 /* checkbox start */
 
-label {
+label.label-topping {
   border: 1px solid #fff;
   padding: 8px;
   display: block;
   position: relative;
   cursor: pointer;
 }
-label:before {
+label.label-topping:before {
   background-color: white;
   color: white;
   content: ' ';
@@ -325,23 +325,23 @@ label:before {
   transition-duration: 0.4s;
   transform: scale(0);
 }
-label img {
+label.label-topping img {
   height: 100px;
   width: 100px;
   transition-duration: 0.2s;
   transform-origin: 50% 50%;
 }
-:checked + label {
+:checked + label.label-topping {
   border-color: var(--primaryColor);
 }
 
-:checked + label:before {
+:checked + label.label-topping:before {
   content: '✓';
   background-color: var(--primaryColor);
   transform: scale(1);
 }
 
-:checked + label img {
+:checked + label.label-topping img {
   transform: scale(0.9);
   /* box-shadow: 0 0 5px #333; */
   z-index: -1;
@@ -368,6 +368,7 @@ section.detail-page .box-check label {
 
 section.detail-page .container .col-md-4 img {
   width: 100%;
+  border-radius: 8px;
 }
 
 section.detail-page .container h1 {

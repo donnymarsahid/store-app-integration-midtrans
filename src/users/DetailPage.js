@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import moment from 'moment';
+import convertRupiah from 'rupiah-format';
 
 const DetailPage = () => {
   const date = moment(Date.now()).format('LL');
@@ -18,26 +19,8 @@ const DetailPage = () => {
   const findAllCoffee = dataAllCoffee.find((data) => data.id === params.id);
   let [allPrice, setAllPrice] = useState(findAllCoffee.price);
 
-  const parsingPrice = allPrice
-    .toString()
-    .split('')
-    .reverse()
-    .join('')
-    .match(/\d{1,3}/g)
-    .join('.')
-    .split('')
-    .reverse()
-    .join('');
-  const allCoffePrice = findAllCoffee.price
-    .toString()
-    .split('')
-    .reverse()
-    .join('')
-    .match(/\d{1,3}/g)
-    .join('.')
-    .split('')
-    .reverse()
-    .join('');
+  const parsingPrice = convertRupiah.convert(allPrice);
+  const allCoffePrice = convertRupiah.convert(findAllCoffee.price);
 
   const IMG_URL = '/images/coffee/';
   const IMG_URL_TOPPINGS = '/images/toppings/';
@@ -97,7 +80,7 @@ const DetailPage = () => {
             }}
           />
           <input type="checkbox" name={`${topping.name}`} value={`${topping.price}`} className="checkbox d-none" id={`${topping.name}`} />
-          <label for={`${topping.name}`}>
+          <label for={`${topping.name}`} className="label-topping">
             <img src={`${IMG_URL_TOPPINGS}${topping.image}`} alt={topping.image} />
           </label>
           <label className="click-topping">{topping.name}</label>
@@ -115,9 +98,9 @@ const DetailPage = () => {
             <div className="col-md-4">
               <img src={`${IMG_URL}${findAllCoffee.image}`} alt={findAllCoffee.image} />
             </div>
-            <div className="col-md-7">
+            <div className="col-md-8">
               <h1 className="text-capitalize">{findAllCoffee.name}</h1>
-              <p>Rp.{allCoffePrice}</p>
+              <p>{allCoffePrice}</p>
               <form onSubmit={handlerAddCart}>
                 <div className="toppings mt-3">
                   <div className="row">{listToppings}</div>
@@ -125,7 +108,7 @@ const DetailPage = () => {
                 <div className="total d-flex justify-content-lg-between mt-2">
                   <h3>Total</h3>
                   <p className="price-total">
-                    <h4 className="text-end">Rp.{parsingPrice}</h4>
+                    <h4 className="text-end">{parsingPrice}</h4>
                   </p>
                 </div>
                 <button className="btn-total" onClick="">

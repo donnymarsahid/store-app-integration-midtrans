@@ -12,6 +12,7 @@ const BestSeller = () => {
   });
   return (
     <>
+      <title>WaysBucks | Best Seller</title>
       <section className="varian coffee">
         <div className="container">
           <h3>Coffee Variant</h3>

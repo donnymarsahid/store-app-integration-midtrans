@@ -6,6 +6,7 @@ import CardCart from './cardsProducts/CardCart';
 import swal from 'sweetalert';
 import { useContext, useState } from 'react/cjs/react.development';
 import { context } from '../App';
+import convertRupiah from 'rupiah-format';
 
 const CartPage = () => {
   const { addUserTransaction } = useContext(context);
@@ -65,16 +66,7 @@ const CartPage = () => {
       });
     };
     if (item.priceTopping.length === 0) {
-      const parsingPrice = item.price
-        .toString()
-        .split('')
-        .reverse()
-        .join('')
-        .match(/\d{1,3}/g)
-        .join('.')
-        .split('')
-        .reverse()
-        .join('');
+      const parsingPrice = convertRupiah.convert(item.price);
 
       arrayTotal.push(item.price);
       return (
@@ -86,7 +78,7 @@ const CartPage = () => {
             </div>
           </div>
           <div className="price-remove text-end">
-            <p>Rp.{parsingPrice}</p>
+            <p>{parsingPrice}</p>
             <i className="fas fa-trash" onClick={handlerRemoveCart}></i>
           </div>
         </div>
@@ -97,16 +89,7 @@ const CartPage = () => {
       return acc + curr;
     });
     const amountCoffeTopping = amountToppingPrice + item.price;
-    const parsingPrice = amountCoffeTopping
-      .toString()
-      .split('')
-      .reverse()
-      .join('')
-      .match(/\d{1,3}/g)
-      .join('.')
-      .split('')
-      .reverse()
-      .join('');
+    const parsingPrice = convertRupiah.convert(amountCoffeTopping);
     arrayTotal.push(amountCoffeTopping);
     return <CardCart item={item} parsingPrice={parsingPrice} handlerRemoveCart={handlerRemoveCart} itemTopping={itemTopping} />;
   });
@@ -114,16 +97,7 @@ const CartPage = () => {
     return acc + curr;
   });
 
-  const parsingPriceTotal = amountArrayTotal
-    .toString()
-    .split('')
-    .reverse()
-    .join('')
-    .match(/\d{1,3}/g)
-    .join('.')
-    .split('')
-    .reverse()
-    .join('');
+  const parsingPriceTotal = convertRupiah.convert(amountArrayTotal);
 
   const handlerPay = (e) => {
     e.preventDefault();
@@ -153,13 +127,13 @@ const CartPage = () => {
                         <p>Quantity</p>
                       </div>
                       <div className="detail-2 mt-3 text-end">
-                        <p>Rp.{parsingPriceTotal}</p>
+                        <p>{parsingPriceTotal}</p>
                         <p>{quantity}</p>
                       </div>
                     </div>
                     <div className="total d-flex justify-content-between">
                       <p>Total</p>
-                      <p>Rp.{parsingPriceTotal}</p>
+                      <p>{parsingPriceTotal}</p>
                     </div>
                   </div>
                   <div class="col-md-4">

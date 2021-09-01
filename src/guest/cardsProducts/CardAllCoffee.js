@@ -1,18 +1,10 @@
 import React from 'react';
+import convertRupiah from 'rupiah-format';
 
 const CardAllCoffee = ({ coffee }) => {
   const IMG_URL = 'images/coffee/';
 
-  const parsingPrice = coffee.price
-    .toString()
-    .split('')
-    .reverse()
-    .join('')
-    .match(/\d{1,3}/g)
-    .join('.')
-    .split('')
-    .reverse()
-    .join('');
+  const parsingPrice = convertRupiah.convert(coffee.price);
 
   return (
     <>
@@ -28,7 +20,7 @@ const CardAllCoffee = ({ coffee }) => {
           </div>
           <div className="description">
             <h5 className="text-capitalize">{coffee.name}</h5>
-            <p>Rp.{parsingPrice}</p>
+            <p>{parsingPrice}</p>
           </div>
         </div>
       </div>
