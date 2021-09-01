@@ -13,9 +13,8 @@ import dataAccount from './data/account.json';
 import dataToppings from './data/toppings.json';
 import dataTransaction from './data/transaction.json';
 import AllMenu from './guest/AllMenu';
-import Coffee from './guest/Coffee';
 import AllMenuUsers from './users/AllMenu';
-import CoffeeUsers from './users/Coffee';
+import BestSellerUsers from './users/BestSeller';
 import ScrollToTop from './assets/components/ScrollToTop';
 import DetailPage from './users/DetailPage';
 import CartPage from './users/CartPage';
@@ -26,10 +25,10 @@ import IncomeTransaction from './admin/IncomeTransaction';
 import Admin from './admin/Admin';
 import dataAdmin from './data/admin.json';
 import NavbarAdmin from './admin/components/NavbarAdmin';
-
 import { v4 as uuidv4 } from 'uuid';
 import NoMatch from './404/NoMatch';
 import Store from './guest/Store';
+import BestSeller from './guest/BestSeller';
 
 function App() {
   const loginAuth = JSON.parse(localStorage.getItem('login_auth'));
@@ -82,7 +81,7 @@ function App() {
           <Switch>
             <Route path="/" exact component={Guest} />
             <Route path="/all-menu" component={AllMenu} />
-            <Route path="/coffee" component={Coffee} />
+            <Route path="/best-seller" component={BestSeller} />
             <Route path="/store" component={Store} />
             <Route path="/*" component={NoMatch} />
           </Switch>
@@ -102,7 +101,7 @@ function App() {
             <Switch>
               <Route path="/" exact component={Users} />
               <Route path="/all-menu" component={AllMenuUsers} />
-              <Route path="/coffee" component={CoffeeUsers} />
+              <Route path="/best-seller" component={BestSellerUsers} />
               <Route path="/detail-page/:id" component={DetailPage} />
               <Route path="/cart-page" component={CartPage} />
               <Route path="/profile" component={Profile} />

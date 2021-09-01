@@ -4,6 +4,7 @@ import merchant from '../assets/img/merchant-waysbucks.png';
 const Store = () => {
   return (
     <>
+      <title>WaysBucks | Store</title>
       <section class="store">
         <div class="container">
           <h1>Location</h1>
@@ -13,10 +14,13 @@ const Store = () => {
             </div>
             <div class="col-md-6">
               <h3>
-                <i class="fas fa-map-marker-alt"></i> Jalanin aja dulu No.899
+                <i class="fas fa-map-marker-alt"></i> WaysBucks Coffee, Jakarta City
               </h3>
-              <p>Jalanin Aja Dulu, RT.03/RW.07, Kp. Parung Jambu, Tanah Baru, Kota Bogor, Jawa Barat</p>
-              <p>Jl. Kol. Ahmad Syam No.899, RT.03/RW.07, RT.03/RW.07, Kp. Parung Jambu, Tanah Baru, North Bogor, Bogor City, West Java 16143</p>
+              <p>WaysBucks Coffee, in Road tomang number 23, RT.03/RW.07, west jakarta city, districts palmerah, ward Jatipulo, Post Code 11430</p>
+              <p>Open monday to sunday</p>
+              <p>at : 08:00AM - 21:00PM</p>
+              <p>Contact WaysBucks : 0838-7223-9021</p>
+              <p>Email WaysBucks : waysbuckus.coffee@gmail.com</p>
             </div>
           </div>
         </div>

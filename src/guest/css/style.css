@@ -1,3 +1,8 @@
+:root {
+  --primaryColor: #bd0707;
+  --secondaryColor: #f6dada;
+}
+
 /* Navbar Start */
 nav {
   width: 100%;
@@ -254,3 +259,93 @@ section.store h3 {
   font-weight: 600;
 }
 /* Store End */
+
+/* ReadMore section Start */
+.button-read-more {
+  margin-bottom: 100px;
+}
+.button-read-more button.btn-best-seller,
+.button-read-more button.btn-all-menu {
+  background-color: transparent;
+  border: 2px solid var(--primaryColor);
+  padding: 5px 18px;
+  font-weight: 600;
+  color: var(--primaryColor);
+  border-radius: 5px;
+  transition: 0.2s;
+  font-size: 14px;
+}
+.button-read-more button.btn-best-seller:hover,
+.button-read-more button.btn-all-menu:hover {
+  background-color: var(--primaryColor);
+  color: white;
+}
+/* ReadMore section End */
+
+/* Carousel Start */
+.carousel {
+  margin-bottom: 100px;
+}
+/* Carousel End */
+.location h3 {
+  font-weight: 700;
+  color: var(--primaryColor);
+}
+.location .detail h3 {
+  font-weight: 600;
+}
+.location .detail h3,
+.location .detail p,
+.location i {
+  color: var(--primaryColor);
+}
+
+.location .detail p {
+  font-weight: 500;
+}
+
+.location .google-maps {
+  margin-bottom: 150px;
+}
+
+/* Section RegisterNow */
+section.register-now {
+  margin-bottom: 120px;
+}
+section.register-now button.btn-register {
+  background-color: var(--primaryColor);
+  color: white;
+  font-weight: 500;
+  padding: 5px 15px;
+  border-radius: 5px;
+  border: 2px solid var(--primaryColor);
+  transition: 0.2s;
+}
+section.register-now button.btn-register:hover {
+  background-color: #d14545;
+  border: 2px solid #d14545;
+  color: white;
+}
+section.register-now button.btn-login {
+  background-color: white;
+  color: var(--primaryColor);
+  font-weight: 500;
+  padding: 5px 25px;
+  border-radius: 5px;
+  border: 2px solid var(--primaryColor);
+  transition: 0.2s;
+}
+section.register-now button.btn-login:hover {
+  background-color: var(--primaryColor);
+  color: white;
+}
+
+section.register-now .text-uppercase {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+section.register-now p {
+  font-weight: 500;
+  color: var(--primaryColor);
+}

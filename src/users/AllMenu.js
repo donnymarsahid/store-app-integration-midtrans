@@ -11,6 +11,7 @@ const AllMenu = () => {
   });
   return (
     <>
+      <title>WaysBucks | All Menu</title>
       <section className="all-menu varian">
         <div className="container">
           <h3>All Menu</h3>

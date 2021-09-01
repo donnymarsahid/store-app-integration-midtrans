@@ -33,13 +33,16 @@ const CartPage = () => {
 
   if (dataCart.order.length === 0) {
     return (
-      <section className="cart-page-null d-flex align-items-center justify-content-center flex-column">
-        <img src={emptyCart} alt="empty-cart" width="150px" />
-        <h1>Empty Cart :(</h1>
-        <Link to="/all-menu">
-          <button class="btn-empty">Order Now</button>
-        </Link>
-      </section>
+      <>
+        <title>WaysBucks | Cart</title>
+        <section className="cart-page-null d-flex align-items-center justify-content-center flex-column">
+          <img src={emptyCart} alt="empty-cart" width="150px" />
+          <h1>Empty Cart :(</h1>
+          <Link to="/all-menu">
+            <button class="btn-empty">Order Now</button>
+          </Link>
+        </section>
+      </>
     );
   }
 
@@ -131,15 +134,16 @@ const CartPage = () => {
 
   return (
     <>
+      <title>WaysBucks | Cart</title>
       <section className="cart-page">
         <div className="container">
           <form onSubmit={handlerPay}>
             <div className="row">
+              <div className="title">
+                <h1>My Cart</h1>
+                <h5>Review Your Order</h5>
+              </div>
               <div className="col-md-7">
-                <div className="title">
-                  <h1>My Cart</h1>
-                  <h5>Review Your Order</h5>
-                </div>
                 <div className="parent-list">{listDataCart}</div>
                 <div class="row">
                   <div class="col-md-8">

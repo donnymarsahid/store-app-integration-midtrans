@@ -96,8 +96,10 @@ const DetailPage = () => {
               setGetPriceTopping(topping.price);
             }}
           />
-          <input type="checkbox" name={`${topping.name}`} value={`${topping.price}`} className="checkbox" />
-          <img src={`${IMG_URL_TOPPINGS}${topping.image}`} alt={topping.image} />
+          <input type="checkbox" name={`${topping.name}`} value={`${topping.price}`} className="checkbox d-none" id={`${topping.name}`} />
+          <label for={`${topping.name}`}>
+            <img src={`${IMG_URL_TOPPINGS}${topping.image}`} alt={topping.image} />
+          </label>
           <label className="click-topping">{topping.name}</label>
         </div>
       </div>
@@ -106,6 +108,7 @@ const DetailPage = () => {
 
   return (
     <>
+      <title>WaysBucks | Detail Coffee</title>
       <section className="detail-page">
         <div className="container">
           <div className="row">

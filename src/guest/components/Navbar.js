@@ -15,25 +15,19 @@ const Navbar = () => {
           </div>
           <div className="navbar-link">
             <ul className="d-flex m-0 p-0 ps-3 justify-content-lg-around">
-              <Link to="/coffee" className="text-decoration-none ">
-                <li className="fw-bolder">Coffee</li>
+              <Link to="/best-seller" className="text-decoration-none ">
+                <li className="fw-bolder">Best Seller</li>
               </Link>
               <div className="link-router text-decoration-none">
-                <li className="menu">
-                  <p className="text-uppercase m-0 fw-bolder">Menu</p>
-                  <div className="box">
-                    <Link to="/all-menu" className="text-decoration-none">
-                      <p className="pb-3 m-0">All Menu</p>
-                    </Link>
-                  </div>
-                </li>
+                <Link to="/all-menu" className="link-router text-decoration-none">
+                  <li className="menu">
+                    <p className="text-uppercase m-0 fw-bolder">All Menu</p>
+                  </li>
+                </Link>
               </div>
               <Link to="/store" className="link-router text-decoration-none">
                 <li className="store">
                   <p className="text-uppercase m-0 fw-bolder">Store</p>
-                  <div className="box">
-                    <p className="pb-3 m-0">Location</p>
-                  </div>
                 </li>
               </Link>
             </ul>
