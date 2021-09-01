@@ -1,6 +1,8 @@
 import React from 'react';
 import store from '../assets/img/merchant-waysbucks.png';
 import coffeeJourney from '../assets/img/coffee-journey.svg';
+import Login from '../access/Login';
+import Register from '../access/Register';
 
 const Store = () => {
   return (
@@ -73,6 +75,8 @@ const Store = () => {
           </div>
         </div>
       </section>
+      <Login />
+      <Register />
     </>
   );
 };
