@@ -1,7 +1,7 @@
 import React from 'react';
-import addProduct from '../assets/img/add-product.svg';
-import addTopping from '../assets/img/add-topping.svg';
-import transaction from '../assets/img/transaction.svg';
+import addProduct from '../../assets/img/add-product.svg';
+import addTopping from '../../assets/img/add-topping.svg';
+import transaction from '../../assets/img/transaction.svg';
 import { Link } from 'react-router-dom';
 
 const Admin = () => {

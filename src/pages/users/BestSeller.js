@@ -1,10 +1,8 @@
 import React, { useContext } from 'react';
-import Login from '../access/Login';
-import Register from '../access/Register';
-import { context } from '../App';
+import { context } from '../../App';
 import CardCoffe from './cardsProducts/CardCoffe';
 
-const BestSeller = () => {
+const Coffee = () => {
   const { coffeeVariant } = useContext(context);
 
   const cardCoffee = coffeeVariant.map((coffee) => {
@@ -19,10 +17,8 @@ const BestSeller = () => {
           <div className="row">{cardCoffee}</div>
         </div>
       </section>
-      <Login />
-      <Register />
     </>
   );
 };
 
-export default BestSeller;
+export default Coffee;

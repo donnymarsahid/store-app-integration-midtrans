@@ -1,6 +1,6 @@
 import React from 'react';
-import logo from '../assets/img/logo-waysbucks.svg';
-import barcode from '../assets/img/barcode.svg';
+import logo from '../../assets/img/logo-waysbucks.svg';
+import barcode from '../../assets/img/barcode.svg';
 import { useState } from 'react/cjs/react.development';
 
 const Profile = () => {

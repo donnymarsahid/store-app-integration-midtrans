@@ -1,8 +1,8 @@
 import React from 'react';
 import './css/style.css';
-import clip from '../assets/img/clip.svg';
+import clip from '../../assets/img/clip.svg';
 import { useContext, useState } from 'react';
-import { context } from '../App';
+import { context } from '../../App';
 import { useHistory } from 'react-router';
 import swal from 'sweetalert';
 

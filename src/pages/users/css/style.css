@@ -174,7 +174,7 @@ header .container {
 header .container .jumbotron {
   width: 90%;
   height: 100%;
-  background-image: url('../../assets/img/bg-waysbucks.png');
+  background-image: url('../../../assets/img/bg-waysbucks.png');
   background-size: cover;
   border-radius: 10px;
   padding: 90px 400px 80px 80px;

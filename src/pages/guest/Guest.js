@@ -1,14 +1,15 @@
 import React, { useContext } from 'react';
 import './css/style.css';
-import imgHeader from '../assets/img/img-header.png';
-import { context } from '../App';
+import imgHeader from '../../assets/img/img-header.png';
+import { context } from '../../App';
 import CardCoffe from './cardsProducts/CardCoffe';
 import { Link } from 'react-router-dom';
-import store from '../assets/img/merchant-waysbucks.png';
+import Login from '../access/Login';
+import Register from '../access/Register';
+import store from '../../assets/img/merchant-waysbucks.png';
 
-const Users = () => {
+const Guest = () => {
   const { coffeeVariant } = useContext(context);
-
   const cardCoffee = coffeeVariant.map((coffee) => {
     return <CardCoffe coffee={coffee} key={coffee.id} />;
   });
@@ -111,8 +112,21 @@ const Users = () => {
           </div>
         </div>
       </div>
+      <section className="register-now text-center">
+        <p className="text-uppercase">register now</p>
+        <p>Register an account so you can order coffee</p>
+        <button className="btn-register" data-bs-toggle="modal" data-bs-target="#exampleModalRegister">
+          Register
+        </button>
+        <p className="mt-2 mb-2">OR</p>
+        <button className="btn-login" data-bs-toggle="modal" data-bs-target="#exampleModalLogin">
+          Login
+        </button>
+      </section>
+      <Login />
+      <Register />
     </>
   );
 };
 
-export default Users;
+export default Guest;

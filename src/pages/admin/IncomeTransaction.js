@@ -1,7 +1,7 @@
 import React from 'react';
 import './css/style.css';
 import { useContext } from 'react/cjs/react.development';
-import { context } from '../App';
+import { context } from '../../App';
 import swal from 'sweetalert';
 
 const IncomeTransaction = () => {

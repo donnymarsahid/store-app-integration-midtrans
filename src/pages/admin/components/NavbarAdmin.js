@@ -1,9 +1,9 @@
 import React from 'react';
 import '../css/style.css';
 import { Link, useHistory } from 'react-router-dom';
-import logoWaysBucks from '../../assets/img/logo-waysbucks.svg';
+import logoWaysBucks from '../../../assets/img/logo-waysbucks.svg';
 import swal from 'sweetalert';
-import logout from '../../assets/img/logout.svg';
+import logout from '../../../assets/img/logout.svg';
 
 const NavbarAdmin = () => {
   const history = useHistory();

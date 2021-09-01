@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import uploadFile from '../assets/img/upload-file.svg';
-import emptyCart from '../assets/img/empty-cart.svg';
+import uploadFile from '../../assets/img/upload-file.svg';
+import emptyCart from '../../assets/img/empty-cart.svg';
 import { Link } from 'react-router-dom';
 import CardCart from './cardsProducts/CardCart';
 import swal from 'sweetalert';
 import { useContext, useState } from 'react/cjs/react.development';
-import { context } from '../App';
+import { context } from '../../App';
 import convertRupiah from 'rupiah-format';
 
 const CartPage = () => {

@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import '../css/style.css';
 import { Link, useHistory } from 'react-router-dom';
-import logoWaysBucks from '../../assets/img/logo-waysbucks.svg';
-import logout from '../../assets/img/logout.svg';
-import cartIcon from '../../assets/img/cart.svg';
+import logoWaysBucks from '../../../assets/img/logo-waysbucks.svg';
+import logout from '../../../assets/img/logout.svg';
+import cartIcon from '../../../assets/img/cart.svg';
 import swal from 'sweetalert';
 import { useState } from 'react/cjs/react.development';
 

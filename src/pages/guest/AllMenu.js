@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
-import { context } from '../App';
+import Login from '../access/Login';
+import Register from '../access/Register';
+import { context } from '../../App';
 import CardAllCoffee from './cardsProducts/CardAllCoffee';
 import './css/style.css';
 
@@ -18,6 +20,8 @@ const AllMenu = () => {
           <div className="row">{cardsAllCoffee}</div>
         </div>
       </section>
+      <Login />
+      <Register />
     </>
   );
 };

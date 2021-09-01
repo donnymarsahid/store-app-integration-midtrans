@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './css/style.css';
 import { useContext } from 'react/cjs/react.development';
-import { context } from '../App';
+import { context } from '../../App';
 
 const Register = () => {
   const { addAccount } = useContext(context);
