@@ -1,7 +1,13 @@
 import React from 'react';
-import addProduct from '../../assets/img/add-product.svg';
-import addTopping from '../../assets/img/add-topping.svg';
-import transaction from '../../assets/img/transaction.svg';
+import product from '../../assets/img/product.svg';
+import topping from '../../assets/img/topping.svg';
+import incomeTransaction from '../../assets/img/income-transaction.svg';
+import chartsDonnut from '../../assets/img/charts-donnut.svg';
+import twitter from '../../assets/img/icon-twitter.svg';
+import facebook from '../../assets/img/icon-facebook.svg';
+import instagram from '../../assets/img/icon-instagram.svg';
+import diagram from '../../assets/img/diagram.png';
+import users from '../../assets/img/users.svg';
 import { Link } from 'react-router-dom';
 
 const Admin = () => {
@@ -9,43 +15,100 @@ const Admin = () => {
     <>
       <section className="admin">
         <div class="container">
-          <h1 className="text-center">Admin Waysbucks</h1>
-          <div class="row">
-            <div class="col-md-4">
-              <Link to="/admin/income-transaction" className="text-decoration-none">
-                <div width="18rem">
-                  <img src={transaction} class="card-img-top" alt="transaction" />
-                  <div class="card-body">
-                    <h5 class="card-title">Income Transaction</h5>
-                    <p class="card-text">breakdown of income from sales</p>
-                    <button>Income Transaction</button>
-                  </div>
+          <div class="row d-flex justify-content-between">
+            <div class="col-md-4 box box-income-transaction d-flex justify-content-between">
+              <div class="d-flex flex-column justify-content-between info">
+                <div className="title">
+                  <p class="text-uppercase m-0">Income Transaction</p>
+                  <p>Total : 10</p>
                 </div>
-              </Link>
+                <div class="check">
+                  <Link to="/" class="link-router">
+                    <p className="text-decoration-underline m-0">check details</p>
+                  </Link>
+                </div>
+              </div>
+              <div class="icon d-flex flex-column justify-content-md-end">
+                <img src={incomeTransaction} alt="income-transaction" />
+              </div>
             </div>
-            <div class="col-md-4">
-              <Link to="/admin/add-product" className="text-decoration-none">
-                <div width="18rem">
-                  <img src={addProduct} class="card-img-top" alt="add-product" />
-                  <div class="card-body">
-                    <h5 class="card-title">Add Product</h5>
-                    <p class="card-text">add new coffee product</p>
-                    <button>Add Product</button>
-                  </div>
+            <div class="col-md-4 box box-product d-flex justify-content-between">
+              <div class="d-flex flex-column justify-content-between info">
+                <div className="title">
+                  <p class="text-uppercase m-0">Product</p>
+                  <p>Total : 20</p>
                 </div>
-              </Link>
+                <div class="check">
+                  <Link to="/" class="link-router">
+                    <p className="text-decoration-underline m-0">check details</p>
+                  </Link>
+                </div>
+              </div>
+              <div class="icon d-flex flex-column justify-content-md-end">
+                <img src={product} alt="income-transaction" />
+              </div>
             </div>
-            <div class="col-md-4">
-              <Link to="/admin/add-topping" className="text-decoration-none">
-                <div width="18rem">
-                  <img src={addTopping} class="card-img-top" alt="add-topping" />
-                  <div class="card-body">
-                    <h5 class="card-title">Add Topping</h5>
-                    <p class="card-text">add a variety of coffee toppings</p>
-                    <button>Add Topping</button>
+            <div class="col-md-4 box box-topping d-flex justify-content-between">
+              <div class="d-flex flex-column justify-content-between info">
+                <div className="title">
+                  <p class="text-uppercase m-0">Topping</p>
+                  <p>Total : 8</p>
+                </div>
+                <div class="check">
+                  <Link to="/" class="link-router">
+                    <p className="text-decoration-underline m-0">check details</p>
+                  </Link>
+                </div>
+              </div>
+              <div class="icon d-flex flex-column justify-content-md-end">
+                <img src={topping} alt="income-transaction" />
+              </div>
+            </div>
+          </div>
+          <div class="row social-media d-flex justify-content-between mt-5">
+            <div class="col-md-4 p-0 pe-3">
+              <div class="box-sosmed d-flex justify-content-between align-items-center">
+                <img src={chartsDonnut} alt="charts-donnut" />
+                <p class="text-uppercase m-0">Twitter Tweets</p>
+                <img src={twitter} alt="twitter" />
+              </div>
+            </div>
+            <div class="col-md-4 pe-3 ps-3">
+              <div class="box-sosmed d-flex justify-content-between align-items-center">
+                <img src={chartsDonnut} alt="charts-donnut" />
+                <p class="text-uppercase m-0">Facebook Followers</p>
+                <img src={facebook} alt="facebook" />
+              </div>
+            </div>
+            <div class="col-md-4 p-0 ps-3">
+              <div class="box-sosmed d-flex justify-content-between align-items-center">
+                <img src={chartsDonnut} alt="charts-donnut" />
+                <p class="text-uppercase m-0">Instagram Followers</p>
+                <img src={instagram} alt="instagram" />
+              </div>
+            </div>
+          </div>
+          <div class="diagram-users">
+            <div class="row diagram-users d-flex justify-content-between mt-5">
+              <div class="col-md-8 diagram">
+                <img src={diagram} alt="charts" class="img-fluid" />
+              </div>
+              <div class="col-md-4 box box-users d-flex justify-content-between">
+                <div class="d-flex flex-column justify-content-between info">
+                  <div className="title">
+                    <p class="text-uppercase m-0">Users WaysBucks</p>
+                    <p>Total : 20</p>
+                  </div>
+                  <div class="check">
+                    <Link to="/" class="link-router">
+                      <p className="text-decoration-underline m-0">check details</p>
+                    </Link>
                   </div>
                 </div>
-              </Link>
+                <div class="icon d-flex flex-column justify-content-md-end">
+                  <img src={users} alt="income-transaction" />
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -1,142 +1,110 @@
 :root {
   --primaryColor: #bd0707;
   --secondaryColor: #f6dada;
+  --gradientRed: linear-gradient(#cf0000, #ff5c00);
+  --gradientBlue: linear-gradient(#00a3ff, #3fbaff);
+  --gradientYellow: linear-gradient(#ffb341, #facc27);
 }
-/* Admin Start */
+/* Box 1 Start */
 section.admin {
-  height: 100vh;
   margin-top: 140px;
+  margin-bottom: 150px;
 }
-section.admin h1 {
-  font-size: 32px;
-  font-weight: 700;
-  color: var(--primaryColor);
-  margin-bottom: 16px;
-}
-section.admin .col-md-4 {
-  transform: scale(0.8);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  padding: 0;
+
+section.admin .container .col-md-4.box-income-transaction {
+  background: var(--gradientRed);
+  width: 345px;
+  height: 217px;
+  border-radius: 8px;
+  padding: 18px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.212);
+  transform: scale(0.98);
   transition: 0.2s;
-  cursor: pointer;
-  border-radius: 8px;
-}
-section.admin .col-md-4 h5 {
-  font-size: 20px;
-  color: var(--primaryColor);
-  font-weight: 600;
-}
-section.admin .col-md-4 p {
-  color: var(--primaryColor);
-  font-weight: 500;
-}
-section.admin .col-md-4:hover {
-  transform: scale(0.85);
-}
-section.admin .col-md-4 button {
-  background-color: var(--primaryColor);
-  border: none;
-  padding: 8px;
-  font-weight: 600;
-  border-radius: 5px;
-  color: white;
-}
-section.admin .col-md-4 img {
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-}
-/* Admin End */
-/* Add Product Start */
-section.add-product {
-  height: 100vh;
-  margin-top: 150px;
-}
-section.add-product h1 {
-  color: var(--primaryColor);
-  font-weight: 700;
-  font-size: 32px;
-}
-section.add-product input {
-  padding: 8px;
-  border-radius: 8px;
-  background-color: #e0c8c840;
-  border: 2px solid var(--primaryColor);
-  font-weight: 600;
-  color: #68323280;
-  outline: none;
 }
 
-section.add-product label.label-upload {
-  padding: 8px;
-  border-radius: 8px;
-  background-color: #e0c8c840;
-  border: 2px solid var(--primaryColor);
-  font-weight: 600;
-  color: #68323280;
-  cursor: pointer;
+section.admin .col-md-4.box .info {
+  height: 100%;
 }
-section.add-product button.btn-add-product {
-  padding: 8px;
-  border-radius: 8px;
-  background-color: var(--primaryColor);
-  border: 2px solid var(--primaryColor);
-  font-weight: 600;
-  color: white;
+section.admin .col-md-4.box .icon img {
+  width: 100px;
+}
+
+section.admin .title p {
   font-size: 18px;
-  margin-top: 50px;
-}
-section.add-product .col-md-5 img {
-  width: 350px;
-  border-radius: 10px;
-}
-/* Add Product End */
-
-/* Income Start */
-section.income-transaction {
-  margin-top: 150px;
-  height: 100vh;
-}
-section.income-transaction h1 {
-  font-weight: 700;
-  font-size: 32px;
-  color: var(--primaryColor);
-}
-section.income-transaction table {
-  border: 2px solid #828282;
-}
-section.income-transaction table tr td,
-section.income-transaction table tr th {
-  border-right: 2px solid #828282;
-}
-section.income-transaction table tr {
-  border-bottom: 2px solid #828282;
-}
-section.income-transaction table thead {
-  background-color: #e5e5e5;
-}
-
-section.income-transaction tr td {
   font-weight: 600;
-  text-transform: capitalize;
-}
-section.income-transaction button.btn-cancel {
-  border: none;
-  background-color: var(--primaryColor);
   color: white;
-  border-radius: 3px;
-  padding: 3px 8px;
-  font-weight: 500;
 }
-section.income-transaction button.btn-approve {
-  border: none;
-  background-color: #0acf83;
-  color: white;
-  border-radius: 3px;
-  padding: 3px 8px;
+section.admin .check p {
   font-weight: 500;
+  color: white;
+  letter-spacing: 1px;
 }
 
-section.add-product img.img-upload {
-  width: 200px;
+section.admin .container .col-md-4.box-product {
+  background: var(--gradientBlue);
+  width: 345px;
+  height: 217px;
+  border-radius: 8px;
+  padding: 18px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.212);
+  transform: scale(0.98);
+  transition: 0.2s;
 }
-/* Income End */
+section.admin .container .col-md-4.box-topping {
+  background: var(--gradientYellow);
+  width: 345px;
+  height: 217px;
+  border-radius: 8px;
+  padding: 18px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.212);
+  transform: scale(0.98);
+  transition: 0.2s;
+}
+section.admin .col-md-4.box-product .icon img,
+section.admin .col-md-4.box-topping .icon img {
+  width: 80px;
+}
+
+section.admin .link-router p:hover {
+  color: #3d3d3d;
+}
+
+section.admin .container .col-md-4.box:hover {
+  transform: scale(1);
+}
+/* Box 1 End */
+
+/* Box Sosmed Start */
+section.admin .row.social-media .box-sosmed {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.226);
+  border-radius: 6px;
+  padding: 8px 15px;
+  transform: scale(0.98);
+  transition: 0.2s;
+}
+section.admin .row.social-media .box-sosmed:hover {
+  transform: scale(1);
+}
+section.admin .row.social-media .box-sosmed p {
+  color: var(--primaryColor);
+  font-weight: 500;
+}
+/* Box Sosmed Start */
+
+/* Diagram Users Start */
+section.admin .row.diagram-users .diagram img {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+section.admin .container .col-md-4.box-users {
+  background: var(--gradientRed);
+  width: 345px;
+  height: 217px;
+  border-radius: 8px;
+  padding: 18px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.212);
+  transform: scale(0.98);
+  transition: 0.2s;
+}
+/* Diagram Users End */
