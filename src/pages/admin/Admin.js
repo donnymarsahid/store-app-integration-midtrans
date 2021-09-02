@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 const Admin = () => {
   return (
     <>
+      <title>WaysBucks | Admin</title>
       <section className="admin">
         <div class="container">
           <div class="row d-flex justify-content-between">
