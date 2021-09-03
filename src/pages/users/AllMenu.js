@@ -4,7 +4,7 @@ import { getProducts } from '../../config/api';
 import CardAllCoffee from './cardsProducts/CardAllCoffee';
 import './css/style.css';
 import FadeLoader from 'react-spinners/FadeLoader';
-import { useState } from 'react/cjs/react.development';
+import { useState } from 'react';
 
 const AllMenu = () => {
   let [loading] = useState(true);

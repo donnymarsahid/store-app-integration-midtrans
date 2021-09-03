@@ -122,6 +122,7 @@ function App() {
           <ScrollToTop />
           <NavbarAdmin />
           <Switch>
+            <Route path="/" exact component={Admin} />
             <Route path="/admin" exact component={Admin} />
             <Route path="/admin/add-product" component={AddProduct} />
             <Route path="/admin/add-topping" component={AddTopping} />
