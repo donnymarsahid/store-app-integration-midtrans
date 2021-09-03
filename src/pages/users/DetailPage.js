@@ -1,93 +1,48 @@
-import React, { useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
-import { useState } from 'react';
-import moment from 'moment';
+import React, { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
+import { useHistory, useParams } from 'react-router';
+import { API, getToppings } from '../../config/api';
 import convertRupiah from 'rupiah-format';
 
 const DetailPage = () => {
-  const date = moment(Date.now()).format('LL');
-  const params = useParams();
+  const { id } = useParams();
   const history = useHistory();
-  const [getTopping, setGetTopping] = useState([]);
-  const [getPriceTopping, setGetPriceTopping] = useState([]);
 
-  const dataToppings = JSON.parse(localStorage.getItem('toppings'));
-
-  const dataAllCoffee = JSON.parse(localStorage.getItem('all_coffee'));
+  const { data: detailProduct, isLoading } = useQuery('detailProductCache', async () => {
+    const response = await API().get('/product/' + id);
+    localStorage.setItem('detailPage', JSON.stringify(response.data.product));
+    return response.data.product;
+  });
   const getDataUserTransaction = JSON.parse(localStorage.getItem('user_order'));
 
-  const findAllCoffee = dataAllCoffee.find((data) => data.id === params.id);
-  let [allPrice, setAllPrice] = useState(findAllCoffee.price);
+  const data = JSON.parse(localStorage.getItem('detailPage'));
 
-  const parsingPrice = convertRupiah.convert(allPrice);
-  const allCoffePrice = convertRupiah.convert(findAllCoffee.price);
+  const { data: toppings, isLoading: loadingTopping } = useQuery('toppingsCache', getToppings);
+  let [total, setTotal] = useState(0);
 
-  const IMG_URL = '/images/coffee/';
-  const IMG_URL_TOPPINGS = '/images/toppings/';
+  useEffect(() => {
+    const selectToppings = document.querySelectorAll('.checkbox');
+    selectToppings.forEach((check) => {
+      check.addEventListener('click', function () {
+        if (this.checked === true) {
+          setTotal((total += parseInt(this.value)));
+        } else {
+          setTotal((total -= parseInt(this.value)));
+        }
+      });
+    });
+  }, []);
 
   const handlerAddCart = () => {
     getDataUserTransaction.order.push({
-      name: findAllCoffee.name,
-      price: parseInt(findAllCoffee.price),
-      image: findAllCoffee.image,
-      topping: getTopping,
-      priceTopping: getPriceTopping,
-      subtotal: parseInt(allPrice),
-      date: date,
+      title: data.title,
+      price: data.price,
+      image: data.image,
     });
     localStorage.setItem('user_order', JSON.stringify(getDataUserTransaction));
     history.push('/cart-page');
     window.location.reload();
   };
-
-  useEffect(() => {
-    const selectToppings = document.querySelectorAll('.checkbox');
-    let toppingArray = [];
-    let toppingPrice = [];
-    let priceAll = [parseInt(allPrice)];
-    for (let checkbox of selectToppings) {
-      checkbox.addEventListener('click', function () {
-        if (this.checked === true) {
-          toppingArray.push(this.name);
-          toppingPrice.push(parseInt(this.value));
-          setGetTopping(toppingArray);
-          setGetPriceTopping(toppingPrice);
-          priceAll.push(parseInt(this.value));
-          const total = priceAll.reduce((acc, curr) => acc + curr);
-          setAllPrice(total);
-        }
-        if (this.checked === false) {
-          priceAll = priceAll.filter((data) => data !== parseInt(this.value));
-          toppingArray = toppingArray.filter((data) => data !== this.name);
-          toppingPrice = toppingPrice.filter((data) => data !== parseInt(this.value));
-          setGetTopping(toppingArray);
-          setGetPriceTopping(toppingPrice);
-          const total = priceAll.reduce((acc, curr) => acc + curr);
-          setAllPrice(total);
-        }
-      });
-    }
-  }, []);
-
-  const listToppings = dataToppings.map((topping) => {
-    return (
-      <div className="col-md-3 d-flex flex-column align-items-center">
-        <div class="box-check d-flex flex-column align-items-center">
-          <input
-            type="hidden"
-            onChange={() => {
-              setGetPriceTopping(topping.price);
-            }}
-          />
-          <input type="checkbox" name={`${topping.name}`} value={`${topping.price}`} className="checkbox d-none" id={`${topping.name}`} />
-          <label for={`${topping.name}`} className="label-topping">
-            <img src={`${IMG_URL_TOPPINGS}${topping.image}`} alt={topping.image} />
-          </label>
-          <label className="click-topping">{topping.name}</label>
-        </div>
-      </div>
-    );
-  });
 
   return (
     <>
@@ -96,22 +51,39 @@ const DetailPage = () => {
         <div className="container">
           <div className="row">
             <div className="col-md-4">
-              <img src={`${IMG_URL}${findAllCoffee.image}`} alt={findAllCoffee.image} />
+              {isLoading && <div>Loading...</div>}
+              <img src={data.image} alt="detail-product" />
             </div>
             <div className="col-md-8">
-              <h1 className="text-capitalize">{findAllCoffee.name}</h1>
-              <p>{allCoffePrice}</p>
-              <form onSubmit={handlerAddCart}>
+              <h1 className="text-capitalize">{data.title}</h1>
+              <p>{convertRupiah.convert(data.price)}</p>
+              <form onSubmit="">
                 <div className="toppings mt-3">
-                  <div className="row">{listToppings}</div>
+                  <div className="row">
+                    {loadingTopping && <div>Loading...</div>}
+                    {toppings?.map((topping) => {
+                      return (
+                        <div className="col-md-3 d-flex flex-column align-items-center">
+                          <div class="box-check d-flex flex-column align-items-center">
+                            <input type="hidden" />
+                            <input type="checkbox" name={`${topping.title}`} value={`${topping.price}`} className="checkbox d-none" id={`${topping.title}`} />
+                            <label for={`${topping.title}`} className="label-topping">
+                              <img src={`${topping.image}`} alt={topping.image} />
+                            </label>
+                            <label className="click-topping">{topping.title}</label>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
                 <div className="total d-flex justify-content-lg-between mt-2">
                   <h3>Total</h3>
                   <p className="price-total">
-                    <h4 className="text-end">{parsingPrice}</h4>
+                    <h4 className="text-end">{convertRupiah.convert(detailProduct?.price + total)}</h4>
                   </p>
                 </div>
-                <button className="btn-total" onClick="">
+                <button className="btn-total" onClick={handlerAddCart}>
                   Add Cart
                 </button>
               </form>

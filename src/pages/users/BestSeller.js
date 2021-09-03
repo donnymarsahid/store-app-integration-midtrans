@@ -13,7 +13,7 @@ const Coffee = () => {
       <title>WaysBucks | Best Seller</title>
       <section className="varian coffee">
         <div className="container">
-          <h3>Coffee Variant</h3>
+          <h3>Best Seller</h3>
           <div className="row">{cardCoffee}</div>
         </div>
       </section>

@@ -57,7 +57,7 @@ const Register = () => {
                 <div className="box-access">
                   <h2>Register</h2>
                   {status && (
-                    <div className="alert alert-success" role="alert">
+                    <div className="alert alert-danger" role="alert">
                       {status}
                     </div>
                   )}

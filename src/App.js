@@ -33,7 +33,7 @@ import BestSeller from './pages/guest/BestSeller';
 function App() {
   const loginAuth = JSON.parse(localStorage.getItem('login_auth'));
   const [login] = useState(loginAuth);
-  const [coffeeVariant, setCoffeeVariant] = useState(dataCoffeeVariant);
+  const [coffeeVariant] = useState(dataCoffeeVariant);
   const [allCoffee, setAllCoffee] = useState(dataAllCoffee);
   const [toppings, setToppings] = useState(dataToppings);
   const [transaction, setTransaction] = useState(dataTransaction);
