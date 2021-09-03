@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router';
 import { API, getToppings } from '../../config/api';
@@ -19,19 +19,15 @@ const DetailPage = () => {
 
   const { data: toppings, isLoading: loadingTopping } = useQuery('toppingsCache', getToppings);
   let [total, setTotal] = useState(0);
+  const convertTotal = convertRupiah.convert(detailProduct?.price + total);
 
-  useEffect(() => {
-    const selectToppings = document.querySelectorAll('.checkbox');
-    selectToppings.forEach((check) => {
-      check.addEventListener('click', function () {
-        if (this.checked === true) {
-          setTotal((total += parseInt(this.value)));
-        } else {
-          setTotal((total -= parseInt(this.value)));
-        }
-      });
-    });
-  }, []);
+  const handlerCheckBox = (e) => {
+    if (e.target.checked === true) {
+      setTotal((total += parseInt(e.target.value)));
+    } else {
+      setTotal((total -= parseInt(e.target.value)));
+    }
+  };
 
   const handlerAddCart = () => {
     getDataUserTransaction.order.push({
@@ -66,9 +62,9 @@ const DetailPage = () => {
                         <div className="col-md-3 d-flex flex-column align-items-center">
                           <div class="box-check d-flex flex-column align-items-center">
                             <input type="hidden" />
-                            <input type="checkbox" name={`${topping.title}`} value={`${topping.price}`} className="checkbox d-none" id={`${topping.title}`} />
-                            <label for={`${topping.title}`} className="label-topping">
-                              <img src={`${topping.image}`} alt={topping.image} />
+                            <input type="checkbox" name={topping.title} value={topping.price} className="checkbox d-none" id={topping.title} onChange={handlerCheckBox} />
+                            <label for={topping.title} className="label-topping">
+                              <img src={topping.image} alt={topping.image} />
                             </label>
                             <label className="click-topping">{topping.title}</label>
                           </div>
@@ -80,7 +76,7 @@ const DetailPage = () => {
                 <div className="total d-flex justify-content-lg-between mt-2">
                   <h3>Total</h3>
                   <p className="price-total">
-                    <h4 className="text-end">{convertRupiah.convert(detailProduct?.price + total)}</h4>
+                    <h4 className="text-end">{detailProduct?.price ? <>{convertTotal}</> : <></>}</h4>
                   </p>
                 </div>
                 <button className="btn-total" onClick={handlerAddCart}>

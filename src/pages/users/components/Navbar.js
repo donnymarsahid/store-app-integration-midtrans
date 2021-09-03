@@ -43,8 +43,8 @@ const Navbar = () => {
           </div>
           <div className="navbar-link">
             <ul className="d-flex m-0 p-0 ps-3 justify-content-lg-around">
-              <Link to="/best-seller" className="text-decoration-none ">
-                <li className="fw-bolder">Best Seller</li>
+              <Link to="/coffee" className="text-decoration-none ">
+                <li className="fw-bolder">Coffee</li>
               </Link>
               <div className="link-router text-decoration-none">
                 <Link to="/all-menu" className="link-router text-decoration-none">

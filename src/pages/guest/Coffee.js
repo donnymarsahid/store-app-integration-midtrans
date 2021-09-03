@@ -1,14 +1,13 @@
 import React from 'react';
+import { useQuery } from 'react-query';
+import { getTypeCoffee } from '../../config/api';
 import Login from '../access/Login';
 import Register from '../access/Register';
-import CardAllCoffee from './cardsProducts/CardAllCoffee';
-import './css/style.css';
-import { useQuery } from 'react-query';
-import { getProducts } from '../../config/api';
+import CardCoffe from './cardsProducts/CardCoffe';
 import FadeLoader from 'react-spinners/FadeLoader';
 
-const AllMenu = () => {
-  const { data: products, isLoading, error } = useQuery('productsCache', getProducts);
+const Coffee = () => {
+  const { data: typeCoffee, isLoading, error } = useQuery('typeCoffeeCache', getTypeCoffee);
 
   if (isLoading)
     return (
@@ -23,13 +22,13 @@ const AllMenu = () => {
 
   return (
     <>
-      <title>WaysBucks | All Menu</title>
-      <section className="all-menu varian">
+      <title>WaysBucks | Coffee Variant</title>
+      <section className="varian coffee">
         <div className="container">
-          <h3>All Menu</h3>
+          <h3>Coffee Variant</h3>
           <div className="row">
-            {products.map((data) => (
-              <CardAllCoffee coffee={data} key={data.id} />
+            {typeCoffee.map((data) => (
+              <CardCoffe coffee={data} key={data.id} />
             ))}
           </div>
         </div>
@@ -40,4 +39,4 @@ const AllMenu = () => {
   );
 };
 
-export default AllMenu;
+export default Coffee;

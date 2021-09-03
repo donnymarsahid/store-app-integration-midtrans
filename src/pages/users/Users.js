@@ -1,18 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import './css/style.css';
 import imgHeader from '../../assets/img/img-header.png';
-import { context } from '../../App';
-import CardCoffe from './cardsProducts/CardCoffe';
 import { Link } from 'react-router-dom';
 import store from '../../assets/img/merchant-waysbucks.png';
 
 const Users = () => {
-  const { coffeeVariant } = useContext(context);
-
-  const cardCoffee = coffeeVariant.map((coffee) => {
-    return <CardCoffe coffee={coffee} key={coffee.id} />;
-  });
-
   return (
     <>
       <title>WaysBucks</title>
@@ -33,14 +25,11 @@ const Users = () => {
       </header>
       <section className="varian">
         <div className="container">
-          <h3>Best Seller</h3>
-          <div className="row">{cardCoffee}</div>
+          <h3>Coffee Variant</h3>
+          <div className="row"></div>
         </div>
       </section>
       <div className="button-read-more d-flex justify-content-center">
-        <Link to="/best-seller">
-          <button className="btn-best-seller me-5 text-uppercase">see best seller</button>
-        </Link>
         <Link to="/all-menu">
           <button className="btn-all-menu text-uppercase">see all menu</button>
         </Link>

@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import './css/style.css';
-import { useContext } from 'react/cjs/react.development';
-import { context } from '../../App';
 
 const Register = () => {
-  const { addAccount } = useContext(context);
   const [newAccount, setNewAccount] = useState({
     fullname: '',
     email: '',
@@ -39,7 +36,6 @@ const Register = () => {
         return false;
       }
       setStatus('success register please login');
-      addAccount(fullname, email, password);
     }
   };
 

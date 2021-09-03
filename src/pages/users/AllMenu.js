@@ -4,18 +4,14 @@ import { getProducts } from '../../config/api';
 import CardAllCoffee from './cardsProducts/CardAllCoffee';
 import './css/style.css';
 import FadeLoader from 'react-spinners/FadeLoader';
-import { useState } from 'react';
 
 const AllMenu = () => {
-  let [loading] = useState(true);
-  let [color] = useState('#BD0707');
-
   const { data: products, isLoading, error } = useQuery('productsCache', getProducts);
 
   if (isLoading)
     return (
       <div className="custom-status">
-        <FadeLoader color={color} loading={loading} size={50} />
+        <FadeLoader color={'#BD0707'} loading={true} size={60} />
       </div>
     );
 

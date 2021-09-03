@@ -1,18 +1,18 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import './css/style.css';
 import imgHeader from '../../assets/img/img-header.png';
-import { context } from '../../App';
-import CardCoffe from './cardsProducts/CardCoffe';
 import { Link } from 'react-router-dom';
 import Login from '../access/Login';
 import Register from '../access/Register';
 import store from '../../assets/img/merchant-waysbucks.png';
+import { getTypeCoffee } from '../../config/api';
+import { useQuery } from 'react-query';
+import convertRupiah from 'rupiah-format';
 
 const Guest = () => {
-  const { coffeeVariant } = useContext(context);
-  const cardCoffee = coffeeVariant.map((coffee) => {
-    return <CardCoffe coffee={coffee} key={coffee.id} />;
-  });
+  const { data: typeCoffee } = useQuery('typeCoffeeCache', getTypeCoffee);
+
+  const dataCoffee = typeCoffee?.slice(0, 4);
 
   return (
     <>
@@ -34,14 +34,32 @@ const Guest = () => {
       </header>
       <section className="varian">
         <div className="container">
-          <h3>Best Seller</h3>
-          <div className="row">{cardCoffee}</div>
+          <h3>Coffee Variant</h3>
+          <div className="row">
+            {dataCoffee?.map((coffee) => {
+              return (
+                <div className="col-md-3">
+                  <div className="box-card">
+                    <div className="image-card">
+                      <img src={coffee.image} alt={coffee.image} />
+                      <div className="overlay d-flex justify-content-center align-items-center">
+                        <button data-bs-toggle="modal" data-bs-target="#exampleModalLogin">
+                          ORDER NOW
+                        </button>
+                      </div>
+                    </div>
+                    <div className="description">
+                      <h5 className="text-capitalize">{coffee.title}</h5>
+                      <p>{convertRupiah.convert(coffee.price)}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
       <div className="button-read-more d-flex justify-content-center">
-        <Link to="/best-seller">
-          <button className="btn-best-seller me-5 text-uppercase">see best seller</button>
-        </Link>
         <Link to="/all-menu">
           <button className="btn-all-menu text-uppercase">see all menu</button>
         </Link>

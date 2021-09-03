@@ -1,46 +1,50 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router';
+import { API } from '../../config/api';
+import { UserContext } from '../../context/userContext';
 import './css/style.css';
 
 const Login = () => {
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [status, setStatus] = useState('');
-
   const history = useHistory();
+  const [state, dispatch] = useContext(UserContext);
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+  });
 
-  const dataAccountAuth = JSON.parse(localStorage.getItem('user_auth'));
-  const dataAdminAuth = JSON.parse(localStorage.getItem('admin_auth'));
-  const findAccountAuth = dataAccountAuth.find((data) => data.email === email && data.password === password);
-  const findAdminAuth = dataAdminAuth.find((data) => data.email === email && data.password === password);
+  const { email, password } = form;
 
-  const handlerLogin = (e) => {
+  const handlerInput = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handlerSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const body = JSON.stringify(form);
+      const config = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body,
+      };
+      const response = await API().post('/login', config);
 
-    if (findAdminAuth) {
-      localStorage.setItem('login_auth', JSON.stringify('admin'));
-      localStorage.setItem('add_product', 'upload.png');
-      localStorage.setItem('add_topping', 'upload.png');
-      history.push('/admin');
-      window.location.reload();
-    }
-    if (findAccountAuth) {
-      localStorage.setItem('login_auth', true);
-      localStorage.setItem(
-        'user_order',
-        JSON.stringify({
-          ...findAccountAuth,
-          order: [],
-          image: 'profile.png',
-        })
-      );
-      history.push('/');
-      window.location.reload();
-    } else {
-      setStatus('email/password is wrong');
-      setTimeout(() => {
-        setStatus('');
-      }, 4000);
+      console.log(response);
+
+      if (response.status === 'success') {
+        dispatch({
+          type: 'LOGIN_SUCCESS',
+          payload: response.data.user,
+        });
+        if (response.data.user.status === 'admin') {
+          history.push('/admin');
+        }
+      }
+      console.log(state);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -57,37 +61,12 @@ const Login = () => {
               <div className="access-login-register d-flex justify-content-center align-items-center">
                 <div className="box-access">
                   <h2>Login</h2>
-                  {status && (
-                    <div className="alert alert-danger" role="alert">
-                      {status}
-                    </div>
-                  )}
-                  <form onSubmit={handlerLogin}>
-                    <input
-                      type="email"
-                      id="email"
-                      placeHolder="Email"
-                      className="mt-3 mb-3"
-                      onChange={(e) => {
-                        setEmail(e.target.value);
-                      }}
-                      autoComplete="off"
-                      required
-                    />
+                  <form onSubmit={handlerSubmit}>
+                    <input type="email" name="email" id="email" placeHolder="Email" className="mt-3 mb-3" autoComplete="off" required onChange={handlerInput} />
                     <br />
-                    <input
-                      type="password"
-                      id="password"
-                      placeHolder="Password"
-                      className="mb-4"
-                      onChange={(e) => {
-                        setPassword(e.target.value);
-                      }}
-                      autoComplete="off"
-                      required
-                    />
+                    <input type="password" name="password" id="password" placeHolder="Password" className="mb-4" autoComplete="off" required onChange={handlerInput} />
                     <br />
-                    <button>Login</button>
+                    <button type="submit">Login</button>
                   </form>
                   <p className="text-center mt-3 d-flex justify-content-center">
                     Don't have an account ? click

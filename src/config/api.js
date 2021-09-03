@@ -20,12 +20,12 @@ export const getProducts = async () => {
   return response.data.products;
 };
 
-export const getDetailProduct = async (id) => {
-  const response = await API().get('/product/' + id);
-  return response.data;
-};
-
 export const getToppings = async () => {
   const response = await API().get('/toppings');
   return response.data.toppings;
+};
+
+export const getTypeCoffee = async () => {
+  const response = await API().get('/typecoffee');
+  return response.data.products;
 };
