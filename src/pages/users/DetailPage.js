@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { useParams } from 'react-router';
 import { API, getToppings } from '../../config/api';
 import convertRupiah from 'rupiah-format';
@@ -16,11 +16,40 @@ const DetailPage = () => {
   let [total, setTotal] = useState(0);
   const convertTotal = convertRupiah.convert(detailProduct?.price + total);
 
+  let [idTopping] = useState([]);
+
   const handlerCheckBox = (e) => {
     if (e.target.checked === true) {
       setTotal((total += parseInt(e.target.value)));
+      idTopping.push(e.target.name);
     } else {
       setTotal((total -= parseInt(e.target.value)));
+      idTopping.splice(idTopping.indexOf(e.target.name), 1);
+    }
+  };
+
+  const [quantity] = useState(1);
+
+  const handlerAddCart = async (e) => {
+    try {
+      e.preventDefault();
+      const body = JSON.stringify({ quantity, idTopping });
+
+      const config = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.token,
+        },
+        body,
+      };
+      const response = await API().post('/cart/' + id, config);
+
+      console.log(id);
+
+      console.log(response);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -45,8 +74,7 @@ const DetailPage = () => {
                       return (
                         <div className="col-md-3 d-flex flex-column align-items-center">
                           <div class="box-check d-flex flex-column align-items-center">
-                            <input type="hidden" />
-                            <input type="checkbox" name={topping.title} value={topping.price} className="checkbox d-none" id={topping.title} onChange={handlerCheckBox} />
+                            <input type="checkbox" name={topping.id} value={topping.price} className="checkbox d-none" id={topping.title} onChange={handlerCheckBox} />
                             <label for={topping.title} className="label-topping">
                               <img src={topping.image} alt={topping.image} />
                             </label>
@@ -63,7 +91,7 @@ const DetailPage = () => {
                     <h4 className="text-end">{detailProduct?.price ? <>{convertTotal}</> : <></>}</h4>
                   </p>
                 </div>
-                <button className="btn-total" onClick="">
+                <button className="btn-total" onClick={handlerAddCart}>
                   Add Cart
                 </button>
               </form>

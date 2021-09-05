@@ -38,3 +38,14 @@ export const getUsers = async () => {
   const response = await API().get('/users');
   return response.data.users;
 };
+
+// User
+export const getCarts = async () => {
+  const config = {
+    headers: {
+      Authorization: 'bearer ' + localStorage.token,
+    },
+  };
+  const response = await API().get('/carts', config);
+  return response.data.carts;
+};

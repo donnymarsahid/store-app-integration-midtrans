@@ -33,8 +33,6 @@ const Login = () => {
       };
       const response = await API().post('/login', config);
 
-      console.log(response);
-
       if (response.status === 'success') {
         dispatch({
           type: 'LOGIN_SUCCESS',

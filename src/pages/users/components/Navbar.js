@@ -7,12 +7,15 @@ import cartIcon from '../../../assets/img/cart.svg';
 import { useState } from 'react/cjs/react.development';
 import swal from 'sweetalert';
 import { UserContext } from '../../../context/userContext';
+import { useQuery } from 'react-query';
+import { getCarts } from '../../../config/api';
 
 const Navbar = () => {
   const history = useHistory();
-  const [totalCart, setTotalCart] = useState(0);
   const [state, dispatch] = useContext(UserContext);
   const IMG_URL_PROFILE = '/images/';
+
+  const { data: carts } = useQuery('getCartsCache', getCarts);
 
   const handlerLogout = () => {
     swal({
@@ -64,7 +67,7 @@ const Navbar = () => {
             <div className="shop d-flex align-items-center">
               <Link to="/cart-page">
                 <img src={cartIcon} alt="cart" className="me-5" width="30px" />
-                <span className="d-flex justify-content-center align-items-center">{totalCart}</span>
+                <span className="d-flex justify-content-center align-items-center">{carts?.length}</span>
               </Link>
             </div>
             <div className="profile">
