@@ -15,17 +15,26 @@ export const API = () => {
   };
 };
 
+// Product
 export const getProducts = async () => {
   const response = await API().get('/products');
   return response.data.products;
 };
 
+// Topping
 export const getToppings = async () => {
   const response = await API().get('/toppings');
   return response.data.toppings;
 };
 
+// TypeCoffee
 export const getTypeCoffee = async () => {
   const response = await API().get('/typecoffee');
   return response.data.products;
+};
+
+// User
+export const getUsers = async () => {
+  const response = await API().get('/users');
+  return response.data.users;
 };

@@ -1,41 +1,58 @@
 import React, { useState } from 'react';
+import { API } from '../../config/api';
+import { useHistory } from 'react-router';
 import './css/style.css';
 
 const Register = () => {
-  const [newAccount, setNewAccount] = useState({
+  const history = useHistory();
+  const [message, setMessage] = useState('');
+
+  const [form, setForm] = useState({
     fullname: '',
     email: '',
     password: '',
     confirmPassword: '',
   });
 
-  const { fullname, email, password, confirmPassword } = newAccount;
-
-  const [status, setStatus] = useState('');
-  const dataAccountAuth = JSON.parse(localStorage.getItem('user_auth'));
+  const { fullname, email, password, confirmPassword } = form;
 
   const handlerInput = (e) => {
-    setNewAccount({ ...newAccount, [e.target.name]: e.target.value });
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handlerRegister = (e) => {
+  const handlerSubmit = async (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      setStatus('password does not match');
-      setTimeout(() => {
-        setStatus('');
-      }, 4000);
-      return false;
-    } else {
-      const findAccount = dataAccountAuth.find((data) => data.email === email);
-      if (findAccount) {
-        setStatus('email has been use');
+    try {
+      if (password !== confirmPassword) {
+        setMessage('password does not match');
         setTimeout(() => {
-          setStatus('');
-        }, 4000);
+          setMessage('');
+        }, 3000);
         return false;
       }
-      setStatus('success register please login');
+      const body = JSON.stringify({ fullname, email, password });
+      const config = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body,
+      };
+      const response = await API().post('/register', config);
+      if (response.status === 'failed') {
+        setMessage(response.message);
+        setTimeout(() => {
+          setMessage('');
+        }, 3000);
+        return false;
+      }
+      setMessage('success register please login');
+      setTimeout(() => {
+        setMessage('');
+      }, 3000);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -52,19 +69,19 @@ const Register = () => {
               <div className="access-login-register d-flex justify-content-center align-items-center">
                 <div className="box-access">
                   <h2>Register</h2>
-                  {status && (
+                  {message && (
                     <div className="alert alert-danger" role="alert">
-                      {status}
+                      {message}
                     </div>
                   )}
-                  <form onSubmit={handlerRegister}>
-                    <input type="text" name="fullname" id="fullname" placeHolder="Full Name" className="mt-3 mb-3" onChange={(e) => handlerInput(e)} autoComplete="off" required />
+                  <form onSubmit={handlerSubmit}>
+                    <input type="text" name="fullname" id="fullname" placeHolder="Full Name" className="mt-3 mb-3" onChange={handlerInput} autoComplete="off" required />
                     <br />
-                    <input type="email" name="email" id="email" placeHolder="Email" className="mt-3 mb-3" onChange={(e) => handlerInput(e)} autoComplete="off" required />
+                    <input type="email" name="email" id="email" placeHolder="Email" className="mt-3 mb-3" onChange={handlerInput} autoComplete="off" required />
                     <br />
-                    <input type="password" name="password" id="password" placeHolder="Password" className="mb-4" onChange={(e) => handlerInput(e)} autoComplete="off" required />
+                    <input type="password" name="password" id="password" placeHolder="Password" className="mb-4" onChange={handlerInput} autoComplete="off" required />
                     <br />
-                    <input type="password" name="confirmPassword" id="confrim-password" placeHolder="Confirm Password" className="mb-4" onChange={(e) => handlerInput(e)} autoComplete="off" required />
+                    <input type="password" name="confirmPassword" id="confrim-password" placeHolder="Confirm Password" className="mb-4" onChange={handlerInput} autoComplete="off" required />
                     <br />
                     <button type="submit">Register</button>
                   </form>

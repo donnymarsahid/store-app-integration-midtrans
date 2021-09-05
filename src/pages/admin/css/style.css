@@ -108,3 +108,143 @@ section.admin .container .col-md-4.box-users {
   transition: 0.2s;
 }
 /* Diagram Users End */
+
+/* Add Product Start */
+/* Add Product Start */
+section.add-product {
+  height: 100vh;
+  margin-top: 150px;
+}
+section.add-product h1 {
+  color: var(--primaryColor);
+  font-weight: 700;
+  font-size: 32px;
+}
+section.add-product input {
+  padding: 8px;
+  border-radius: 8px;
+  background-color: #e0c8c840;
+  border: 2px solid var(--primaryColor);
+  font-weight: 600;
+  color: #68323280;
+  outline: none;
+}
+
+section.add-product label.label-upload {
+  padding: 8px;
+  border-radius: 8px;
+  background-color: #e0c8c840;
+  border: 2px solid var(--primaryColor);
+  font-weight: 600;
+  color: #68323280;
+  cursor: pointer;
+}
+section.add-product button.btn-add-product {
+  padding: 8px;
+  border-radius: 8px;
+  background-color: var(--primaryColor);
+  border: 2px solid var(--primaryColor);
+  font-weight: 600;
+  color: white;
+  font-size: 18px;
+  margin-top: 50px;
+}
+section.add-product .col-md-5 img {
+  width: 350px;
+  border-radius: 10px;
+}
+section.add-product .form-check-label p {
+  font-weight: 600;
+  color: var(--primaryColor);
+  padding-left: 5px;
+}
+
+.modal-delete h3 {
+  color: var(--primaryColor);
+}
+.modal-delete .btn-closed {
+  font-weight: 600;
+}
+.modal-delete .btn-delete {
+  font-weight: 600;
+  background-color: var(--primaryColor);
+  border: none;
+}
+.modal-delete .btn-delete:hover {
+  background-color: #cf0000;
+}
+/* Add Product End */
+
+/* Income Start */
+section.income-transaction {
+  margin-top: 150px;
+  margin-bottom: 150px;
+}
+section.income-transaction h1 {
+  font-weight: 700;
+  font-size: 32px;
+  color: var(--primaryColor);
+}
+section.income-transaction table {
+  border: 2px solid #828282;
+}
+section.income-transaction table tr td,
+section.income-transaction table tr th {
+  border-right: 2px solid #828282;
+}
+section.income-transaction table tr {
+  border-bottom: 2px solid #828282;
+}
+section.income-transaction table thead {
+  background-color: #e5e5e5;
+}
+
+section.add-product img.img-upload {
+  width: 200px;
+}
+
+section.income-transaction .title button {
+  background-color: transparent;
+  border: 2px solid var(--primaryColor);
+  padding: 4px 13px;
+  border-radius: 5px;
+  font-weight: 600;
+  color: var(--primaryColor);
+  transition: 0.2s;
+}
+section.income-transaction .title button:hover {
+  background-color: var(--primaryColor);
+  color: white;
+}
+section.income-transaction tbody img {
+  width: 50px;
+}
+section.income-transaction tbody .action button.trash {
+  background-color: var(--primaryColor);
+  color: white;
+  font-weight: 600;
+  border: 2px solid var(--primaryColor);
+  padding: 3px 15px;
+  border-radius: 5px;
+}
+section.income-transaction tbody .action button.trash:hover {
+  background-color: #ff5c00;
+  border: 2px solid #ff5c00;
+}
+section.income-transaction tbody .action button.me-2 {
+  background-color: transparent;
+  color: var(--primaryColor);
+  font-weight: 600;
+  border: 2px solid var(--primaryColor);
+  padding: 3px 15px;
+  border-radius: 5px;
+}
+section.income-transaction tbody .action button.me-2:hover {
+  background-color: var(--primaryColor);
+  color: white;
+}
+section.income-transaction tbody tr td {
+  font-weight: 600;
+  color: #3d3d3d;
+}
+/* Income End */

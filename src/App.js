@@ -4,7 +4,7 @@ import NavbarUsers from './pages/users/components/Navbar';
 import './App.css';
 import Footer from './assets/components/Footer';
 import Guest from './pages/guest/Guest';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import Users from './pages/users/Users';
 import AllMenu from './pages/guest/AllMenu';
 import AllMenuUsers from './pages/users/AllMenu';
@@ -12,8 +12,8 @@ import ScrollToTop from './assets/components/ScrollToTop';
 import DetailPage from './pages/users/DetailPage';
 import CartPage from './pages/users/CartPage';
 import Profile from './pages/users/Profile';
-import AddProduct from './pages/admin/AddProduct';
-import AddTopping from './pages/admin/AddTopping';
+import AddProduct from './pages/admin/components/createData/AddProduct';
+import AddTopping from './pages/admin/components/createData/AddTopping';
 import IncomeTransaction from './pages/admin/IncomeTransaction';
 import Admin from './pages/admin/Admin';
 import NavbarAdmin from './pages/admin/components/NavbarAdmin';
@@ -22,11 +22,51 @@ import Store from './pages/guest/Store';
 import CoffeeUsers from './pages/users/Coffee';
 import Coffee from './pages/guest/Coffee';
 import { UserContext } from './context/userContext';
+import { API } from './config/api';
+import TableProduct from './pages/admin/components/tableData/TableProduct';
+import TableUser from './pages/admin/components/tableData/TableUser';
+import TableTopping from './pages/admin/components/tableData/TableTopping';
+import UpdateProduct from './pages/admin/components/updateData/UpdateProduct';
+import UpdateTopping from './pages/admin/components/updateData/UpdateTopping';
 
 function App() {
   const [state, dispatch] = useContext(UserContext);
-  console.log(state);
-  console.log(localStorage.token);
+
+  console.log(state.isLogin);
+  console.log(state.user);
+
+  const checkAuth = async () => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.token}`,
+        },
+      };
+
+      const response = await API().get('/check-auth', config);
+
+      let payload = response.data.user;
+      payload.token = localStorage.token;
+
+      if (response.status === 'failed') {
+        return dispatch({
+          type: 'AUTH_ERROR',
+        });
+      }
+
+      dispatch({
+        type: 'AUTH_SUCCESS',
+        payload,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    checkAuth();
+    console.log(state);
+  }, []);
 
   if (!state.isLogin) {
     return (
@@ -75,8 +115,13 @@ function App() {
         <Switch>
           <Route path="/" exact component={Admin} />
           <Route path="/admin" exact component={Admin} />
-          <Route path="/admin/add-product" component={AddProduct} />
-          <Route path="/admin/add-topping" component={AddTopping} />
+          <Route path="/admin/product" exact component={TableProduct} />
+          <Route path="/admin/product/add-product" component={AddProduct} />
+          <Route path="/admin/update-product/:id" component={UpdateProduct} />
+          <Route path="/admin/topping" exact component={TableTopping} />
+          <Route path="/admin/topping/add-topping" component={AddTopping} />
+          <Route path="/admin/update-topping/:id" component={UpdateTopping} />
+          <Route path="/admin/user" component={TableUser} />
           <Route path="/admin/income-transaction" component={IncomeTransaction} />
           <Route path="/*" component={NoMatch} />
         </Switch>

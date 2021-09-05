@@ -1,16 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useContext } from 'react';
 import '../css/style.css';
 import { Link, useHistory } from 'react-router-dom';
 import logoWaysBucks from '../../../assets/img/logo-waysbucks.svg';
 import logout from '../../../assets/img/logout.svg';
 import cartIcon from '../../../assets/img/cart.svg';
-import swal from 'sweetalert';
 import { useState } from 'react/cjs/react.development';
+import swal from 'sweetalert';
+import { UserContext } from '../../../context/userContext';
 
 const Navbar = () => {
   const history = useHistory();
   const [totalCart, setTotalCart] = useState(0);
-  const dataUser = JSON.parse(localStorage.getItem('user_order'));
+  const [state, dispatch] = useContext(UserContext);
   const IMG_URL_PROFILE = '/images/';
 
   const handlerLogout = () => {
@@ -22,16 +23,15 @@ const Navbar = () => {
       dangerMode: true,
     }).then((logout) => {
       if (logout) {
-        localStorage.setItem('login_auth', false);
+        dispatch({
+          type: 'LOGOUT',
+        });
+        localStorage.removeItem('token');
         history.push('/');
         window.location.reload();
       }
     });
   };
-  const cart = JSON.parse(localStorage.getItem('user_order'));
-  useEffect(() => {
-    setTotalCart(cart.order.length);
-  }, [cart]);
   return (
     <>
       <nav className="fixed-top shadow-sm d-flex align-items-center">
@@ -69,7 +69,7 @@ const Navbar = () => {
             </div>
             <div className="profile">
               <div className="btn-group dropstart">
-                <img src={`${IMG_URL_PROFILE}${dataUser.image}`} alt="profile" width="30px" className="img-profile" data-bs-toggle="dropdown" />
+                <img src={`${IMG_URL_PROFILE}`} alt="profile" width="30px" className="img-profile" data-bs-toggle="dropdown" />
                 <ul className="dropdown-menu">
                   <Link to="/profile" className="text-decoration-none">
                     <li className="li-profile">

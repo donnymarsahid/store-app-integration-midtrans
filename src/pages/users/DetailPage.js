@@ -1,21 +1,16 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
-import { useHistory, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import { API, getToppings } from '../../config/api';
 import convertRupiah from 'rupiah-format';
 
 const DetailPage = () => {
   const { id } = useParams();
-  const history = useHistory();
 
   const { data: detailProduct, isLoading } = useQuery('detailProductCache', async () => {
     const response = await API().get('/product/' + id);
-    localStorage.setItem('detailPage', JSON.stringify(response.data.product));
     return response.data.product;
   });
-  const getDataUserTransaction = JSON.parse(localStorage.getItem('user_order'));
-
-  const data = JSON.parse(localStorage.getItem('detailPage'));
 
   const { data: toppings, isLoading: loadingTopping } = useQuery('toppingsCache', getToppings);
   let [total, setTotal] = useState(0);
@@ -29,17 +24,6 @@ const DetailPage = () => {
     }
   };
 
-  const handlerAddCart = () => {
-    getDataUserTransaction.order.push({
-      title: data.title,
-      price: data.price,
-      image: data.image,
-    });
-    localStorage.setItem('user_order', JSON.stringify(getDataUserTransaction));
-    history.push('/cart-page');
-    window.location.reload();
-  };
-
   return (
     <>
       <title>WaysBucks | Detail Coffee</title>
@@ -48,11 +32,11 @@ const DetailPage = () => {
           <div className="row">
             <div className="col-md-4">
               {isLoading && <div>Loading...</div>}
-              <img src={data.image} alt="detail-product" />
+              <img src={detailProduct?.image} alt="detail-product" />
             </div>
             <div className="col-md-8">
-              <h1 className="text-capitalize">{data.title}</h1>
-              <p>{convertRupiah.convert(data.price)}</p>
+              <h1 className="text-capitalize">{detailProduct?.title}</h1>
+              <p>{convertRupiah.convert(detailProduct?.price)}</p>
               <form onSubmit="">
                 <div className="toppings mt-3">
                   <div className="row">
@@ -79,7 +63,7 @@ const DetailPage = () => {
                     <h4 className="text-end">{detailProduct?.price ? <>{convertTotal}</> : <></>}</h4>
                   </p>
                 </div>
-                <button className="btn-total" onClick={handlerAddCart}>
+                <button className="btn-total" onClick="">
                   Add Cart
                 </button>
               </form>

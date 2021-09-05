@@ -54,10 +54,16 @@ footer .link-footer {
   text-decoration: none;
   color: white;
 }
+footer a,
+footer .link-footer p {
+  transition: 0.2s;
+}
+
 footer a:hover,
 footer .link-footer p:hover {
   text-decoration: none;
-  color: black;
+  font-weight: 500;
+  color: white;
 }
 /* Footer End */
 

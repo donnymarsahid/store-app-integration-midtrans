@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import product from '../../assets/img/product.svg';
 import topping from '../../assets/img/topping.svg';
 import incomeTransaction from '../../assets/img/income-transaction.svg';
@@ -7,10 +7,21 @@ import twitter from '../../assets/img/icon-twitter.svg';
 import facebook from '../../assets/img/icon-facebook.svg';
 import instagram from '../../assets/img/icon-instagram.svg';
 import diagram from '../../assets/img/diagram.png';
-import users from '../../assets/img/users.svg';
+import usersIcon from '../../assets/img/users.svg';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../../context/userContext';
+import { getProducts, getToppings, getUsers } from '../../config/api';
+import { useQuery } from 'react-query';
 
-const Admin = () => {
+const Admin = (props) => {
+  const [state, dispatch] = useContext(UserContext);
+
+  const { data: products, isLoading } = useQuery('productsCache', getProducts);
+  const { data: toppings, isLoading: loadingTopping } = useQuery('toppingsCache', getToppings);
+  const { data: users, isLoading: loadUsers } = useQuery('usersCache', getUsers);
+
+  console.log(users);
+
   return (
     <>
       <title>WaysBucks | Admin</title>
@@ -24,7 +35,7 @@ const Admin = () => {
                   <p>Total : 10</p>
                 </div>
                 <div class="check">
-                  <Link to="/" class="link-router">
+                  <Link to="/admin/income-transaction" class="link-router">
                     <p className="text-decoration-underline m-0">check details</p>
                   </Link>
                 </div>
@@ -37,10 +48,10 @@ const Admin = () => {
               <div class="d-flex flex-column justify-content-between info">
                 <div className="title">
                   <p class="text-uppercase m-0">Product</p>
-                  <p>Total : 20</p>
+                  <p>Total : {products?.length}</p>
                 </div>
                 <div class="check">
-                  <Link to="/" class="link-router">
+                  <Link to="/admin/product" class="link-router">
                     <p className="text-decoration-underline m-0">check details</p>
                   </Link>
                 </div>
@@ -53,10 +64,10 @@ const Admin = () => {
               <div class="d-flex flex-column justify-content-between info">
                 <div className="title">
                   <p class="text-uppercase m-0">Topping</p>
-                  <p>Total : 8</p>
+                  <p>Total : {toppings?.length}</p>
                 </div>
                 <div class="check">
-                  <Link to="/" class="link-router">
+                  <Link to="/admin/topping" class="link-router">
                     <p className="text-decoration-underline m-0">check details</p>
                   </Link>
                 </div>
@@ -98,16 +109,16 @@ const Admin = () => {
                 <div class="d-flex flex-column justify-content-between info">
                   <div className="title">
                     <p class="text-uppercase m-0">Users WaysBucks</p>
-                    <p>Total : 20</p>
+                    <p>Total : {users?.length - 1}</p>
                   </div>
                   <div class="check">
-                    <Link to="/" class="link-router">
+                    <Link to="/admin/user" class="link-router">
                       <p className="text-decoration-underline m-0">check details</p>
                     </Link>
                   </div>
                 </div>
                 <div class="icon d-flex flex-column justify-content-md-end">
-                  <img src={users} alt="income-transaction" />
+                  <img src={usersIcon} alt="users" />
                 </div>
               </div>
             </div>

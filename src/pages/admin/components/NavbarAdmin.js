@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import '../css/style.css';
 import { Link, useHistory } from 'react-router-dom';
 import logoWaysBucks from '../../../assets/img/logo-waysbucks.svg';
 import swal from 'sweetalert';
 import logout from '../../../assets/img/logout.svg';
+import { UserContext } from '../../../context/userContext';
 
 const NavbarAdmin = () => {
+  const [state, dispatch] = useContext(UserContext);
   const history = useHistory();
   const IMG_URL_PROFILE = '/images/';
 
@@ -18,7 +20,10 @@ const NavbarAdmin = () => {
       dangerMode: true,
     }).then((logout) => {
       if (logout) {
-        localStorage.setItem('login_auth', false);
+        dispatch({
+          type: 'LOGOUT',
+        });
+        localStorage.removeItem('token');
         history.push('/');
         window.location.reload();
       }

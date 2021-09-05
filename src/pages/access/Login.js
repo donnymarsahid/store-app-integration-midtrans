@@ -7,6 +7,8 @@ import './css/style.css';
 const Login = () => {
   const history = useHistory();
   const [state, dispatch] = useContext(UserContext);
+  const [message, setMessage] = useState('');
+
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -40,9 +42,17 @@ const Login = () => {
         });
         if (response.data.user.status === 'admin') {
           history.push('/admin');
+          window.location.reload();
+        } else {
+          history.push('/');
+          window.location.reload();
         }
+      } else {
+        setMessage(response.message);
+        setTimeout(() => {
+          setMessage('');
+        }, 3000);
       }
-      console.log(state);
     } catch (error) {
       console.log(error);
     }
@@ -61,6 +71,11 @@ const Login = () => {
               <div className="access-login-register d-flex justify-content-center align-items-center">
                 <div className="box-access">
                   <h2>Login</h2>
+                  {message && (
+                    <div className="alert alert-danger" role="alert">
+                      {message}
+                    </div>
+                  )}
                   <form onSubmit={handlerSubmit}>
                     <input type="email" name="email" id="email" placeHolder="Email" className="mt-3 mb-3" autoComplete="off" required onChange={handlerInput} />
                     <br />

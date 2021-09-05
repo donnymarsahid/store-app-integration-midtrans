@@ -3,8 +3,14 @@ import './css/style.css';
 import imgHeader from '../../assets/img/img-header.png';
 import { Link } from 'react-router-dom';
 import store from '../../assets/img/merchant-waysbucks.png';
+import { useQuery } from 'react-query';
+import { getTypeCoffee } from '../../config/api';
+import convertRupiah from 'rupiah-format';
 
 const Users = () => {
+  const { data: typeCoffee } = useQuery('typeCoffeeCache', getTypeCoffee);
+
+  const dataCoffee = typeCoffee?.slice(0, 4);
   return (
     <>
       <title>WaysBucks</title>
@@ -26,7 +32,28 @@ const Users = () => {
       <section className="varian">
         <div className="container">
           <h3>Coffee Variant</h3>
-          <div className="row"></div>
+          <div className="row">
+            {dataCoffee?.map((coffee) => {
+              return (
+                <div className="col-md-3">
+                  <div className="box-card">
+                    <div className="image-card">
+                      <img src={coffee.image} alt={coffee.image} />
+                      <div className="overlay d-flex justify-content-center align-items-center">
+                        <button data-bs-toggle="modal" data-bs-target="#exampleModalLogin">
+                          ORDER NOW
+                        </button>
+                      </div>
+                    </div>
+                    <div className="description">
+                      <h5 className="text-capitalize">{coffee.title}</h5>
+                      <p>{convertRupiah.convert(coffee.price)}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
       <div className="button-read-more d-flex justify-content-center">
