@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useMutation, useQuery } from 'react-query';
+import { useQuery } from 'react-query';
 import { useParams } from 'react-router';
 import { API, getToppings } from '../../config/api';
 import convertRupiah from 'rupiah-format';
@@ -45,7 +45,7 @@ const DetailPage = () => {
         },
         body,
       };
-      const response = await API().post('/cart/' + id, config);
+      await API().post('/cart/' + id, config);
       history.push('/cart-page');
     } catch (error) {
       console.log(error);

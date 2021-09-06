@@ -3,17 +3,27 @@ import { useMutation, useQuery } from 'react-query';
 import { API, getCarts } from '../../config/api';
 import convertRupiah from 'rupiah-format';
 import { Modal, Button } from 'react-bootstrap';
+import { useHistory } from 'react-router';
+import emptyCart from '../../assets/img/empty-cart.svg';
+import { Link } from 'react-router-dom';
 
 const CartPage = () => {
-  const { data: carts, refetch } = useQuery('getCartsCache', getCarts);
+  const history = useHistory();
+
   const [idDelete, setIdDelete] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(null);
   const [show, setShow] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const [showOrder, setShowOrder] = useState(false);
+  const handleCloseOrder = () => history.push('/profile');
+  const handleShowOrder = () => setShowOrder(true);
+
+  const { data: carts, refetch } = useQuery('getCartsCache', getCarts);
 
   const [form, setForm] = useState({
     name: '',
     email: '',
-    price: 0,
     phone: '',
     posCode: '',
     address: '',
@@ -24,23 +34,7 @@ const CartPage = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handlerSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const body = JSON.stringify(form);
-      const config = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body,
-      };
-      const response = await API().post('/transaction', config);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const dataId = [];
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -77,12 +71,29 @@ const CartPage = () => {
       setConfirmDelete(null);
     }
   }, [confirmDelete]);
+  const [fileUpload, setFileUpload] = useState('/images/upload-file.svg');
 
   const array = [];
+
+  if (carts?.length === 0) {
+    return (
+      <>
+        <title>WaysBucks | Cart</title>
+        <section className="cart-page-null d-flex align-items-center justify-content-center flex-column">
+          <img src={emptyCart} alt="empty-cart" width="150px" />
+          <h1>Empty Cart :(</h1>
+          <Link to="/all-menu">
+            <button class="btn-empty">Order Now</button>
+          </Link>
+        </section>
+      </>
+    );
+  }
 
   const cartsProducts = carts?.map((data) => {
     const dataPrice = [];
 
+    dataId.push(data.id);
     dataPrice.push(data.product.price);
 
     const dataTopping = data.product.toppings.map((topping) => {
@@ -121,7 +132,37 @@ const CartPage = () => {
 
   const totalPriceAll = array.reduce((acc, curr) => acc + curr);
 
-  const [fileUpload, setFileUpload] = useState('/images/upload-file.svg');
+  const handlerSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      if (fileUpload === '/images/upload-file.svg') {
+        setMessage('select your attachment');
+        setTimeout(() => {
+          setMessage('');
+        }, 3000);
+        return false;
+      }
+      const body = JSON.stringify({ ...form, price: totalPriceAll, idOrder: dataId });
+      const config = {
+        method: 'POST',
+        headers: {
+          Authorization: 'Bearer ' + localStorage.token,
+          'Content-Type': 'application/json',
+        },
+        body,
+      };
+
+      const response = await API().post('/transaction', config);
+
+      console.log(response);
+
+      if (response.status === 'success') {
+        handleShowOrder();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handlerFile = (e) => {
     if (e.target.type === 'file') {
@@ -129,6 +170,7 @@ const CartPage = () => {
       setFileUpload(url);
     }
   };
+
   return (
     <>
       <title>WaysBucks | Cart</title>
@@ -160,7 +202,7 @@ const CartPage = () => {
                     </div>
                   </div>
                   <div class="col-md-4">
-                    <input type="file" name="image" id="upload" className="d-none" required onChange={handlerFile} />
+                    <input type="file" name="image" id="upload" className="d-none" onChange={handlerFile} />
                     <label for="upload" className="upload-struck d-flex flex-column align-items-center justify-content-center">
                       <img src={fileUpload} alt="uploadFile" width="70px" />
                       <p>Attache Of Transaction</p>
@@ -169,8 +211,13 @@ const CartPage = () => {
                 </div>
               </div>
               <div className="col-md-5 d-flex flex-column">
-                <input type="text" name="name" id="name" placeHolder="Name" className="mb-4" required onChange={handlerInput} />
-                <input type="email" name="email" id="email" placeHolder="Email" className="mb-4" required onChange={handlerInput} />
+                {message && (
+                  <div className="alert alert-danger" role="alert">
+                    {message}
+                  </div>
+                )}
+                <input type="text" name="name" id="name" placeHolder="Name" className="mb-4" required onChange={handlerInput} autoComplete="off" />
+                <input type="email" name="email" id="email" placeHolder="Email" className="mb-4" required onChange={handlerInput} autoComplete="off" />
                 <input type="number" name="phone" id="phone" placeHolder="Phone" className="mb-4" required onChange={handlerInput} />
                 <input type="number" name="posCode" id="postcode" placeHolder="Pos Code" className="mb-4" required onChange={handlerInput} />
                 <textarea name="address" id="address" cols="30" rows="10" placeHolder="Address" onChange={handlerInput}></textarea>
@@ -184,14 +231,23 @@ const CartPage = () => {
       </section>
       <Modal show={show} onHide={handleClose} centered className="text-center modal-delete">
         <Modal.Body>
-          <h3>Are You Sure Delete?</h3>
+          <h5>Are You Sure Delete Cart?</h5>
         </Modal.Body>
         <Modal.Footer className="d-flex justify-content-center">
           <Button variant="secondary" onClick={handleClose} className="btn-closed">
-            close
+            cancel
           </Button>
           <Button variant="primary" onClick={actionDelete} className="btn-delete">
             delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={showOrder} centered onHide={handleCloseOrder}>
+        <Modal.Body>Thank you for ordering in us, please wait verify you order</Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" className="btn-order" onClick={handleCloseOrder}>
+            oke
           </Button>
         </Modal.Footer>
       </Modal>

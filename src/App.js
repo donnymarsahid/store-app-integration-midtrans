@@ -18,7 +18,6 @@ import IncomeTransaction from './pages/admin/IncomeTransaction';
 import Admin from './pages/admin/Admin';
 import NavbarAdmin from './pages/admin/components/NavbarAdmin';
 import NoMatch from './404/NoMatch';
-import Store from './pages/guest/Store';
 import CoffeeUsers from './pages/users/Coffee';
 import Coffee from './pages/guest/Coffee';
 import { UserContext } from './context/userContext';
@@ -28,6 +27,7 @@ import TableUser from './pages/admin/components/tableData/TableUser';
 import TableTopping from './pages/admin/components/tableData/TableTopping';
 import UpdateProduct from './pages/admin/components/updateData/UpdateProduct';
 import UpdateTopping from './pages/admin/components/updateData/UpdateTopping';
+import About from './pages/guest/About';
 
 function App() {
   const [state, dispatch] = useContext(UserContext);
@@ -77,7 +77,7 @@ function App() {
           <Route path="/" exact component={Guest} />
           <Route path="/all-menu" component={AllMenu} />
           <Route path="/coffee" component={Coffee} />
-          <Route path="/store" component={Store} />
+          <Route path="/about" component={About} />
           <Route path="/*" component={NoMatch} />
         </Switch>
         <Footer />
@@ -98,7 +98,7 @@ function App() {
             <Route path="/detail-page/:id" component={DetailPage} />
             <Route path="/cart-page" component={CartPage} />
             <Route path="/profile" component={Profile} />
-            <Route path="/store" component={Store} />
+            <Route path="/about" component={About} />
             <Route path="/*" component={NoMatch} />
           </Switch>
           <Footer />

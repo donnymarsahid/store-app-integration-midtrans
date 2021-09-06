@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import convertRupiah from 'rupiah-format';
 
 const CardCoffe = ({ coffee }) => {
-  const IMG_URL = 'images/coffee/';
-
   function handlerWhistlist() {
     document.querySelector(`.btn${coffee.id}`).classList.toggle('click-whistlist');
   }

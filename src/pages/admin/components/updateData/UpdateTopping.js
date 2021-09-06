@@ -25,7 +25,7 @@ const UpdateTopping = () => {
 
   console.log(detailTopping?.price);
 
-  const [fileUpload, setFileUpload] = useState(detailTopping?.image);
+  // const [fileUpload, setFileUpload] = useState(detailTopping?.image);
 
   const { title, price, image, status } = form;
 
@@ -37,7 +37,7 @@ const UpdateTopping = () => {
 
     if (e.target.type === 'file') {
       let url = URL.createObjectURL(e.target.files[0]);
-      setFileUpload(url);
+      // setFileUpload(url);
     }
   };
 
@@ -62,6 +62,11 @@ const UpdateTopping = () => {
 
       const response = await API().put('/topping/' + id, config);
       console.log(response);
+
+      if (response.message) {
+        setMessage(response.message);
+        return false;
+      }
 
       swal({
         title: 'Success Update Topping',
@@ -102,7 +107,7 @@ const UpdateTopping = () => {
               </form>
             </div>
             <div class="col-md-5 d-flex justify-content-center align-items-center">
-              <img src={fileUpload} alt="coffee" className="img-upload" />
+              <img src={detailTopping?.image} alt="coffee" className="img-upload" />
             </div>
           </div>
         </div>

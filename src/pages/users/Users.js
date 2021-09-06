@@ -114,7 +114,7 @@ const Users = () => {
                 <div class="google-maps">
                   <iframe
                     title="location waysbucks"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15866.743262628099!2d106.78790077041022!3d-6.172803545112276!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f660d0866193%3A0x9f26e23cd7e3c120!2sTomang%2C%20Kec.%20Grogol%20petamburan%2C%20Kota%20Jakarta%20Barat%2C%20Daerah%20Khusus%20Ibukota%20Jakarta!5e0!3m2!1sid!2sid!4v1630503627792!5m2!1sid!2sid"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.6517848294575!2d106.79744511436016!3d-6.1773467622502585!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f66213ab4d67%3A0x7b58b43c0f7953fe!2sJl.%20Tomang%20Raya%2C%20RT.5%2FRW.1%2C%20Jatipulo%2C%20Kec.%20Palmerah%2C%20Kota%20Jakarta%20Barat%2C%20Daerah%20Khusus%20Ibukota%20Jakarta!5e0!3m2!1sid!2sid!4v1630949001360!5m2!1sid!2sid"
                     width="400"
                     height="350"
                     style={{ border: '0' }}

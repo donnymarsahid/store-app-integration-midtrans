@@ -56,6 +56,13 @@ const AddTopping = () => {
         }, 3000);
         return false;
       }
+      if (response.message) {
+        setMessage(response.message);
+        setTimeout(() => {
+          setMessage('');
+        }, 3000);
+        return false;
+      }
 
       swal({
         title: 'Success Add Topping',

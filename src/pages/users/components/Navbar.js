@@ -4,18 +4,27 @@ import { Link, useHistory } from 'react-router-dom';
 import logoWaysBucks from '../../../assets/img/logo-waysbucks.svg';
 import logout from '../../../assets/img/logout.svg';
 import cartIcon from '../../../assets/img/cart.svg';
-import { useState } from 'react/cjs/react.development';
 import swal from 'sweetalert';
 import { UserContext } from '../../../context/userContext';
 import { useQuery } from 'react-query';
-import { getCarts } from '../../../config/api';
+import { API, getCarts } from '../../../config/api';
 
 const Navbar = () => {
   const history = useHistory();
   const [state, dispatch] = useContext(UserContext);
-  const IMG_URL_PROFILE = '/images/';
 
   const { data: carts } = useQuery('getCartsCache', getCarts);
+
+  const { data: user } = useQuery('getUserCache', async () => {
+    const config = {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.token,
+      },
+    };
+    const response = await API().get('/user', config);
+    return response.data.userDetail;
+  });
 
   const handlerLogout = () => {
     swal({
@@ -56,9 +65,9 @@ const Navbar = () => {
                   </li>
                 </Link>
               </div>
-              <Link to="/store" className="link-router text-decoration-none">
+              <Link to="/about" className="link-router text-decoration-none">
                 <li className="store">
-                  <p className="text-uppercase m-0 fw-bolder">Store</p>
+                  <p className="text-uppercase m-0 fw-bolder">About</p>
                 </li>
               </Link>
             </ul>
@@ -72,7 +81,7 @@ const Navbar = () => {
             </div>
             <div className="profile">
               <div className="btn-group dropstart">
-                <img src={`${IMG_URL_PROFILE}`} alt="profile" width="30px" className="img-profile" data-bs-toggle="dropdown" />
+                <img src={user?.image} alt="profile" width="30px" className="img-profile" data-bs-toggle="dropdown" />
                 <ul className="dropdown-menu">
                   <Link to="/profile" className="text-decoration-none">
                     <li className="li-profile">

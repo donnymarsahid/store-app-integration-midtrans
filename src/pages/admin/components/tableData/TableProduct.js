@@ -107,7 +107,7 @@ const TableProduct = () => {
         </Modal.Body>
         <Modal.Footer className="d-flex justify-content-center">
           <Button variant="secondary" onClick={handleClose} className="btn-closed">
-            close
+            cancel
           </Button>
           <Button variant="primary" onClick={actionDelete} className="btn-delete">
             delete

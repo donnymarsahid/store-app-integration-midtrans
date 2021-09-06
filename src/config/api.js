@@ -49,3 +49,14 @@ export const getCarts = async () => {
   const response = await API().get('/carts', config);
   return response.data.carts;
 };
+
+// Transaction
+export const getTransactionById = async () => {
+  const config = {
+    headers: {
+      Authorization: 'bearer ' + localStorage.token,
+    },
+  };
+  const response = await API().get('/carts', config);
+  return response.data.carts;
+};

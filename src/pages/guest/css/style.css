@@ -378,3 +378,45 @@ section.register-now p {
   font-weight: 500;
   color: var(--primaryColor);
 }
+
+/* About Store Start */
+section.about-store-page {
+  margin-top: 80px;
+}
+
+section.about-store-page .jumbotron {
+  background-image: url('../../../assets/img/jb-about-store.png');
+  background-size: cover;
+  height: 530px;
+  margin-bottom: 180px;
+}
+section.about-store-page .jumbotron h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #3d3d3d;
+}
+section.about-store-page .jumbotron .container {
+  padding-top: 80px;
+}
+section.about-store-page .jumbotron p {
+  font-size: 16px;
+  font-weight: 500;
+  color: #3d3d3d;
+}
+section.about-store-page .content h3 {
+  font-weight: 600;
+  color: #3d3d3d;
+}
+section.about-store-page .content p {
+  color: #3d3d3d;
+}
+section.about-store-page .content img {
+  width: 348px;
+}
+section.about-store-page .content .container {
+  width: 75%;
+}
+section.about-store-page .content {
+  margin-bottom: 130px;
+}
+/* About Store End */

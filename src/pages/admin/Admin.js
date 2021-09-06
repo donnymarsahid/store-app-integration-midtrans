@@ -32,7 +32,7 @@ const Admin = (props) => {
               <div class="d-flex flex-column justify-content-between info">
                 <div className="title">
                   <p class="text-uppercase m-0">Income Transaction</p>
-                  <p>Total : 10</p>
+                  <p>Total : 4</p>
                 </div>
                 <div class="check">
                   <Link to="/admin/income-transaction" class="link-router">

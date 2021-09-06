@@ -26,7 +26,7 @@ const UpdateProduct = () => {
 
   console.log(detailProduct?.price);
 
-  const [fileUpload, setFileUpload] = useState(detailProduct?.image);
+  // const [fileUpload, setFileUpload] = useState(detailProduct?.image);
 
   const { title, price, image, status } = form;
 
@@ -37,8 +37,8 @@ const UpdateProduct = () => {
     });
 
     if (e.target.type === 'file') {
-      let url = URL.createObjectURL(e.target.files[0]);
-      setFileUpload(url);
+      URL.createObjectURL(e.target.files[0]);
+      // setFileUpload(url);
     }
   };
 
@@ -56,8 +56,6 @@ const UpdateProduct = () => {
       formData.set('image', image);
       formData.set('status', status);
 
-      console.log(status);
-
       const config = {
         method: 'PUT',
         headers: {
@@ -68,6 +66,11 @@ const UpdateProduct = () => {
 
       const response = await API().put('/product/' + id, config);
       console.log(response);
+
+      if (response.message) {
+        setMessage(response.message);
+        return false;
+      }
 
       swal({
         title: 'Success Update Product',
@@ -114,7 +117,7 @@ const UpdateProduct = () => {
               </form>
             </div>
             <div class="col-md-5 d-flex justify-content-center align-items-center">
-              <img src={fileUpload} alt="coffee" className="img-upload" />
+              <img src={detailProduct?.image} alt="coffee" className="img-upload" />
             </div>
           </div>
         </div>

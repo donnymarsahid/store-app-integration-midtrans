@@ -9,7 +9,6 @@ import { UserContext } from '../../../context/userContext';
 const NavbarAdmin = () => {
   const [state, dispatch] = useContext(UserContext);
   const history = useHistory();
-  const IMG_URL_PROFILE = '/images/';
 
   const handlerLogout = () => {
     swal({
@@ -42,7 +41,8 @@ const NavbarAdmin = () => {
           <div className="access d-flex">
             <div className="profile">
               <div className="btn-group dropstart">
-                <img src={`${IMG_URL_PROFILE}profile.png`} alt="profile" width="30px" className="img-profile" data-bs-toggle="dropdown" />
+                <p className="m-0 pe-2 text-nav-admin">Hai Admin!</p>
+                <img src="/logo192.png" alt="profile" width="30px" className="img-profile" data-bs-toggle="dropdown" />
                 <ul className="dropdown-menu">
                   <Link className="text-decoration-none">
                     <li className="li-profile">

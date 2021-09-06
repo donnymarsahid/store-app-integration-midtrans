@@ -11,6 +11,12 @@ section.admin {
   margin-bottom: 150px;
 }
 
+nav .access p.text-nav-admin {
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  padding-top: 2.8px;
+}
+
 section.admin .container .col-md-4.box-income-transaction {
   background: var(--gradientRed);
   width: 345px;
@@ -173,6 +179,14 @@ section.add-product .form-check-label p {
 .modal-delete .btn-delete:hover {
   background-color: #cf0000;
 }
+.btn-order {
+  font-weight: 600;
+  background-color: var(--primaryColor);
+  border: none;
+}
+.btn-order:hover {
+  background-color: #cf0000;
+}
 /* Add Product End */
 
 /* Income Start */
@@ -246,5 +260,43 @@ section.income-transaction tbody .action button.me-2:hover {
 section.income-transaction tbody tr td {
   font-weight: 600;
   color: #3d3d3d;
+}
+section.income-transaction button.btn-cancel {
+  background-color: var(--primaryColor);
+  border-radius: 5px;
+  font-weight: 500;
+  color: white;
+  border: none;
+}
+section.income-transaction button.btn-cancel:hover {
+  background-color: #ff5c00;
+}
+section.income-transaction button.btn-approve {
+  background-color: #0acf83;
+  border-radius: 5px;
+  font-weight: 500;
+  color: white;
+  border: none;
+}
+section.income-transaction button.btn-approve:hover {
+  background-color: #02eb91;
+}
+section.income-transaction img.img-action {
+  width: 28px;
+}
+section.income-transaction .column-price {
+  color: #061e99;
+}
+section.income-transaction td.income.waiting {
+  color: #ff9900;
+}
+section.income-transaction td.income.success {
+  color: #78a85a;
+}
+section.income-transaction td.income.cancel {
+  color: #e83939;
+}
+section.income-transaction td.income.on {
+  color: #00d1ff;
 }
 /* Income End */
