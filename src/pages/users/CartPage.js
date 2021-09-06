@@ -10,6 +10,38 @@ const CartPage = () => {
   const [confirmDelete, setConfirmDelete] = useState(null);
   const [show, setShow] = useState(false);
 
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    price: 0,
+    phone: '',
+    posCode: '',
+    address: '',
+    attachment: '',
+  });
+
+  const handlerInput = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handlerSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const body = JSON.stringify(form);
+      const config = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body,
+      };
+      const response = await API().post('/transaction', config);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -26,10 +58,8 @@ const CartPage = () => {
         headers: {
           Authorization: 'Bearer ' + localStorage.token,
         },
-        body: 'cae4463d-d37c-4cfa-9b99-a22b7d83d0ef',
       };
       const response = await API().delete('/cart/' + id, config);
-      console.log(response);
       refetch();
     } catch (error) {
       console.log(error);
@@ -48,6 +78,8 @@ const CartPage = () => {
     }
   }, [confirmDelete]);
 
+  const array = [];
+
   const cartsProducts = carts?.map((data) => {
     const dataPrice = [];
 
@@ -59,6 +91,8 @@ const CartPage = () => {
     });
 
     const resultPrice = dataPrice.reduce((acc, curr) => acc + curr);
+
+    array.push(resultPrice);
 
     return (
       <div className="list-cart mb-3 d-flex align-items-center justify-content-between">
@@ -85,9 +119,11 @@ const CartPage = () => {
     );
   });
 
+  const totalPriceAll = array.reduce((acc, curr) => acc + curr);
+
   const [fileUpload, setFileUpload] = useState('/images/upload-file.svg');
 
-  const handlerInput = (e) => {
+  const handlerFile = (e) => {
     if (e.target.type === 'file') {
       let url = URL.createObjectURL(e.target.files[0]);
       setFileUpload(url);
@@ -98,7 +134,7 @@ const CartPage = () => {
       <title>WaysBucks | Cart</title>
       <section className="cart-page">
         <div className="container">
-          <form onSubmit="">
+          <form onSubmit={handlerSubmit}>
             <div className="row">
               <div className="title">
                 <h1>My Cart</h1>
@@ -114,17 +150,17 @@ const CartPage = () => {
                         <p>Quantity</p>
                       </div>
                       <div className="detail-2 mt-3 text-end">
-                        <p></p>
-                        <p></p>
+                        <p>{convertRupiah.convert(totalPriceAll)}</p>
+                        <p>{carts?.length}</p>
                       </div>
                     </div>
                     <div className="total d-flex justify-content-between">
                       <p>Total</p>
-                      <p></p>
+                      <p>{convertRupiah.convert(totalPriceAll)}</p>
                     </div>
                   </div>
                   <div class="col-md-4">
-                    <input type="file" name="image" id="upload" className="d-none" required onChange={handlerInput} />
+                    <input type="file" name="image" id="upload" className="d-none" required onChange={handlerFile} />
                     <label for="upload" className="upload-struck d-flex flex-column align-items-center justify-content-center">
                       <img src={fileUpload} alt="uploadFile" width="70px" />
                       <p>Attache Of Transaction</p>
@@ -133,11 +169,11 @@ const CartPage = () => {
                 </div>
               </div>
               <div className="col-md-5 d-flex flex-column">
-                <input type="text" name="name" id="name" placeHolder="Name" className="mb-4" required />
-                <input type="email" name="email" id="email" placeHolder="Email" className="mb-4" required />
-                <input type="number" name="phone" id="phone" placeHolder="Phone" className="mb-4" required />
-                <input type="number" name="postcode" id="postcode" placeHolder="Pos Code" className="mb-4" required />
-                <textarea name="address" id="address" cols="30" rows="10" placeHolder="Address"></textarea>
+                <input type="text" name="name" id="name" placeHolder="Name" className="mb-4" required onChange={handlerInput} />
+                <input type="email" name="email" id="email" placeHolder="Email" className="mb-4" required onChange={handlerInput} />
+                <input type="number" name="phone" id="phone" placeHolder="Phone" className="mb-4" required onChange={handlerInput} />
+                <input type="number" name="posCode" id="postcode" placeHolder="Pos Code" className="mb-4" required onChange={handlerInput} />
+                <textarea name="address" id="address" cols="30" rows="10" placeHolder="Address" onChange={handlerInput}></textarea>
                 <button type="submit" className="btn-pay">
                   Pay
                 </button>

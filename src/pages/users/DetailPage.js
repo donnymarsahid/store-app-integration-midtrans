@@ -3,9 +3,11 @@ import { useMutation, useQuery } from 'react-query';
 import { useParams } from 'react-router';
 import { API, getToppings } from '../../config/api';
 import convertRupiah from 'rupiah-format';
+import { useHistory } from 'react-router';
 
 const DetailPage = () => {
   const { id } = useParams();
+  const history = useHistory();
 
   const { data: detailProduct, isLoading } = useQuery('detailProductCache', async () => {
     const response = await API().get('/product/' + id);
@@ -44,10 +46,7 @@ const DetailPage = () => {
         body,
       };
       const response = await API().post('/cart/' + id, config);
-
-      console.log(id);
-
-      console.log(response);
+      history.push('/cart-page');
     } catch (error) {
       console.log(error);
     }
