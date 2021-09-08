@@ -1,25 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import convertRupiah from 'rupiah-format';
 import { API, getProducts } from '../../../../config/api';
-import { Modal, Button } from 'react-bootstrap';
+import swal from 'sweetalert';
 
 const TableProduct = () => {
   const { data: products, isLoading: loadingTopping, refetch } = useQuery('productsCache', getProducts);
-  const [idDelete, setIdDelete] = useState(null);
-  const [confirmDelete, setConfirmDelete] = useState(null);
-  const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const handlerDelete = (id) => {
-    handleShow();
-    setIdDelete(id);
-  };
-
-  const deleteById = useMutation(async (id) => {
+  const handlerDelete = useMutation(async (id) => {
     try {
       const config = {
         method: 'DELETE',
@@ -27,25 +16,28 @@ const TableProduct = () => {
           Authorization: 'Bearer ' + localStorage.token,
         },
       };
-      const response = await API().delete('/product/' + id, config);
-      console.log(response);
-      refetch();
+
+      swal({
+        title: 'Are you sure?',
+        text: 'product will be deleted',
+        icon: 'warning',
+        buttons: true,
+        dangerMode: true,
+      }).then(async (willDelete) => {
+        if (willDelete) {
+          const response = await API().delete('/product/' + id, config);
+          refetch();
+          swal('Product has been deleted!', {
+            icon: 'success',
+          });
+        } else {
+          swal('Product is safe!');
+        }
+      });
     } catch (error) {
       console.log(error);
     }
   });
-
-  const actionDelete = () => {
-    setConfirmDelete(true);
-  };
-
-  useEffect(() => {
-    if (confirmDelete) {
-      handleClose();
-      deleteById.mutate(idDelete);
-      setConfirmDelete(null);
-    }
-  }, [confirmDelete]);
 
   return (
     <>
@@ -89,7 +81,7 @@ const TableProduct = () => {
                       <button
                         className="trash"
                         onClick={() => {
-                          handlerDelete(product.id);
+                          handlerDelete.mutate(product.id);
                         }}
                       >
                         <i class="fas fa-trash-alt"></i>
@@ -102,19 +94,6 @@ const TableProduct = () => {
           </table>
         </div>
       </section>
-      <Modal show={show} onHide={handleClose} centered className="text-center modal-delete">
-        <Modal.Body>
-          <h3>Are You Sure Delete?</h3>
-        </Modal.Body>
-        <Modal.Footer className="d-flex justify-content-center">
-          <Button variant="secondary" onClick={handleClose} className="btn-closed">
-            cancel
-          </Button>
-          <Button variant="primary" onClick={actionDelete} className="btn-delete">
-            delete
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </>
   );
 };

@@ -67,7 +67,7 @@ const Profile = () => {
   return (
     <>
       <title>WaysBucks | Profile</title>
-      <section className="profile">
+      <section className="profile mb-5">
         <div class="container">
           <div class="row">
             <div class="col-md-6 d-flex">

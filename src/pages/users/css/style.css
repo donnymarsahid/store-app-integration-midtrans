@@ -500,6 +500,7 @@ section.cart-page .container .col-md-5 button.btn-pay {
   color: white;
   padding: 8px;
   border-radius: 8px;
+  outline: none;
   background-color: var(--primaryColor);
 }
 section.cart-page .container .col-md-7 .sub-total {

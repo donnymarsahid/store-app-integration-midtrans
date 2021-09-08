@@ -7,6 +7,7 @@ import swal from 'sweetalert';
 
 const IncomeTransaction = () => {
   const { data: transactions, refetch } = useQuery('getTransactionsCache', getTransactions);
+  const array = [];
 
   const handlerOnTheWay = useMutation(async (id) => {
     try {
@@ -19,11 +20,23 @@ const IncomeTransaction = () => {
         },
         body,
       };
-      const response = await API().put('/transaction/' + id, config);
-      if (response.status === 'success') {
-        swal('Good job!', 'You clicked the button!', 'success');
-        refetch();
-      }
+
+      swal({
+        title: 'Transaction already entered?',
+        icon: 'success',
+        buttons: true,
+        dangerMode: true,
+      }).then(async (willDelete) => {
+        if (willDelete) {
+          const response = await API().put('/transaction/' + id, config);
+          refetch();
+          swal('Poof! Your imaginary file has been deleted!', {
+            icon: 'success',
+          });
+        } else {
+          swal('transaction waiting approve');
+        }
+      });
     } catch (error) {
       console.log(error);
     }
@@ -40,11 +53,23 @@ const IncomeTransaction = () => {
         },
         body,
       };
-      const response = await API().put('/transaction/' + id, config);
-      if (response.status === 'success') {
-        swal('Good job!', 'You clicked the button!', 'success');
-        refetch();
-      }
+      swal({
+        title: 'Are you sure cancel?',
+        text: 'transaction will be canceled!',
+        icon: 'warning',
+        buttons: true,
+        dangerMode: true,
+      }).then(async (willDelete) => {
+        if (willDelete) {
+          const response = await API().put('/transaction/' + id, config);
+          refetch();
+          swal('Transaction has been deleted', {
+            icon: 'success',
+          });
+        } else {
+          swal('Safe transaction data stored');
+        }
+      });
     } catch (error) {
       console.log(error);
     }
@@ -69,10 +94,14 @@ const IncomeTransaction = () => {
             </thead>
             <tbody>
               {transactions?.map((data) => {
-                const dataTransaction = data.transactions.map((transaction, index) => {
+                const dataTransaction = data.transactions.map((transaction) => {
+                  array.push(transaction);
+
+                  const indexTransaction = array.map((data, index) => index + 1);
+
                   return (
                     <tr>
-                      <th scope="row">{index + 1}</th>
+                      <th scope="row">{indexTransaction.length}</th>
                       <td>{transaction.name}</td>
                       <td>{transaction.address}</td>
                       <td>{transaction.posCode}</td>

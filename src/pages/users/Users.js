@@ -40,9 +40,11 @@ const Users = () => {
                     <div className="image-card">
                       <img src={coffee.image} alt={coffee.image} />
                       <div className="overlay d-flex justify-content-center align-items-center">
-                        <button data-bs-toggle="modal" data-bs-target="#exampleModalLogin">
-                          ORDER NOW
-                        </button>
+                        <Link to={`/detail-page/${coffee.id}`}>
+                          <button data-bs-toggle="modal" data-bs-target="#exampleModalLogin">
+                            ORDER NOW
+                          </button>
+                        </Link>
                       </div>
                     </div>
                     <div className="description">

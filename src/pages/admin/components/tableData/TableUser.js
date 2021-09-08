@@ -29,7 +29,7 @@ const TableUser = () => {
                     <td scope="col">{index + 1}</td>
                     <td scope="col">{user.fullname}</td>
                     <td scope="col">{user.email}</td>
-                    <td scope="col"></td>
+                    <td scope="col">{user.transactions.length}</td>
                   </tr>
                 );
               })}

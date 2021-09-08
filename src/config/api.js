@@ -35,9 +35,16 @@ export const getTypeCoffee = async () => {
 
 // Users
 export const getUsers = async () => {
-  const response = await API().get('/users');
+  const config = {
+    method: 'GET',
+    headers: {
+      Authorization: 'Bearer ' + localStorage.token,
+    },
+  };
+  const response = await API().get('/users', config);
   return response.data.users;
 };
+
 // User By Id
 export const getUser = async () => {
   const config = {

@@ -16,7 +16,10 @@ const CartPage = () => {
   const [message, setMessage] = useState('');
 
   const [showOrder, setShowOrder] = useState(false);
-  const handleCloseOrder = () => history.push('/profile');
+  const handleCloseOrder = () => {
+    history.push('/profile');
+    window.location.reload();
+  };
   const handleShowOrder = () => setShowOrder(true);
 
   const { data: carts, refetch } = useQuery('getCartsCache', getCarts);
