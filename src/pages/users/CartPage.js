@@ -4,7 +4,6 @@ import { API, getCarts } from '../../config/api';
 import convertRupiah from 'rupiah-format';
 import { Modal, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router';
-import emptyCart from '../../assets/img/empty-cart.svg';
 import { Link } from 'react-router-dom';
 
 const CartPage = () => {
@@ -85,8 +84,7 @@ const CartPage = () => {
       <>
         <title>WaysBucks | Cart</title>
         <section className="cart-page-null d-flex align-items-center justify-content-center flex-column">
-          <img src={emptyCart} alt="empty-cart" width="150px" />
-          <h1>Empty Cart :(</h1>
+          <img src="/images/empty-cart.png" alt="empty-cart" width="530px" />
           <Link to="/all-menu">
             <button class="btn-empty">Order Now</button>
           </Link>

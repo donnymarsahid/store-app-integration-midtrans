@@ -20,8 +20,6 @@ const Admin = (props) => {
   const { data: toppings, isLoading: loadingTopping } = useQuery('toppingsCache', getToppings);
   const { data: users, isLoading: loadUsers } = useQuery('usersCache', getUsers);
 
-  console.log(users);
-
   return (
     <>
       <title>WaysBucks | Admin</title>

@@ -32,9 +32,6 @@ import About from './pages/guest/About';
 function App() {
   const [state, dispatch] = useContext(UserContext);
 
-  console.log(state.isLogin);
-  console.log(state.user);
-
   const checkAuth = async () => {
     try {
       const config = {
@@ -65,7 +62,6 @@ function App() {
 
   useEffect(() => {
     checkAuth();
-    console.log(state);
   }, []);
 
   if (!state.isLogin) {

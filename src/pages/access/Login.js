@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
-import { useHistory } from 'react-router';
+import { useMutation } from 'react-query';
+import { useHistory } from 'react-router-dom';
 import { API } from '../../config/api';
 import { UserContext } from '../../context/userContext';
 import './css/style.css';
@@ -14,13 +15,11 @@ const Login = () => {
     password: '',
   });
 
-  const { email, password } = form;
-
   const handlerInput = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handlerSubmit = async (e) => {
+  const handlerSubmit = useMutation(async (e) => {
     e.preventDefault();
     try {
       const body = JSON.stringify(form);
@@ -54,7 +53,7 @@ const Login = () => {
     } catch (error) {
       console.log(error);
     }
-  };
+  });
 
   return (
     <>
@@ -74,7 +73,7 @@ const Login = () => {
                       {message}
                     </div>
                   )}
-                  <form onSubmit={handlerSubmit}>
+                  <form onSubmit={(e) => handlerSubmit.mutate(e)}>
                     <input type="email" name="email" id="email" placeHolder="Email" className="mt-3 mb-3" autoComplete="off" required onChange={handlerInput} />
                     <br />
                     <input type="password" name="password" id="password" placeHolder="Password" className="mb-4" autoComplete="off" required onChange={handlerInput} />
