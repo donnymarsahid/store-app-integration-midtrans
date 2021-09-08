@@ -33,17 +33,29 @@ export const getTypeCoffee = async () => {
   return response.data.products;
 };
 
-// User
+// Users
 export const getUsers = async () => {
   const response = await API().get('/users');
   return response.data.users;
 };
+// User By Id
+export const getUser = async () => {
+  const config = {
+    method: 'GET',
+    headers: {
+      Authorization: 'Bearer ' + localStorage.token,
+    },
+  };
+  const response = await API().get('/user', config);
+  return response.data;
+};
 
-// User
+// Cart
 export const getCarts = async () => {
   const config = {
+    method: 'GET',
     headers: {
-      Authorization: 'bearer ' + localStorage.token,
+      Authorization: 'Bearer ' + localStorage.token,
     },
   };
   const response = await API().get('/carts', config);
@@ -51,12 +63,13 @@ export const getCarts = async () => {
 };
 
 // Transaction
-export const getTransactionById = async () => {
+export const getTransactionUser = async () => {
   const config = {
+    method: 'GET',
     headers: {
-      Authorization: 'bearer ' + localStorage.token,
+      Authorization: 'Bearer ' + localStorage.token,
     },
   };
-  const response = await API().get('/carts', config);
-  return response.data.carts;
+  const response = await API().get('/transaction', config);
+  return response.data.transactions;
 };

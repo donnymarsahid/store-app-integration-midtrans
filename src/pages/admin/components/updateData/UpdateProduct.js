@@ -12,10 +12,12 @@ const UpdateProduct = () => {
 
   const [message, setMessage] = useState('');
 
-  const { data: detailProduct } = useQuery('detailProductCache', async () => {
+  const { data: detailProduct, refetch } = useQuery('detailProductCache', async () => {
     const response = await API().get('/product/' + id);
     return response.data.product;
   });
+
+  console.log(detailProduct);
 
   const [form, setForm] = useState({
     title: detailProduct?.title,
@@ -66,7 +68,7 @@ const UpdateProduct = () => {
 
       const response = await API().put('/product/' + id, config);
       console.log(response);
-
+      refetch();
       if (response.message) {
         setMessage(response.message);
         return false;
@@ -87,6 +89,7 @@ const UpdateProduct = () => {
 
   return (
     <>
+      <title>WaysBucks | Update Product</title>
       <section className="add-product">
         <div class="container">
           <div class="row">

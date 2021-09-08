@@ -12,7 +12,7 @@ const UpdateTopping = () => {
 
   const [message, setMessage] = useState('');
 
-  const { data: detailTopping } = useQuery('detailToppingCache', async () => {
+  const { data: detailTopping, refetch } = useQuery('detailToppingCache', async () => {
     const response = await API().get('/topping/' + id);
     return response.data.topping;
   });
@@ -62,7 +62,7 @@ const UpdateTopping = () => {
 
       const response = await API().put('/topping/' + id, config);
       console.log(response);
-
+      refetch();
       if (response.message) {
         setMessage(response.message);
         return false;
@@ -83,6 +83,7 @@ const UpdateTopping = () => {
 
   return (
     <>
+      <title>WaysBucks | Update Topping</title>
       <section className="add-product">
         <div class="container">
           <div class="row">

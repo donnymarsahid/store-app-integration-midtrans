@@ -564,7 +564,6 @@ section.cart-page p.alert {
 /* Profile Start */
 section.profile {
   margin-top: 150px;
-  height: 100vh;
 }
 section.profile .col-md-6 img.profile {
   border-radius: 8px;
@@ -596,5 +595,20 @@ section.profile .col-md-6.transaction .box-transaction {
   background-color: #f6dada;
   border-radius: 10px;
   padding: 20px;
+}
+section.profile button.btn-action {
+  background-color: #0acf83;
+  border-radius: 5px;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 8px;
+  color: white;
+}
+
+section.profile .box-transaction p.text-total {
+  color: #974a4a;
+  font-weight: 600;
+  font-size: 14px;
 }
 /* Profile End */

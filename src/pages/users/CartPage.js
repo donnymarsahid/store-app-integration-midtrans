@@ -27,8 +27,10 @@ const CartPage = () => {
     phone: '',
     posCode: '',
     address: '',
-    attachment: '',
+    image: '',
   });
+
+  const { name, email, phone, posCode, address, image } = form;
 
   const handlerInput = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -96,7 +98,7 @@ const CartPage = () => {
     dataId.push(data.id);
     dataPrice.push(data.product.price);
 
-    const dataTopping = data.product.toppings.map((topping) => {
+    const dataTopping = data.toppings.map((topping) => {
       dataPrice.push(topping.price);
       return <>{topping.title},</>;
     });
@@ -132,6 +134,14 @@ const CartPage = () => {
 
   const totalPriceAll = array.reduce((acc, curr) => acc + curr);
 
+  const handlerFile = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.files[0] });
+    if (e.target.type === 'file') {
+      let url = URL.createObjectURL(e.target.files[0]);
+      setFileUpload(url);
+    }
+  };
+
   const handlerSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -142,14 +152,21 @@ const CartPage = () => {
         }, 3000);
         return false;
       }
-      const body = JSON.stringify({ ...form, price: totalPriceAll, idOrder: dataId });
+      const formData = new FormData();
+      formData.set('name', name);
+      formData.set('email', email);
+      formData.set('phone', phone);
+      formData.set('posCode', posCode);
+      formData.set('address', address);
+      formData.set('total', totalPriceAll);
+      formData.set('image', image);
+
       const config = {
         method: 'POST',
         headers: {
           Authorization: 'Bearer ' + localStorage.token,
-          'Content-Type': 'application/json',
         },
-        body,
+        body: formData,
       };
 
       const response = await API().post('/transaction', config);
@@ -161,13 +178,6 @@ const CartPage = () => {
       }
     } catch (error) {
       console.log(error);
-    }
-  };
-
-  const handlerFile = (e) => {
-    if (e.target.type === 'file') {
-      let url = URL.createObjectURL(e.target.files[0]);
-      setFileUpload(url);
     }
   };
 

@@ -17,16 +17,17 @@ const DetailPage = () => {
   const { data: toppings, isLoading: loadingTopping } = useQuery('toppingsCache', getToppings);
   let [total, setTotal] = useState(0);
   const convertTotal = convertRupiah.convert(detailProduct?.price + total);
+  const subTotal = detailProduct?.price + total;
 
-  let [idTopping] = useState([]);
+  let [idTopping, setIdTopping] = useState([]);
 
   const handlerCheckBox = (e) => {
     if (e.target.checked === true) {
       setTotal((total += parseInt(e.target.value)));
-      idTopping.push(e.target.name);
+      setIdTopping([...idTopping, e.target.name]);
     } else {
       setTotal((total -= parseInt(e.target.value)));
-      idTopping.splice(idTopping.indexOf(e.target.name), 1);
+      setIdTopping(idTopping.filter((data) => data !== e.target.name));
     }
   };
 
@@ -35,8 +36,7 @@ const DetailPage = () => {
   const handlerAddCart = async (e) => {
     try {
       e.preventDefault();
-      const body = JSON.stringify({ quantity, idTopping });
-
+      const body = JSON.stringify({ quantity, idTopping, subTotal });
       const config = {
         method: 'POST',
         headers: {

@@ -34,6 +34,14 @@ const AddTopping = () => {
     try {
       e.preventDefault();
 
+      if (title === '' || price === 0) {
+        setMessage('insert title or price');
+        setTimeout(() => {
+          setMessage('');
+        }, 3000);
+        return false;
+      }
+
       const formData = new FormData();
       formData.set('title', title);
       formData.set('price', price);
