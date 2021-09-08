@@ -8,10 +8,11 @@ import { convert } from 'rupiah-format';
 import { Modal, Button } from 'react-bootstrap';
 import clip from '../../assets/img/clip.svg';
 import { useHistory } from 'react-router';
+import swal from 'sweetalert';
 
 const Profile = () => {
   const history = useHistory();
-  const { data: transactionsUser } = useQuery('transactionsUserCache', getTransactionUser);
+  const { data: transactionsUser, refetch } = useQuery('transactionsUserCache', getTransactionUser);
   const { data: userId } = useQuery('getUserIdCache', getUser);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -64,6 +65,39 @@ const Profile = () => {
     }
   });
 
+  const handlerSuccess = useMutation(async (id) => {
+    try {
+      const body = JSON.stringify({ status: 'success' });
+      const config = {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.token,
+        },
+        body,
+      };
+
+      swal({
+        title: 'Have you received the coffee?',
+        icon: 'success',
+        buttons: true,
+        dangerMode: true,
+      }).then(async (willDelete) => {
+        if (willDelete) {
+          const response = await API().put('/transaction/' + id, config);
+          refetch();
+          swal('Enjoy the coffee', {
+            icon: 'success',
+          });
+        } else {
+          swal('Happy waiting for coffee to come');
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
   return (
     <>
       <title>WaysBucks | Profile</title>
@@ -92,6 +126,13 @@ const Profile = () => {
             </div>
             <div class="col-md-6 transaction">
               <h3>My Transaction</h3>
+              {transactionsUser?.length === 0 && (
+                <>
+                  <div class="box-empty-transaction-profile">
+                    <p>empty transaction</p>
+                  </div>
+                </>
+              )}
               {transactionsUser?.map((data) => {
                 const dataOrders = data.orders.map((item) => {
                   const dataToppings = item.toppings.map((topping) => <p>{topping.title},</p>);
@@ -117,7 +158,17 @@ const Profile = () => {
                       <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
                         <img src={logo} alt="logo" className="logo" />
                         <img src={barcode} alt="barcode" className="barcode mt-3 mb-3" />
-                        <button class="btn-action">waiting approve</button>
+                        {data.status === 'on the way' ? (
+                          <>
+                            <button class={`btn-profile ${data.status}`} onClick={() => handlerSuccess.mutate(data.id)}>
+                              {data.status}
+                            </button>
+                          </>
+                        ) : (
+                          <>
+                            <button class={`btn-profile ${data.status}`}>{data.status}</button>
+                          </>
+                        )}
                         <p className="text-total pt-1">Sub Total :</p>
                         <p className="text-total">{convert(data.total)}</p>
                       </div>

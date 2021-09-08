@@ -30,7 +30,7 @@ const IncomeTransaction = () => {
         if (willDelete) {
           const response = await API().put('/transaction/' + id, config);
           refetch();
-          swal('Poof! Your imaginary file has been deleted!', {
+          swal('Transaction success approve!', {
             icon: 'success',
           });
         } else {

@@ -32,6 +32,9 @@ import About from './pages/guest/About';
 function App() {
   const [state, dispatch] = useContext(UserContext);
 
+  console.log(state.isLogin);
+  console.log(state.user);
+
   const checkAuth = async () => {
     try {
       const config = {
@@ -63,23 +66,6 @@ function App() {
   useEffect(() => {
     checkAuth();
   }, []);
-
-  if (!state.isLogin) {
-    return (
-      <Router>
-        <ScrollToTop />
-        <Navbar />
-        <Switch>
-          <Route path="/" exact component={Guest} />
-          <Route path="/all-menu" component={AllMenu} />
-          <Route path="/coffee" component={Coffee} />
-          <Route path="/about" component={About} />
-          <Route path="/*" component={NoMatch} />
-        </Switch>
-        <Footer />
-      </Router>
-    );
-  }
 
   if (state.user.status === 'user') {
     return (
@@ -125,6 +111,21 @@ function App() {
       </Router>
     );
   }
+
+  return (
+    <Router>
+      <ScrollToTop />
+      <Navbar />
+      <Switch>
+        <Route path="/" exact component={Guest} />
+        <Route path="/all-menu" component={AllMenu} />
+        <Route path="/coffee" component={Coffee} />
+        <Route path="/about" component={About} />
+        <Route path="/*" component={NoMatch} />
+      </Switch>
+      <Footer />
+    </Router>
+  );
 }
 
 export default App;

@@ -597,15 +597,6 @@ section.profile .col-md-6.transaction .box-transaction {
   border-radius: 10px;
   padding: 20px;
 }
-section.profile button.btn-action {
-  background-color: #0acf83;
-  border-radius: 5px;
-  border: none;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 5px 8px;
-  color: white;
-}
 
 section.profile .box-transaction p.text-total {
   color: #974a4a;
@@ -663,5 +654,56 @@ section.profile button.btn-change-profile:hover {
 }
 .modal-profile .btn-danger-profile:hover {
   background-color: #d14545;
+}
+
+section.profile button.btn-profile.on {
+  background-color: #00d1ff;
+  border-radius: 5px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 5px 8px;
+  color: white;
+}
+section.profile button.btn-profile.success,
+section.profile button.btn-profile.waiting {
+  background-color: #0acf83;
+  border-radius: 5px;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 8px;
+  color: white;
+}
+section.profile button.btn-profile.success {
+  background-color: #0acf83;
+  border-radius: 5px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 5px 8px;
+  color: white;
+}
+section.profile button.btn-profile.cancel {
+  background-color: #ff0742;
+  border-radius: 5px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 5px 8px;
+  color: white;
+}
+section.profile .box-empty-transaction-profile {
+  height: 300px;
+  width: 100%;
+  background-color: #f6dada;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+section.profile .box-empty-transaction-profile p {
+  font-size: 22px !important;
+  color: #9b03036c;
 }
 /* Profile End */

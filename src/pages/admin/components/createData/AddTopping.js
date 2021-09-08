@@ -21,9 +21,16 @@ const AddTopping = () => {
   const handlerInput = (e) => {
     setForm({
       ...form,
-      [e.target.name]: e.target.type === 'file' ? e.target.files[0] : e.target.value,
+      [e.target.name]: e.target.value,
     });
+  };
 
+  const [namePath, setNamePath] = useState('Photo Product');
+  const handlerFile = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.files[0] });
+    const path = e.target.value;
+    const format = path.replace(/^.*\\/, '');
+    setNamePath(format);
     if (e.target.type === 'file') {
       let url = URL.createObjectURL(e.target.files[0]);
       setFileUpload(url);
@@ -99,9 +106,9 @@ const AddTopping = () => {
               <form className="d-flex flex-column" onSubmit={(e) => handlerSubmit.mutate(e)}>
                 <input type="text" name="title" id="name" placeHolder="Name Topping" onChange={handlerInput} />
                 <input type="number" name="price" id="price" placeHolder="Price" className="mt-4 mb-4" onChange={handlerInput} />
-                <input type="file" name="image" id="image" className="d-none" onChange={handlerInput} />
+                <input type="file" name="image" id="image" className="d-none" onChange={handlerFile} />
                 <label for="image" className="label-upload mb-4 d-flex justify-content-between">
-                  Photo Topping
+                  {namePath}
                   <img src={clip} alt="clip" width="15px" />
                 </label>
                 <button class="btn-add-product" type="submit">

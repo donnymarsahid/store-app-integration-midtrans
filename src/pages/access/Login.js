@@ -40,6 +40,7 @@ const Login = () => {
         if (response.data.user.status === 'admin') {
           history.push('/admin');
           window.location.reload();
+         
         } else {
           history.push('/');
           window.location.reload();
