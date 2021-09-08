@@ -7,24 +7,14 @@ import cartIcon from '../../../assets/img/cart.svg';
 import swal from 'sweetalert';
 import { UserContext } from '../../../context/userContext';
 import { useQuery } from 'react-query';
-import { API, getCarts } from '../../../config/api';
+import { getCarts, getUser } from '../../../config/api';
 
 const Navbar = () => {
   const history = useHistory();
   const [state, dispatch] = useContext(UserContext);
 
   const { data: carts } = useQuery('getCartsCache', getCarts);
-
-  const { data: user } = useQuery('getUserCache', async () => {
-    const config = {
-      method: 'GET',
-      headers: {
-        Authorization: 'Bearer ' + localStorage.token,
-      },
-    };
-    const response = await API().get('/user', config);
-    return response.data.userDetail;
-  });
+  const { data: userId } = useQuery('getUserIdCache', getUser);
 
   const handlerLogout = () => {
     swal({
@@ -81,7 +71,7 @@ const Navbar = () => {
             </div>
             <div className="profile">
               <div className="btn-group dropstart">
-                <img src={user?.image} alt="profile" width="30px" className="img-profile" data-bs-toggle="dropdown" />
+                <img src={userId?.image} alt="profile" width="30px" className="img-profile" data-bs-toggle="dropdown" />
                 <ul className="dropdown-menu">
                   <Link to="/profile" className="text-decoration-none">
                     <li className="li-profile">

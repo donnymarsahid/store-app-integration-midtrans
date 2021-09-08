@@ -1,14 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from '../../assets/img/logo-waysbucks.svg';
 import barcode from '../../assets/img/barcode.svg';
-import { useQuery } from 'react-query';
-import { getTransactionUser, getUser } from '../../config/api';
+import { useMutation, useQuery } from 'react-query';
+import { API, getTransactionUser, getUser } from '../../config/api';
 import moment from 'moment';
 import { convert } from 'rupiah-format';
+import { Modal, Button } from 'react-bootstrap';
+import clip from '../../assets/img/clip.svg';
+import { useHistory } from 'react-router';
 
 const Profile = () => {
+  const history = useHistory();
   const { data: transactionsUser } = useQuery('transactionsUserCache', getTransactionUser);
-  const { data: userId } = useQuery('userIdCache', getUser);
+  const { data: userId } = useQuery('getUserIdCache', getUser);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const [form, setForm] = useState({
+    fullname: '',
+    image: '',
+  });
+
+  const { fullname, image } = form;
+
+  const [namePath, setNamePath] = useState('upload image');
+
+  const handlerInput = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+  const handlerFile = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.files[0] });
+    const path = e.target.value;
+    const format = path.replace(/^.*\\/, '');
+    setNamePath(format);
+  };
+
+  const handlerSubmit = useMutation(async (e) => {
+    try {
+      e.preventDefault();
+      console.log(form);
+
+      const formData = new FormData();
+      formData.set('image', image);
+      formData.set('fullname', fullname);
+
+      const config = {
+        method: 'PUT',
+        headers: {
+          Authorization: 'Bearer ' + localStorage.token,
+        },
+        body: formData,
+      };
+
+      const response = await API().put('/user', config);
+
+      if (response.status === 'success') {
+        handleClose();
+        window.location.reload();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  });
 
   return (
     <>
@@ -20,13 +74,14 @@ const Profile = () => {
               <div class="title-image">
                 <h3 className="mb-3">My Profile</h3>
                 <div class="detail d-flex ">
-                  <div class="profile-image">
-                    <form onSubmit="">
-                      <input type="file" name="image" id="upload" className="d-none" />
-                      <label for="upload">
-                        <img src="" alt="profile" className="profile" />
-                      </label>
-                    </form>
+                  <div class="profile-image d-flex flex-column">
+                    <input type="file" name="image" id="upload" className="d-none" />
+                    <label for="upload">
+                      <img src={userId?.image} alt="profile" className="profile" />
+                    </label>
+                    <button className="btn-change-profile mt-3" onClick={handleShow}>
+                      <i class="fas fa-cog pe-1"></i>setting profile
+                    </button>
                   </div>
                   <div class="text ps-4">
                     <p>Full Name : {userId?.fullname}</p>
@@ -50,7 +105,7 @@ const Profile = () => {
                           <p>Topping : </p>
                           {dataToppings}
                         </div>
-                        <p>15.000</p>
+                        <p>{convert(item.subTotal)}</p>
                       </div>
                     </div>
                   );
@@ -74,6 +129,36 @@ const Profile = () => {
           </div>
         </div>
       </section>
+
+      <Modal show={show} onHide={handleClose} className="modal-profile">
+        <Modal.Header>
+          <Modal.Title className="update-profile">
+            <i class="fas fa-cog pe-1"></i>Profile
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form className="d-flex flex-column form-profile">
+            <label for="fullname" className="text-profile">
+              Fullname
+            </label>
+            <input type="text" name="fullname" id="fullname" Value={userId?.fullname} onChange={handlerInput} required />
+            <input type="file" name="image" id="image" className="d-none" onChange={handlerFile} required />
+            <p className="m-0 mt-2 text-profile">Image</p>
+            <label for="image" className="input-profile d-flex justify-content-between mb-3">
+              <p className="m-0">{namePath}</p>
+              <img src={clip} alt="clip" width="15px" />
+            </label>
+          </form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="danger" className="btn-danger-profile" onClick={(e) => handlerSubmit.mutate(e)}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };

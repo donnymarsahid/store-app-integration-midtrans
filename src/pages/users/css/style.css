@@ -611,4 +611,56 @@ section.profile .box-transaction p.text-total {
   font-weight: 600;
   font-size: 14px;
 }
+
+section.profile button.btn-change-profile {
+  background-color: var(--primaryColor);
+  border: var(--primaryColor);
+  border-radius: 5px;
+  color: white;
+  font-weight: 500;
+  padding: 5px 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.171);
+}
+section.profile button.btn-change-profile:hover {
+  background-color: #d63030;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+}
+
+.modal-profile input {
+  border: 2px solid var(--primaryColor);
+  background-color: #e0c8c840;
+  border-radius: 8px;
+  width: 70%;
+  padding: 6px 12px;
+  outline: none;
+}
+.modal-profile label.input-profile {
+  border: 2px solid var(--primaryColor);
+  background-color: #e0c8c840;
+  border-radius: 8px;
+  width: 70%;
+  padding: 6px 12px;
+}
+.modal-profile label.input-profile p {
+  color: #bd070763;
+}
+.modal-profile .form-profile label.text-profile,
+.modal-profile .form-profile .text-profile {
+  font-weight: 600;
+  color: var(--primaryColor);
+  font-size: 18px;
+}
+.modal-profile .update-profile {
+  font-weight: 600;
+  color: var(--primaryColor);
+  font-size: 22px;
+}
+.modal-profile .btn-danger-profile {
+  font-weight: 600;
+  color: white;
+  background-color: var(--primaryColor);
+}
+.modal-profile .btn-danger-profile:hover {
+  background-color: #d14545;
+}
 /* Profile End */

@@ -73,3 +73,15 @@ export const getTransactionUser = async () => {
   const response = await API().get('/transaction', config);
   return response.data.transactions;
 };
+
+// Transactions
+export const getTransactions = async () => {
+  const config = {
+    method: 'GET',
+    headers: {
+      Authorization: 'Bearer ' + localStorage.token,
+    },
+  };
+  const response = await API().get('/transactions', config);
+  return response.data;
+};

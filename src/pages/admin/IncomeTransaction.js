@@ -1,7 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './css/style.css';
+import { API, getTransactions } from '../../config/api';
+import { useMutation, useQuery } from 'react-query';
+import { convert } from 'rupiah-format';
+import swal from 'sweetalert';
 
 const IncomeTransaction = () => {
+  const { data: transactions, refetch } = useQuery('getTransactionsCache', getTransactions);
+
+  const handlerOnTheWay = useMutation(async (id) => {
+    try {
+      const body = JSON.stringify({ status: 'on the way' });
+      const config = {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.token,
+        },
+        body,
+      };
+      const response = await API().put('/transaction/' + id, config);
+      if (response.status === 'success') {
+        swal('Good job!', 'You clicked the button!', 'success');
+        refetch();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  const handlerCancel = useMutation(async (id) => {
+    try {
+      const body = JSON.stringify({ status: 'cancel' });
+      const config = {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.token,
+        },
+        body,
+      };
+      const response = await API().put('/transaction/' + id, config);
+      if (response.status === 'success') {
+        swal('Good job!', 'You clicked the button!', 'success');
+        refetch();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
   return (
     <>
       <section className="income-transaction">
@@ -20,55 +68,58 @@ const IncomeTransaction = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Ansel Ma Putri</td>
-                <td>Jln. Tanjung Duren</td>
-                <td>11430</td>
-                <td className="column-price">Rp. 38.000,00</td>
-                <td className="income waiting">waiting approve</td>
-                <td className="text-center">
-                  <button className="me-2 btn-cancel" onClick="">
-                    cancel
-                  </button>
-                  <button className="btn-approve" onClick="">
-                    approve
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Nathalie</td>
-                <td>Jln. Tomang</td>
-                <td>11230</td>
-                <td className="column-price">Rp. 28.000,00</td>
-                <td className="income success">success</td>
-                <td className="text-center">
-                  <img src="/images/actions/success.svg" alt="action" className="img-action" />
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Ariel Tatum</td>
-                <td>Jln. Kemanggisan</td>
-                <td>12440</td>
-                <td className="column-price">Rp. 30.000,00</td>
-                <td className="income cancel">cancel</td>
-                <td className="text-center">
-                  <img src="/images/actions/cancel.svg" alt="action" className="img-action" />
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">4</th>
-                <td>Gal Gadot</td>
-                <td>Jln. Bidara</td>
-                <td>52230</td>
-                <td className="column-price">Rp. 45.000,00</td>
-                <td className="income on">on the way</td>
-                <td className="text-center">
-                  <img src="/images/actions/success.svg" alt="action" className="img-action" />
-                </td>
-              </tr>
+              {transactions?.map((data) => {
+                const dataTransaction = data.transactions.map((transaction, index) => {
+                  return (
+                    <tr>
+                      <th scope="row">{index + 1}</th>
+                      <td>{transaction.name}</td>
+                      <td>{transaction.address}</td>
+                      <td>{transaction.posCode}</td>
+                      <td className="column-price">{convert(transaction.total)}</td>
+                      <td className={`income ${transaction.status}`}>{transaction.status}</td>
+                      <td className="text-center">
+                        {transaction.status === 'waiting approve' && (
+                          <>
+                            <button
+                              className="me-2 btn-cancel"
+                              onClick={() => {
+                                handlerCancel.mutate(transaction.id);
+                              }}
+                            >
+                              cancel
+                            </button>
+                            <button
+                              className="btn-approve"
+                              onClick={() => {
+                                handlerOnTheWay.mutate(transaction.id);
+                              }}
+                            >
+                              approve
+                            </button>
+                          </>
+                        )}
+                        {transaction.status === 'on the way' && (
+                          <>
+                            <img src="/images/actions/success.svg" alt="icon-success" className="img-action" />
+                          </>
+                        )}
+                        {transaction.status === 'success' && (
+                          <>
+                            <img src="/images/actions/success.svg" alt="icon-success" className="img-action" />
+                          </>
+                        )}
+                        {transaction.status === 'cancel' && (
+                          <>
+                            <img src="/images/actions/cancel.svg" alt="icon-cancel" className="img-action" />
+                          </>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                });
+                return <>{dataTransaction}</>;
+              })}
             </tbody>
           </table>
         </div>
