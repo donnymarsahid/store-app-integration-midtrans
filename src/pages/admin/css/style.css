@@ -156,8 +156,8 @@ section.add-product button.btn-add-product {
   margin-top: 50px;
 }
 section.add-product .col-md-5 img {
-  width: 350px;
-  border-radius: 10px;
+  width: 300px !important;
+  border-radius: 8px;
 }
 section.add-product .form-check-label p {
   font-weight: 600;
@@ -186,6 +186,18 @@ section.add-product .form-check-label p {
 }
 .btn-order:hover {
   background-color: #cf0000;
+}
+.btn-back {
+  background-color: transparent;
+  border: 2px solid var(--primaryColor);
+  color: var(--primaryColor);
+  border-radius: 5px;
+  font-weight: 600;
+  padding: 2px 28px 2px 28px;
+}
+.btn-back:hover {
+  background-color: var(--primaryColor);
+  color: white;
 }
 /* Add Product End */
 

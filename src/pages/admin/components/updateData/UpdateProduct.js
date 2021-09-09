@@ -3,7 +3,7 @@ import '../../css/style.css';
 import clip from '../../../../assets/img/clip.svg';
 import { useMutation, useQuery } from 'react-query';
 import { API } from '../../../../config/api';
-import { useHistory, useParams } from 'react-router';
+import { useHistory, useParams, Link } from 'react-router-dom';
 import swal from 'sweetalert';
 
 const UpdateProduct = () => {
@@ -114,9 +114,17 @@ const UpdateProduct = () => {
                     <p class="m-0">Not Available</p>
                   </label>
                 </div>
-                <button class="btn-add-product" type="submit">
-                  Add Product
-                </button>
+                <div class="button d-flex flex-column">
+                  <button class="btn-add-product" type="submit">
+                    Update Product
+                  </button>
+                  <div class="btn-backed d-flex justify-content-between">
+                    <div></div>
+                    <Link to="/admin/product" className="text-decoration-none">
+                      <div className="btn-back mt-3">Back</div>
+                    </Link>
+                  </div>
+                </div>
               </form>
             </div>
             <div class="col-md-5 d-flex justify-content-center align-items-center">

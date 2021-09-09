@@ -115,7 +115,7 @@ const CartPage = () => {
           <div className="description">
             <p className="text-capitalize">{data.product.title}</p>
             <div class="topping d-flex flex-row">
-              <p>Topping: {dataTopping}</p>
+              <p>{data.toppings.length === 0 ? <>Topping not found</> : <>Topping: {dataTopping}</>}</p>
               <p></p>
             </div>
           </div>
