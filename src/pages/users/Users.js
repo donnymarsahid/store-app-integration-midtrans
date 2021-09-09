@@ -13,12 +13,13 @@ const Users = () => {
 
   const dataCoffee = typeCoffee?.slice(0, 4);
 
-  if (isLoading)
+  if (isLoading) {
     return (
       <div className="custom-status">
         <img src={loading} alt="load" width="100px" />
       </div>
     );
+  }
 
   return (
     <>

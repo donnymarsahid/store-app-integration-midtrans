@@ -44,12 +44,21 @@ const Transactions = () => {
     }
   });
 
-  if (isLoading)
+  if (isLoading) {
     return (
       <div className="custom-status">
         <img src={loading} alt="load" width="100px" />
       </div>
     );
+  }
+
+  if (transactionsUser?.length === 0) {
+    return (
+      <div className="custom-status">
+        <h3>empty transaction</h3>
+      </div>
+    );
+  }
 
   return (
     <section className="profile">

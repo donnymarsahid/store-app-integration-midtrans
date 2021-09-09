@@ -101,12 +101,13 @@ const Profile = () => {
     }
   });
 
-  if (isLoading || loadingTransaction)
+  if (isLoading || loadingTransaction) {
     return (
       <div className="custom-status">
         <img src={loading} alt="load" width="100px" />
       </div>
     );
+  }
 
   return (
     <>

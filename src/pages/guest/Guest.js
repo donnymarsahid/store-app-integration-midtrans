@@ -8,11 +8,20 @@ import store from '../../assets/img/merchant-waysbucks.png';
 import { getTypeCoffee } from '../../config/api';
 import { useQuery } from 'react-query';
 import convertRupiah from 'rupiah-format';
+import loading from '../../assets/img/loading.gif';
 
 const Guest = () => {
-  const { data: typeCoffee } = useQuery('typeCoffeeCache', getTypeCoffee);
+  const { data: typeCoffee, isLoading } = useQuery('typeCoffeeCache', getTypeCoffee);
 
   const dataCoffee = typeCoffee?.slice(0, 4);
+
+  if (isLoading) {
+    return (
+      <div className="custom-status">
+        <img src={loading} alt="load" width="100px" />
+      </div>
+    );
+  }
 
   return (
     <>

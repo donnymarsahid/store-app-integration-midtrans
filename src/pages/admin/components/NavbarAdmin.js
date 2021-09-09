@@ -5,8 +5,12 @@ import logoWaysBucks from '../../../assets/img/logo-waysbucks.svg';
 import swal from 'sweetalert';
 import logout from '../../../assets/img/logout.svg';
 import { UserContext } from '../../../context/userContext';
+import user from '../../../assets/img/user.svg';
 
 const NavbarAdmin = () => {
+  function handlerDropDown() {
+    document.querySelector('.dropdown-custom').classList.toggle('show');
+  }
   const [state, dispatch] = useContext(UserContext);
   const history = useHistory();
 
@@ -42,21 +46,22 @@ const NavbarAdmin = () => {
             <div className="profile">
               <div className="btn-group dropstart">
                 <p className="m-0 pe-2 text-nav-admin">Hai Admin!</p>
-                <img src="/logo192.png" alt="profile" width="30px" className="img-profile" data-bs-toggle="dropdown" />
-                <ul className="dropdown-menu">
-                  <Link className="text-decoration-none">
-                    <li className="li-profile">
-                      <p className="ps-3 pt-2">
-                        <i class="far fa-user pe-2"></i> Admin
-                      </p>
+                <img src="/logo192.png" alt="profile" width="30px" className="img-profile" onClick={handlerDropDown} />
+                <div class="dropdown-custom">
+                  <ul>
+                    <Link to="/profile" className="text-decoration-none">
+                      <li className="d-flex dropdown-user">
+                        <img src={user} alt="profile" />
+                        <p className="m-0">Admin</p>
+                      </li>
+                    </Link>
+                    <span></span>
+                    <li className="d-flex dropdown-logout" onClick={handlerLogout}>
+                      <img src={logout} alt="profile" />
+                      <p className="m-0">Logout</p>
                     </li>
-                  </Link>
-                  <li className="logout" onClick={handlerLogout}>
-                    <p className="ps-3 pt-3">
-                      <img src={logout} alt="logout" width="25px" /> Logout
-                    </p>
-                  </li>
-                </ul>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>

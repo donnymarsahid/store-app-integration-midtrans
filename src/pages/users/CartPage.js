@@ -20,6 +20,7 @@ const CartPage = () => {
   const [showOrder, setShowOrder] = useState(false);
   const handleCloseOrder = () => {
     history.push('/profile');
+    window.location.reload();
   };
   const handleShowOrder = () => {
     setShowOrder(true);

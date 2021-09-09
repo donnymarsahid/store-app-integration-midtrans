@@ -3,6 +3,7 @@ import '../css/style.css';
 import { Link, useHistory } from 'react-router-dom';
 import logoWaysBucks from '../../../assets/img/logo-waysbucks.svg';
 import logout from '../../../assets/img/logout.svg';
+import user from '../../../assets/img/user.svg';
 import cartIcon from '../../../assets/img/cart.svg';
 import swal from 'sweetalert';
 import { UserContext } from '../../../context/userContext';
@@ -10,8 +11,11 @@ import { useQuery } from 'react-query';
 import { getCarts, getUser } from '../../../config/api';
 
 const Navbar = () => {
+  function handlerDropDown() {
+    document.querySelector('.dropdown-custom').classList.toggle('show');
+  }
   const history = useHistory();
-  const [dispatch] = useContext(UserContext);
+  const [state, dispatch] = useContext(UserContext);
 
   const { data: carts } = useQuery('getCartsCache', getCarts);
   const { data: userId } = useQuery('getUserIdCache', getUser);
@@ -70,20 +74,19 @@ const Navbar = () => {
               </Link>
             </div>
             <div className="profile">
-              <div className="btn-group dropstart">
-                <img src={userId?.image} alt="profile" width="30px" className="img-profile" data-bs-toggle="dropdown" />
-                <ul className="dropdown-menu">
+              <img src={userId?.image} alt="profile" width="30px" className="img-profile" onClick={handlerDropDown} />
+              <div class="dropdown-custom">
+                <ul>
                   <Link to="/profile" className="text-decoration-none">
-                    <li className="li-profile">
-                      <p className="ps-3 pt-2">
-                        <i class="far fa-user pe-2"></i> Profile
-                      </p>
+                    <li className="d-flex dropdown-user">
+                      <img src={user} alt="profile" />
+                      <p className="m-0">Profile</p>
                     </li>
                   </Link>
-                  <li className="logout" onClick={handlerLogout}>
-                    <p className="ps-3 pt-3">
-                      <img src={logout} alt="logout" width="25px" /> Logout
-                    </p>
+                  <span></span>
+                  <li className="d-flex dropdown-logout" onClick={handlerLogout}>
+                    <img src={logout} alt="profile" />
+                    <p className="m-0">Logout</p>
                   </li>
                 </ul>
               </div>

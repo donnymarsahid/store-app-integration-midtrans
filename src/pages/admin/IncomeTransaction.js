@@ -4,9 +4,10 @@ import { API, getTransactions } from '../../config/api';
 import { useMutation, useQuery } from 'react-query';
 import { convert } from 'rupiah-format';
 import swal from 'sweetalert';
+import loading from '../../assets/img/loading.gif';
 
 const IncomeTransaction = () => {
-  const { data: transactions, refetch } = useQuery('getTransactionsCache', getTransactions);
+  const { data: transactions, refetch, isLoading } = useQuery('getTransactionsCache', getTransactions);
   const array = [];
 
   const handlerOnTheWay = useMutation(async (id) => {
@@ -74,6 +75,14 @@ const IncomeTransaction = () => {
       console.log(error);
     }
   });
+
+  if (isLoading) {
+    return (
+      <div className="custom-status">
+        <img src={loading} alt="load" width="100px" />
+      </div>
+    );
+  }
 
   return (
     <>

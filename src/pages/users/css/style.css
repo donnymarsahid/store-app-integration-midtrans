@@ -159,6 +159,71 @@ nav .access .dropdown button {
   background-color: var(--primaryColor);
   color: white;
 }
+nav .profile {
+  position: relative;
+}
+nav .dropdown-custom {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.315);
+  position: absolute;
+  top: 65px;
+  right: -25px;
+  width: 200px;
+  border-radius: 7px;
+  background-color: white;
+  display: none;
+}
+nav .dropdown-custom.show {
+  display: block;
+}
+nav .dropdown-custom ul li {
+  list-style: none;
+}
+nav .dropdown-custom ul {
+  margin: 0;
+  padding: 0;
+}
+nav .dropdown-custom::before {
+  content: url('../../../assets/img/polygon.png');
+  display: block;
+  position: absolute;
+  top: -33px;
+  right: -35px;
+  z-index: 1;
+  width: 100px;
+}
+nav .dropdown-custom .dropdown-user img {
+  width: 30px;
+}
+nav .dropdown-custom .dropdown-logout img {
+  padding-left: 5px;
+  width: 35px;
+}
+nav .dropdown-custom .dropdown-user p,
+nav .dropdown-custom .dropdown-logout p {
+  color: var(--primaryColor);
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: 1px;
+}
+nav .dropdown-custom .dropdown-user p {
+  padding-left: 13px;
+}
+nav .dropdown-custom .dropdown-logout p {
+  padding-left: 10px;
+}
+nav .dropdown-custom .dropdown-user {
+  padding: 20px 20px 20px 20px;
+}
+nav .dropdown-custom .dropdown-logout {
+  padding: 20px 20px 20px 20px;
+  cursor: pointer;
+}
+nav .dropdown-custom span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #a8a8a8;
+}
 /* Navbar End */
 
 /* Header Start */

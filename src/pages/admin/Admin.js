@@ -10,8 +10,9 @@ import diagram from '../../assets/img/diagram.png';
 import usersIcon from '../../assets/img/users.svg';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../context/userContext';
-import { getProducts, getToppings, getUsers } from '../../config/api';
+import { getProducts, getToppings, getTransactions, getUsers } from '../../config/api';
 import { useQuery } from 'react-query';
+import loading from '../../assets/img/loading.gif';
 
 const Admin = (props) => {
   const [state, dispatch] = useContext(UserContext);
@@ -19,6 +20,28 @@ const Admin = (props) => {
   const { data: products, isLoading } = useQuery('productsCache', getProducts);
   const { data: toppings, isLoading: loadingTopping } = useQuery('toppingsCache', getToppings);
   const { data: users, isLoading: loadUsers } = useQuery('usersCache', getUsers);
+  const { data: transactions, isLoading: loadTransactions } = useQuery('getTransactionsCache', getTransactions);
+
+  if (isLoading || loadingTopping || loadUsers || loadTransactions) {
+    return (
+      <div className="custom-status">
+        <img src={loading} alt="load" width="100px" />
+      </div>
+    );
+  }
+
+  const array = [];
+
+  const data = transactions?.map((data) => {
+    const dataTransaction = data.transactions.map((transaction) => {
+      array.push(transaction);
+
+      const dataArray = array.length;
+
+      return dataArray;
+    });
+    return dataTransaction;
+  });
 
   return (
     <>
@@ -30,7 +53,8 @@ const Admin = (props) => {
               <div class="d-flex flex-column justify-content-between info">
                 <div className="title">
                   <p class="text-uppercase m-0">Income Transaction</p>
-                  <p>Total : 4</p>
+
+                  <p>Total : 4 {data[0][data.length - 1]}</p>
                 </div>
                 <div class="check">
                   <Link to="/admin/income-transaction" class="link-router">

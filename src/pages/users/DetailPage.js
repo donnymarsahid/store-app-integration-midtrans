@@ -5,6 +5,7 @@ import { API, getToppings } from '../../config/api';
 import convertRupiah from 'rupiah-format';
 import { useHistory } from 'react-router';
 import loading from '../../assets/img/loading.gif';
+import swal from 'sweetalert';
 
 const DetailPage = () => {
   const { id } = useParams();
@@ -47,19 +48,20 @@ const DetailPage = () => {
         body,
       };
       await API().post('/cart/' + id, config);
-
+      swal('Success!', 'You have new cart!', 'success');
       history.push('/cart-page');
     } catch (error) {
       console.log(error);
     }
   };
 
-  if (isLoading || loadingTopping)
+  if (isLoading || loadingTopping) {
     return (
       <div className="custom-status">
         <img src={loading} alt="load" width="100px" />
       </div>
     );
+  }
 
   return (
     <>

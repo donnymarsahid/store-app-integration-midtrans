@@ -7,12 +7,13 @@ import loading from '../../assets/img/loading.gif';
 const Coffee = () => {
   const { data: typeCoffee, isLoading, error } = useQuery('typeCoffeeCache', getTypeCoffee);
 
-  if (isLoading)
+  if (isLoading) {
     return (
       <div className="custom-status">
         <img src={loading} alt="load" width="100px" />
       </div>
     );
+  }
 
   if (error) return <div className="custom-status">Error fetching data</div>;
 
