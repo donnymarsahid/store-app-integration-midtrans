@@ -4,6 +4,7 @@ import { useParams } from 'react-router';
 import { API, getToppings } from '../../config/api';
 import convertRupiah from 'rupiah-format';
 import { useHistory } from 'react-router';
+import loading from '../../assets/img/loading.gif';
 
 const DetailPage = () => {
   const { id } = useParams();
@@ -46,11 +47,19 @@ const DetailPage = () => {
         body,
       };
       await API().post('/cart/' + id, config);
+
       history.push('/cart-page');
     } catch (error) {
       console.log(error);
     }
   };
+
+  if (isLoading || loadingTopping)
+    return (
+      <div className="custom-status">
+        <img src={loading} alt="load" width="100px" />
+      </div>
+    );
 
   return (
     <>
@@ -59,7 +68,6 @@ const DetailPage = () => {
         <div className="container">
           <div className="row">
             <div className="col-md-4">
-              {isLoading && <div>Loading...</div>}
               <img src={detailProduct?.image} alt="detail-product" />
             </div>
             <div className="col-md-8">
@@ -68,7 +76,6 @@ const DetailPage = () => {
               <form onSubmit="">
                 <div className="toppings mt-3">
                   <div className="row">
-                    {loadingTopping && <div>Loading...</div>}
                     {toppings?.map((topping) => {
                       return (
                         <div className="col-md-3 d-flex flex-column align-items-center">

@@ -99,7 +99,7 @@ const Guest = () => {
               </div>
               <div class="detail">
                 <h3>WaysBucks Coffee, Jakarta City</h3>
-                <p>WaysBucks Coffee, in Road tomang number 23, RT.03/RW.07, west jakarta city, districts palmerah, ward Jatipulo, Post Code 11430</p>
+                <p>WaysBucks Coffee, in Road tomang number 23, RT.08/RW.04, west jakarta city, districts palmerah, ward Jatipulo, Post Code 11430</p>
                 <p>Open every day</p>
                 <p>
                   <i class="fas fa-clock"></i> 08:00AM - 21:00PM

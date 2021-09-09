@@ -6,7 +6,7 @@ import { API, getProducts } from '../../../../config/api';
 import swal from 'sweetalert';
 
 const TableProduct = () => {
-  const { data: products, isLoading: loadingTopping, refetch } = useQuery('productsCache', getProducts);
+  const { data: products, refetch } = useQuery('productsCache', getProducts);
 
   const handlerDelete = useMutation(async (id) => {
     try {
@@ -25,7 +25,7 @@ const TableProduct = () => {
         dangerMode: true,
       }).then(async (willDelete) => {
         if (willDelete) {
-          const response = await API().delete('/product/' + id, config);
+          await API().delete('/product/' + id, config);
           refetch();
           swal('Product has been deleted!', {
             icon: 'success',

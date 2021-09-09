@@ -28,6 +28,7 @@ import TableTopping from './pages/admin/components/tableData/TableTopping';
 import UpdateProduct from './pages/admin/components/updateData/UpdateProduct';
 import UpdateTopping from './pages/admin/components/updateData/UpdateTopping';
 import About from './pages/guest/About';
+import Transactions from './pages/users/Transactions';
 
 function App() {
   const [state, dispatch] = useContext(UserContext);
@@ -81,6 +82,7 @@ function App() {
             <Route path="/cart-page" component={CartPage} />
             <Route path="/profile" component={Profile} />
             <Route path="/about" component={About} />
+            <Route path="/all-transaction" component={Transactions} />
             <Route path="/*" component={NoMatch} />
           </Switch>
           <Footer />

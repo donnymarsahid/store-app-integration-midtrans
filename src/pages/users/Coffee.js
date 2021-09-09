@@ -1,8 +1,8 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import FadeLoader from 'react-spinners/FadeLoader';
 import { getTypeCoffee } from '../../config/api';
 import CardCoffe from '../users/cardsProducts/CardCoffe';
+import loading from '../../assets/img/loading.gif';
 
 const Coffee = () => {
   const { data: typeCoffee, isLoading, error } = useQuery('typeCoffeeCache', getTypeCoffee);
@@ -10,9 +10,7 @@ const Coffee = () => {
   if (isLoading)
     return (
       <div className="custom-status">
-        <div className="custom-status">
-          <FadeLoader color={'#BD0707'} loading={true} size={60} />
-        </div>
+        <img src={loading} alt="load" width="100px" />
       </div>
     );
 

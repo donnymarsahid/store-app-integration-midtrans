@@ -11,7 +11,7 @@ import { getCarts, getUser } from '../../../config/api';
 
 const Navbar = () => {
   const history = useHistory();
-  const [state, dispatch] = useContext(UserContext);
+  const [dispatch] = useContext(UserContext);
 
   const { data: carts } = useQuery('getCartsCache', getCarts);
   const { data: userId } = useQuery('getUserIdCache', getUser);

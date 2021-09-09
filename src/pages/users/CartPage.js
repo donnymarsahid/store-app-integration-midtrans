@@ -5,6 +5,8 @@ import convertRupiah from 'rupiah-format';
 import { Modal, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
+import trash from '../../assets/img/trash.svg';
+import load from '../../assets/img/load.gif';
 
 const CartPage = () => {
   const history = useHistory();
@@ -13,13 +15,18 @@ const CartPage = () => {
   const [confirmDelete, setConfirmDelete] = useState(null);
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState('');
+  const [order, setOrder] = useState(<img src={load} alt="load" width="50px" />);
 
   const [showOrder, setShowOrder] = useState(false);
   const handleCloseOrder = () => {
     history.push('/profile');
-    window.location.reload();
   };
-  const handleShowOrder = () => setShowOrder(true);
+  const handleShowOrder = () => {
+    setShowOrder(true);
+    setTimeout(() => {
+      setOrder('Thank you for ordering in us, please wait to verify you order');
+    }, 2000);
+  };
 
   const { data: carts, refetch } = useQuery('getCartsCache', getCarts);
 
@@ -57,7 +64,7 @@ const CartPage = () => {
           Authorization: 'Bearer ' + localStorage.token,
         },
       };
-      const response = await API().delete('/cart/' + id, config);
+      await API().delete('/cart/' + id, config);
       refetch();
     } catch (error) {
       console.log(error);
@@ -74,7 +81,7 @@ const CartPage = () => {
       deleteById.mutate(idDelete);
       setConfirmDelete(null);
     }
-  }, [confirmDelete]);
+  }, [confirmDelete, deleteById, idDelete]);
   const [fileUpload, setFileUpload] = useState('/images/upload-file.svg');
 
   const array = [];
@@ -101,7 +108,7 @@ const CartPage = () => {
 
     const dataTopping = data.toppings.map((topping) => {
       dataPrice.push(topping.price);
-      return <>{topping.title},</>;
+      return <p className="text-topping">{topping.title},</p>;
     });
 
     const resultPrice = dataPrice.reduce((acc, curr) => acc + curr);
@@ -115,19 +122,28 @@ const CartPage = () => {
           <div className="description">
             <p className="text-capitalize">{data.product.title}</p>
             <div class="topping d-flex flex-row">
-              <p>{data.toppings.length === 0 ? <>Topping not found</> : <>Topping: {dataTopping}</>}</p>
+              {data.toppings.length === 0 ? (
+                <p className="text-topping-nf">Topping not found</p>
+              ) : (
+                <>
+                  <p className="fw-bolder">Topping : </p>
+                  {dataTopping}
+                </>
+              )}
               <p></p>
             </div>
           </div>
         </div>
         <div className="price-remove text-end">
           <p>{convertRupiah.convert(resultPrice)}</p>
-          <i
-            className="fas fa-trash"
+          <img
+            src={trash}
+            alt="trash"
             onClick={() => {
               handlerDelete(data.id);
             }}
-          ></i>
+            className="trash"
+          />
         </div>
       </div>
     );
@@ -139,7 +155,10 @@ const CartPage = () => {
     setForm({ ...form, [e.target.name]: e.target.files[0] });
     if (e.target.type === 'file') {
       let url = URL.createObjectURL(e.target.files[0]);
-      setFileUpload(url);
+      setTimeout(() => {
+        setFileUpload(url);
+      }, 1500);
+      setFileUpload(load);
     }
   };
 
@@ -215,7 +234,7 @@ const CartPage = () => {
                   <div class="col-md-4">
                     <input type="file" name="image" id="upload" className="d-none" onChange={handlerFile} />
                     <label for="upload" className="upload-struck d-flex flex-column align-items-center justify-content-center">
-                      <img src={fileUpload} alt="uploadFile" width="70px" />
+                      <img src={fileUpload} alt="uploadFile" width="55px" />
                       <p>Attache Of Transaction</p>
                     </label>
                   </div>
@@ -255,7 +274,7 @@ const CartPage = () => {
       </Modal>
 
       <Modal show={showOrder} centered onHide={handleCloseOrder}>
-        <Modal.Body>Thank you for ordering in us, please wait verify you order</Modal.Body>
+        <Modal.Body className="d-flex justify-content-center">{order}</Modal.Body>
         <Modal.Footer>
           <Button variant="primary" className="btn-order" onClick={handleCloseOrder}>
             oke

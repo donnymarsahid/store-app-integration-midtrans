@@ -5,7 +5,7 @@ import CardAllCoffee from './cardsProducts/CardAllCoffee';
 import './css/style.css';
 import { useQuery } from 'react-query';
 import { getProducts } from '../../config/api';
-import FadeLoader from 'react-spinners/FadeLoader';
+import loading from '../../assets/img/loading.gif';
 
 const AllMenu = () => {
   const { data: products, isLoading, error } = useQuery('productsCache', getProducts);
@@ -13,9 +13,7 @@ const AllMenu = () => {
   if (isLoading)
     return (
       <div className="custom-status">
-        <div className="custom-status">
-          <FadeLoader color={'#BD0707'} loading={true} size={60} />
-        </div>
+        <img src={loading} alt="load" width="100px" />
       </div>
     );
 

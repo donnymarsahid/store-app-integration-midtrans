@@ -7,13 +7,16 @@ import moment from 'moment';
 import { convert } from 'rupiah-format';
 import { Modal, Button } from 'react-bootstrap';
 import clip from '../../assets/img/clip.svg';
-import { useHistory } from 'react-router';
 import swal from 'sweetalert';
+import loading from '../../assets/img/loading.gif';
+import { Link } from 'react-router-dom';
 
 const Profile = () => {
-  const history = useHistory();
-  const { data: transactionsUser, refetch } = useQuery('transactionsUserCache', getTransactionUser);
-  const { data: userId } = useQuery('getUserIdCache', getUser);
+  const { data: transactionsUserId, refetch, isLoading: loadingTransaction } = useQuery('transactionsUserCache', getTransactionUser);
+  const { data: userId, refetch: refetchUser, isLoading } = useQuery('getUserIdCache', getUser);
+
+  const transactionsUser = transactionsUserId?.slice(0, 3);
+
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -55,10 +58,10 @@ const Profile = () => {
       };
 
       const response = await API().put('/user', config);
+      refetchUser();
 
       if (response.status === 'success') {
         handleClose();
-        window.location.reload();
       }
     } catch (error) {
       console.log(error);
@@ -84,7 +87,7 @@ const Profile = () => {
         dangerMode: true,
       }).then(async (willDelete) => {
         if (willDelete) {
-          const response = await API().put('/transaction/' + id, config);
+          await API().put('/transaction/' + id, config);
           refetch();
           swal('Enjoy the coffee', {
             icon: 'success',
@@ -98,11 +101,18 @@ const Profile = () => {
     }
   });
 
+  if (isLoading || loadingTransaction)
+    return (
+      <div className="custom-status">
+        <img src={loading} alt="load" width="100px" />
+      </div>
+    );
+
   return (
     <>
       <title>WaysBucks | Profile</title>
       <section className="profile mb-5">
-        <div class="container">
+        <div class="container-profile">
           <div class="row">
             <div class="col-md-6 d-flex">
               <div class="title-image">
@@ -140,13 +150,15 @@ const Profile = () => {
                     <div class="list d-flex mb-3">
                       <img src={item.product.image} alt={item.product.image} className="coffee" />
                       <div class="detail-transaction ps-3">
-                        <h6>{item.product.title}</h6>
-                        <p>{moment(item.createdAt).format('LL')}</p>
+                        <h6 className="text-capitalize">{item.product.title}</h6>
+                        <p className="fw-light text-date">{moment(item.createdAt).format('LL')}</p>
                         <div class="topping d-flex">
-                          <p>Topping : </p>
-                          {dataToppings}
+                          <div className="d-flex pt-2 pb-2">
+                            <p className="fw-bold">Topping : </p>
+                            <p className="text-capitalize d-flex">{dataToppings}</p>
+                          </div>
                         </div>
-                        <p>{convert(item.subTotal)}</p>
+                        <p className="fw-light">{convert(item.subTotal)}</p>
                       </div>
                     </div>
                   );
@@ -176,6 +188,9 @@ const Profile = () => {
                   </div>
                 );
               })}
+              <Link to="/all-transaction">
+                <p className="text-center text-uppercase text-decoration-underline">show all transactions</p>
+              </Link>
             </div>
           </div>
         </div>
@@ -190,7 +205,7 @@ const Profile = () => {
         <Modal.Body>
           <form className="d-flex flex-column form-profile">
             <label for="fullname" className="text-profile">
-              Fullname
+              FullName
             </label>
             <input type="text" name="fullname" id="fullname" Value={userId?.fullname} onChange={handlerInput} required />
             <input type="file" name="image" id="image" className="d-none" onChange={handlerFile} required />
