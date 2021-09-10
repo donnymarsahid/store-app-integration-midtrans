@@ -24,7 +24,7 @@ const IncomeTransaction = () => {
 
       swal({
         title: 'Transaction already entered?',
-        icon: 'success',
+        icon: 'warning',
         buttons: true,
         dangerMode: true,
       }).then(async (willDelete) => {

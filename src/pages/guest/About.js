@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Login from '../access/Login';
 import Register from '../access/Register';
 import assetOne from '../../assets/img/about-1.png';
@@ -7,7 +7,7 @@ import assetTwo from '../../assets/img/about-2.png';
 const About = () => {
   return (
     <>
-      <title>WaysBucks | Store</title>
+      <title>WaysBucks | About</title>
       <section className="about-store-page">
         <div className="jumbotron jumbotron-fluid">
           <div className="container">

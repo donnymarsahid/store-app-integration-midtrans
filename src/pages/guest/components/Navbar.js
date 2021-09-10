@@ -13,20 +13,20 @@ const Navbar = () => {
               <img src={logoWaysBucks} alt="logo-waysbucks" />
             </Link>
           </div>
-          <div className="navbar-link">
+          <div className="navbar-link guest">
             <ul className="d-flex m-0 p-0 ps-3 justify-content-lg-around">
               <Link to="/coffee" className="text-decoration-none ">
-                <li className="fw-bolder">Coffee</li>
+                <li className="fw-bolder link-contact">Contact</li>
               </Link>
-              <div className="link-router text-decoration-none">
-                <Link to="/all-menu" className="link-router text-decoration-none">
-                  <li className="menu">
+              <div className="text-decoration-none">
+                <Link to="/all-menu" className="link-router text-decoration-none ">
+                  <li className="menu link-allmenu">
                     <p className="text-uppercase m-0 fw-bolder">All Menu</p>
                   </li>
                 </Link>
               </div>
-              <Link to="/about" className="link-router text-decoration-none">
-                <li className="store">
+              <Link to="/about" className="text-decoration-none ">
+                <li className="store link-about">
                   <p className="text-uppercase m-0 fw-bolder">About</p>
                 </li>
               </Link>

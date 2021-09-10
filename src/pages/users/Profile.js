@@ -5,19 +5,18 @@ import { useMutation, useQuery } from 'react-query';
 import { API, getTransactionUser, getUser } from '../../config/api';
 import moment from 'moment';
 import { convert } from 'rupiah-format';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import clip from '../../assets/img/clip.svg';
 import swal from 'sweetalert';
 import loading from '../../assets/img/loading.gif';
 import { Link } from 'react-router-dom';
+import load from '../../assets/img/load.gif';
 
 const Profile = () => {
   const { data: transactionsUserId, refetch, isLoading: loadingTransaction } = useQuery('transactionsUserCache', getTransactionUser);
   const { data: userId, refetch: refetchUser, isLoading } = useQuery('getUserIdCache', getUser);
 
   const transactionsUser = transactionsUserId?.slice(0, 3);
-
-  console.log(transactionsUser);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -30,6 +29,7 @@ const Profile = () => {
 
   const { fullname, image } = form;
 
+  const [imageChange, setImageChange] = useState(true);
   const [namePath, setNamePath] = useState('upload image');
 
   const handlerInput = (e) => {
@@ -47,6 +47,8 @@ const Profile = () => {
       e.preventDefault();
       console.log(form);
 
+      setImageChange(false);
+
       const formData = new FormData();
       formData.set('image', image);
       formData.set('fullname', fullname);
@@ -60,7 +62,12 @@ const Profile = () => {
       };
 
       const response = await API().put('/user', config);
-      refetchUser();
+      if (response) {
+        setTimeout(() => {
+          setImageChange(true);
+        }, 2000);
+        refetchUser();
+      }
 
       if (response.status === 'success') {
         handleClose();
@@ -84,7 +91,7 @@ const Profile = () => {
 
       swal({
         title: 'Have you received the coffee?',
-        icon: 'success',
+        icon: 'warning',
         buttons: true,
         dangerMode: true,
       }).then(async (willDelete) => {
@@ -123,9 +130,7 @@ const Profile = () => {
                 <div class="detail d-flex ">
                   <div class="profile-image d-flex flex-column">
                     <input type="file" name="image" id="upload" className="d-none" />
-                    <label for="upload">
-                      <img src={userId?.image} alt="profile" className="profile" />
-                    </label>
+                    <label for="upload">{imageChange ? <img src={userId?.image} alt="profile" className="profile" /> : <img src={load} alt="profile" className="profile" width="200px" />}</label>
                     <button className="btn-change-profile mt-3" onClick={handleShow}>
                       <i class="fas fa-cog pe-1"></i>setting profile
                     </button>
@@ -199,18 +204,28 @@ const Profile = () => {
         </div>
       </section>
 
-      <Modal show={show} onHide={handleClose} className="modal-profile">
+      <Modal show={show} centered onHide={handleClose} className="modal-profile">
         <Modal.Header>
-          <Modal.Title className="update-profile">
-            <i class="fas fa-cog pe-1"></i>Profile
-          </Modal.Title>
+          <Modal.Title className="update-profile">Setting Profile</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form className="d-flex flex-column form-profile">
+          <form className="d-flex flex-column form-profile ps-2 pe-2">
             <label for="fullname" className="text-profile">
               FullName
             </label>
             <input type="text" name="fullname" id="fullname" Value={userId?.fullname} onChange={handlerInput} required />
+            <label for="phone" className="text-profile">
+              Phone
+            </label>
+            <input type="text" name="phone" id="phone" Value="083872239021" />
+            <label for="posCode" className="text-profile">
+              PosCode
+            </label>
+            <input type="text" name="posCode" />
+            <label for="address" className="text-profile">
+              Address
+            </label>
+            <textarea name="address" id="address" cols="30" rows="10"></textarea>
             <input type="file" name="image" id="image" className="d-none" onChange={handlerFile} required />
             <p className="m-0 mt-2 text-profile">Image</p>
             <label for="image" className="input-profile d-flex justify-content-between mb-3">
@@ -220,12 +235,12 @@ const Profile = () => {
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <button className="btn-close-profile" onClick={handleClose}>
             Close
-          </Button>
-          <Button variant="danger" className="btn-danger-profile" onClick={(e) => handlerSubmit.mutate(e)}>
+          </button>
+          <button className="btn-danger-profile" onClick={(e) => handlerSubmit.mutate(e)}>
             Save Changes
-          </Button>
+          </button>
         </Modal.Footer>
       </Modal>
     </>

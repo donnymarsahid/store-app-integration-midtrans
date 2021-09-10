@@ -1,37 +1,28 @@
 import React from 'react';
-import { useQuery } from 'react-query';
-import { getTypeCoffee } from '../../config/api';
 import Login from '../access/Login';
 import Register from '../access/Register';
 import CardCoffe from './cardsProducts/CardCoffe';
-import loading from '../../assets/img/loading.gif';
 
 const Coffee = () => {
-  const { data: typeCoffee, isLoading, error } = useQuery('typeCoffeeCache', getTypeCoffee);
-
-  if (isLoading) {
-    return (
-      <div className="custom-status">
-        <img src={loading} alt="load" width="100px" />
-      </div>
-    );
-  }
-
-  if (error) return <div className="custom-status">Error fetching data</div>;
-
   return (
     <>
       <title>WaysBucks | Coffee Variant</title>
-      <section className="varian coffee">
-        <div className="container">
-          <h3>Coffee Variant</h3>
-          <div className="row">
-            {typeCoffee.map((data) => (
-              <CardCoffe coffee={data} key={data.id} />
-            ))}
-          </div>
+      <div class="page-contact d-flex align-items-center justify-content-center flex-column">
+        <h3>Any Question ?</h3>
+        <p>Contact us via</p>
+        <div class="email d-flex flex-column border-lg">
+          <i class="fas fa-envelope text-center"></i>
+          <a href="mailto:donnymrshd.94@gmail.com" class="ms-2">
+            waysbucks.coffee@gmail.com
+          </a>
         </div>
-      </section>
+        <div class="telp d-flex flex-column border-lg">
+          <i class="fab fa-whatsapp text-center"></i>
+          <a href="https://api.whatsapp.com/send?phone=6283872239021&text=Hallo%20Donny" class="ms-2" target="blank">
+            Click Here!
+          </a>
+        </div>
+      </div>
       <Login />
       <Register />
     </>

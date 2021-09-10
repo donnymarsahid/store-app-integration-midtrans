@@ -692,20 +692,20 @@ section.profile .transaction.all-transaction-page {
 section.profile .transaction.all-transaction-page .col-md-6 {
   width: 48%;
 }
-
 .modal-profile input {
   border: 2px solid var(--primaryColor);
   background-color: #e0c8c840;
-  border-radius: 8px;
-  width: 70%;
+  border-radius: 5px;
+  width: 100%;
   padding: 6px 12px;
   outline: none;
+  font-size: 15px;
+  font-weight: 500;
 }
 .modal-profile label.input-profile {
   border: 2px solid var(--primaryColor);
   background-color: #e0c8c840;
   border-radius: 8px;
-  width: 70%;
   padding: 6px 12px;
   cursor: pointer;
 }
@@ -724,12 +724,40 @@ section.profile .transaction.all-transaction-page .col-md-6 {
   font-size: 22px;
 }
 .modal-profile .btn-danger-profile {
-  font-weight: 600;
-  color: white;
   background-color: var(--primaryColor);
+  color: white;
+  font-weight: 500;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.modal-profile .btn-close-profile {
+  background-color: #974a4a;
+  color: white;
+  border-radius: 5px;
+  font-weight: 500;
+  border: none;
+  padding: 5px 10px;
+}
+.modal-profile .btn-close-profile:hover {
+  background-color: #a85656;
+}
+.modal-profile #address {
+  height: 60px;
+  resize: none;
+  border: 2px solid var(--primaryColor);
+  background-color: #e0c8c840;
+  border-radius: 5px;
+  padding-left: 10px;
+  outline: none;
 }
 .modal-profile .btn-danger-profile:hover {
   background-color: #d14545;
+}
+.modal-profile .form-profile label {
+  font-weight: 400 !important;
+  font-size: 16px !important;
+  margin-top: 8px;
 }
 
 section.profile button.btn-profile.on {
