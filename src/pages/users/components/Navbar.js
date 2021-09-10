@@ -11,9 +11,6 @@ import { useQuery } from 'react-query';
 import { getCarts, getUser } from '../../../config/api';
 
 const Navbar = () => {
-  function handlerDropDown() {
-    document.querySelector('.dropdown-custom').classList.toggle('show');
-  }
   const history = useHistory();
   const [state, dispatch] = useContext(UserContext);
 

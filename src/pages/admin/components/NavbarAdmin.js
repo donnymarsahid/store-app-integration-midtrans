@@ -8,9 +8,6 @@ import { UserContext } from '../../../context/userContext';
 import user from '../../../assets/img/user.svg';
 
 const NavbarAdmin = () => {
-  function handlerDropDown() {
-    document.querySelector('.dropdown-custom').classList.toggle('show');
-  }
   const [state, dispatch] = useContext(UserContext);
   const history = useHistory();
 
@@ -55,8 +52,8 @@ const NavbarAdmin = () => {
                         <p className="m-0">Admin</p>
                       </li>
                     </Link>
-                    <li className="dropdown-logout d-flex">
-                      <img src={logout} alt="profile" onClick={handlerLogout} />
+                    <li className="dropdown-logout d-flex" onClick={handlerLogout}>
+                      <img src={logout} alt="profile" />
                       <p className="m-0">Logout</p>
                     </li>
                   </ul>
