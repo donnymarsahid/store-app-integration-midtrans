@@ -78,7 +78,7 @@ export const getTransactionUser = async () => {
     },
   };
   const response = await API().get('/transaction', config);
-  return response.data.transactions;
+  return response.data;
 };
 
 // Transactions

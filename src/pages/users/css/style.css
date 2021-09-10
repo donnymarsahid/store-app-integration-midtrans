@@ -162,68 +162,51 @@ nav .access .dropdown button {
 nav .profile {
   position: relative;
 }
-nav .dropdown-custom {
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.315);
-  position: absolute;
-  top: 65px;
-  right: -25px;
-  width: 200px;
-  border-radius: 7px;
+
+nav .dropdown-menu {
   background-color: white;
-  display: none;
+  margin-top: 100px;
+  position: absolute !important;
+  top: 28px !important;
+  left: 12px !important;
+  border: none;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.301);
+  width: 200px;
 }
-nav .dropdown-custom.show {
-  display: block;
-}
-nav .dropdown-custom ul li {
-  list-style: none;
-}
-nav .dropdown-custom ul {
-  margin: 0;
-  padding: 0;
-}
-nav .dropdown-custom::before {
+nav .dropdown-menu::before {
   content: url('../../../assets/img/polygon.png');
-  display: block;
   position: absolute;
-  top: -33px;
-  right: -35px;
-  z-index: 1;
-  width: 100px;
+  top: -35px;
+  right: 5px;
 }
-nav .dropdown-custom .dropdown-user img {
-  width: 30px;
+nav .dropdown-menu .dropdown-profile {
+  padding: 15px 20px;
 }
-nav .dropdown-custom .dropdown-logout img {
-  padding-left: 5px;
-  width: 35px;
+nav .dropdown-menu .dropdown-profile img {
+  width: 28px;
 }
-nav .dropdown-custom .dropdown-user p,
-nav .dropdown-custom .dropdown-logout p {
-  color: var(--primaryColor);
-  font-weight: 600;
-  font-size: 17px;
-  letter-spacing: 1px;
+nav .dropdown-menu .dropdown-logout img {
+  width: 31px;
 }
-nav .dropdown-custom .dropdown-user p {
-  padding-left: 13px;
-}
-nav .dropdown-custom .dropdown-logout p {
-  padding-left: 10px;
-}
-nav .dropdown-custom .dropdown-user {
-  padding: 20px 20px 20px 20px;
-}
-nav .dropdown-custom .dropdown-logout {
-  padding: 20px 20px 20px 20px;
+nav .dropdown-menu .dropdown-logout {
+  padding: 15px 20px;
   cursor: pointer;
 }
-nav .dropdown-custom span {
-  display: block;
-  width: 100%;
-  height: 3px;
-  background-color: #a8a8a8;
+nav .dropdown-menu .dropdown-profile p {
+  padding-left: 10px;
+  letter-spacing: 1px;
+  font-size: 17px;
 }
+nav .dropdown-menu .dropdown-logout p {
+  padding-left: 8px;
+  font-size: 17px;
+
+  letter-spacing: 1px;
+}
+nav .dropdown-menu .dropdown-profile {
+  border-bottom: 3px solid #a8a8a8;
+}
+
 /* Navbar End */
 
 /* Header Start */

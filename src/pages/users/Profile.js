@@ -17,6 +17,8 @@ const Profile = () => {
 
   const transactionsUser = transactionsUserId?.slice(0, 3);
 
+  console.log(transactionsUser);
+
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);

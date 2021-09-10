@@ -102,61 +102,54 @@ const IncomeTransaction = () => {
               </tr>
             </thead>
             <tbody>
-              {transactions?.map((data) => {
-                const dataTransaction = data.transactions.map((transaction) => {
-                  array.push(transaction);
-
-                  const indexTransaction = array.map((data, index) => index + 1);
-
-                  return (
-                    <tr>
-                      <th scope="row">{indexTransaction.length}</th>
-                      <td>{transaction.name}</td>
-                      <td>{transaction.address}</td>
-                      <td>{transaction.posCode}</td>
-                      <td className="column-price">{convert(transaction.total)}</td>
-                      <td className={`income ${transaction.status}`}>{transaction.status}</td>
-                      <td className="text-center">
-                        {transaction.status === 'waiting approve' && (
-                          <>
-                            <button
-                              className="me-2 btn-cancel"
-                              onClick={() => {
-                                handlerCancel.mutate(transaction.id);
-                              }}
-                            >
-                              cancel
-                            </button>
-                            <button
-                              className="btn-approve"
-                              onClick={() => {
-                                handlerOnTheWay.mutate(transaction.id);
-                              }}
-                            >
-                              approve
-                            </button>
-                          </>
-                        )}
-                        {transaction.status === 'on the way' && (
-                          <>
-                            <img src="/images/actions/success.svg" alt="icon-success" className="img-action" />
-                          </>
-                        )}
-                        {transaction.status === 'success' && (
-                          <>
-                            <img src="/images/actions/success.svg" alt="icon-success" className="img-action" />
-                          </>
-                        )}
-                        {transaction.status === 'cancel' && (
-                          <>
-                            <img src="/images/actions/cancel.svg" alt="icon-cancel" className="img-action" />
-                          </>
-                        )}
-                      </td>
-                    </tr>
-                  );
-                });
-                return <>{dataTransaction}</>;
+              {transactions?.map((data, index) => {
+                return (
+                  <tr>
+                    <th scope="row">{index + 1}</th>
+                    <td>{data.name}</td>
+                    <td>{data.address}</td>
+                    <td>{data.posCode}</td>
+                    <td className="column-price">{convert(data.total)}</td>
+                    <td className={`income ${data.status}`}>{data.status}</td>
+                    <td className="text-center">
+                      {data.status === 'waiting approve' && (
+                        <>
+                          <button
+                            className="me-2 btn-cancel"
+                            onClick={() => {
+                              handlerCancel.mutate(data.id);
+                            }}
+                          >
+                            cancel
+                          </button>
+                          <button
+                            className="btn-approve"
+                            onClick={() => {
+                              handlerOnTheWay.mutate(data.id);
+                            }}
+                          >
+                            approve
+                          </button>
+                        </>
+                      )}
+                      {data.status === 'on the way' && (
+                        <>
+                          <img src="/images/actions/success.svg" alt="icon-success" className="img-action" />
+                        </>
+                      )}
+                      {data.status === 'success' && (
+                        <>
+                          <img src="/images/actions/success.svg" alt="icon-success" className="img-action" />
+                        </>
+                      )}
+                      {data.status === 'cancel' && (
+                        <>
+                          <img src="/images/actions/cancel.svg" alt="icon-cancel" className="img-action" />
+                        </>
+                      )}
+                    </td>
+                  </tr>
+                );
               })}
             </tbody>
           </table>

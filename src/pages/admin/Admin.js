@@ -30,19 +30,6 @@ const Admin = (props) => {
     );
   }
 
-  const array = [];
-
-  const data = transactions?.map((data) => {
-    const dataTransaction = data.transactions.map((transaction) => {
-      array.push(transaction);
-
-      const dataArray = array.length;
-
-      return dataArray;
-    });
-    return dataTransaction;
-  });
-
   return (
     <>
       <title>WaysBucks | Admin</title>
@@ -54,7 +41,7 @@ const Admin = (props) => {
                 <div className="title">
                   <p class="text-uppercase m-0">Income Transaction</p>
 
-                  <p>Total : 4 {data[0][data.length - 1]}</p>
+                  <p>Total : {transactions.length}</p>
                 </div>
                 <div class="check">
                   <Link to="/admin/income-transaction" class="link-router">

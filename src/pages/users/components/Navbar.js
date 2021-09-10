@@ -47,7 +47,7 @@ const Navbar = () => {
               <img src={logoWaysBucks} alt="logo-waysbucks" />
             </Link>
           </div>
-          <div className="navbar-link">
+          <div className="navbar-link pe-2">
             <ul className="d-flex m-0 p-0 ps-3 justify-content-lg-around">
               <Link to="/coffee" className="text-decoration-none ">
                 <li className="fw-bolder">Coffee</li>
@@ -69,22 +69,21 @@ const Navbar = () => {
           <div className="access d-flex">
             <div className="shop d-flex align-items-center">
               <Link to="/cart-page">
-                <img src={cartIcon} alt="cart" className="me-5" width="30px" />
+                <img src={cartIcon} alt="cart" className="me-4 image-cart" width="30px" />
                 <span className="d-flex justify-content-center align-items-center">{carts?.length}</span>
               </Link>
             </div>
             <div className="profile">
-              <img src={userId?.image} alt="profile" width="30px" className="img-profile" onClick={handlerDropDown} />
-              <div class="dropdown-custom">
-                <ul>
+              <div class="dropdown">
+                <img src={userId?.image} alt="profile" width="30px" className="img-profile" data-bs-toggle="dropdown" />
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                   <Link to="/profile" className="text-decoration-none">
-                    <li className="d-flex dropdown-user">
+                    <li className="dropdown-profile d-flex">
                       <img src={user} alt="profile" />
                       <p className="m-0">Profile</p>
                     </li>
                   </Link>
-                  <span></span>
-                  <li className="d-flex dropdown-logout" onClick={handlerLogout}>
+                  <li className="dropdown-logout d-flex" onClick={handlerLogout}>
                     <img src={logout} alt="profile" />
                     <p className="m-0">Logout</p>
                   </li>

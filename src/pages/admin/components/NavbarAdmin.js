@@ -46,18 +46,17 @@ const NavbarAdmin = () => {
             <div className="profile">
               <div className="btn-group dropstart">
                 <p className="m-0 pe-2 text-nav-admin">Hai Admin!</p>
-                <img src="/logo192.png" alt="profile" width="30px" className="img-profile" onClick={handlerDropDown} />
-                <div class="dropdown-custom">
-                  <ul>
+                <div class="dropdown">
+                  <img src="logo192.png" alt="profile" width="30px" className="img-profile" data-bs-toggle="dropdown" />
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <Link to="/profile" className="text-decoration-none">
-                      <li className="d-flex dropdown-user">
+                      <li className="dropdown-profile d-flex">
                         <img src={user} alt="profile" />
                         <p className="m-0">Admin</p>
                       </li>
                     </Link>
-                    <span></span>
-                    <li className="d-flex dropdown-logout" onClick={handlerLogout}>
-                      <img src={logout} alt="profile" />
+                    <li className="dropdown-logout d-flex">
+                      <img src={logout} alt="profile" onClick={handlerLogout} />
                       <p className="m-0">Logout</p>
                     </li>
                   </ul>
