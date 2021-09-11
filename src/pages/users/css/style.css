@@ -774,36 +774,35 @@ section.profile .transaction.all-transaction-page .col-md-6 {
 }
 
 section.profile button.btn-profile.on {
-  background-color: #00d1ff;
-  border-radius: 5px;
+  background: #00d0ff23;
+  border-radius: 3px;
   border: none;
   font-size: 14px;
   font-weight: 600;
   padding: 5px 8px;
-  color: white;
+  color: #00c1ecec;
 }
-section.profile button.btn-profile.success,
 section.profile button.btn-profile.waiting {
-  background-color: #0acf83;
-  border-radius: 5px;
+  background-color: #ff99002d;
+  border-radius: 3px;
   border: none;
   font-size: 12px;
   font-weight: 600;
   padding: 5px 8px;
-  color: white;
+  color: #ff9900;
 }
 section.profile button.btn-profile.success {
-  background-color: #0acf83;
-  border-radius: 5px;
+  background-color: #78a85a2c;
+  border-radius: 3px;
   border: none;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   padding: 5px 8px;
-  color: white;
+  color: #78a85a;
 }
 section.profile button.btn-profile.cancel {
   background-color: #ff0742;
-  border-radius: 5px;
+  border-radius: 3px;
   border: none;
   font-size: 14px;
   font-weight: 600;

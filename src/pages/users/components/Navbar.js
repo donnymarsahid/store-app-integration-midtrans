@@ -46,8 +46,8 @@ const Navbar = () => {
           </div>
           <div className="navbar-link pe-2">
             <ul className="d-flex m-0 p-0 ps-3 justify-content-lg-around">
-              <Link to="/coffee" className="text-decoration-none ">
-                <li className="fw-bolder">Coffee</li>
+              <Link to="/contact" className="text-decoration-none ">
+                <li className="fw-bolder">Contact</li>
               </Link>
               <div className="link-router text-decoration-none">
                 <Link to="/all-menu" className="link-router text-decoration-none">

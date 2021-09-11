@@ -18,8 +18,6 @@ import IncomeTransaction from './pages/admin/IncomeTransaction';
 import Admin from './pages/admin/Admin';
 import NavbarAdmin from './pages/admin/components/NavbarAdmin';
 import NoMatch from './404/NoMatch';
-import CoffeeUsers from './pages/users/Coffee';
-import Coffee from './pages/guest/Coffee';
 import { UserContext } from './context/userContext';
 import { API } from './config/api';
 import TableProduct from './pages/admin/components/tableData/TableProduct';
@@ -29,12 +27,11 @@ import UpdateProduct from './pages/admin/components/updateData/UpdateProduct';
 import UpdateTopping from './pages/admin/components/updateData/UpdateTopping';
 import About from './pages/guest/About';
 import Transactions from './pages/users/Transactions';
+import ContactUsers from './pages/users/Contact';
+import Contact from './pages/users/Contact';
 
 function App() {
   const [state, dispatch] = useContext(UserContext);
-
-  console.log(state.isLogin);
-  console.log(state.user);
 
   const checkAuth = async () => {
     try {
@@ -77,7 +74,7 @@ function App() {
           <Switch>
             <Route path="/" exact component={Users} />
             <Route path="/all-menu" component={AllMenuUsers} />
-            <Route path="/coffee" component={CoffeeUsers} />
+            <Route path="/contact" component={ContactUsers} />
             <Route path="/detail-page/:id" component={DetailPage} />
             <Route path="/cart-page" component={CartPage} />
             <Route path="/profile" component={Profile} />
@@ -121,7 +118,7 @@ function App() {
       <Switch>
         <Route path="/" exact component={Guest} />
         <Route path="/all-menu" component={AllMenu} />
-        <Route path="/coffee" component={Coffee} />
+        <Route path="/contact" component={Contact} />
         <Route path="/about" component={About} />
         <Route path="/*" component={NoMatch} />
       </Switch>

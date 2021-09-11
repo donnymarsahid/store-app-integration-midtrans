@@ -144,9 +144,9 @@ const Profile = () => {
                   <div class="text ps-4">
                     <p>Full Name : {userId?.fullname}</p>
                     <p>Email : {userId?.email}</p>
-                    <p>Phone : {userId?.phone}</p>
-                    <p>PosCode : {userId?.posCode}</p>
-                    <p>Address : {userId?.address}</p>
+                    <p>Phone : {userId?.phone === null ? <>-</> : userId.phone}</p>
+                    <p>PosCode : {userId?.posCode === null ? <>-</> : userId.posCode}</p>
+                    <p>Address : {userId?.address === null ? <>-</> : userId.address}</p>
                   </div>
                 </div>
               </div>
@@ -234,7 +234,7 @@ const Profile = () => {
             <label for="address" className="text-profile">
               Address
             </label>
-            <textarea name="address" id="address" Value={userId?.address} cols="30" rows="10" onChange={handlerInput}></textarea>
+            <textarea name="address" id="address" defaultValue={userId?.address} cols="30" rows="10" onChange={handlerInput}></textarea>
             <input type="file" name="image" id="image" className="d-none" onChange={handlerFile} required />
             <p className="m-0 mt-2 text-profile">Image</p>
             <label for="image" className="input-profile d-flex justify-content-between mb-3">

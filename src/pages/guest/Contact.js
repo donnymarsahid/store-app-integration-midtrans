@@ -1,12 +1,11 @@
 import React from 'react';
 import Login from '../access/Login';
 import Register from '../access/Register';
-import CardCoffe from './cardsProducts/CardCoffe';
 
-const Coffee = () => {
+const Contact = () => {
   return (
     <>
-      <title>WaysBucks | Coffee Variant</title>
+      <title>WaysBucks | Contact</title>
       <div class="page-contact d-flex align-items-center justify-content-center flex-column">
         <h3>Any Question ?</h3>
         <p>Contact us via</p>
@@ -29,4 +28,4 @@ const Coffee = () => {
   );
 };
 
-export default Coffee;
+export default Contact;
