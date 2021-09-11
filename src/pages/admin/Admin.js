@@ -13,6 +13,7 @@ import { UserContext } from '../../context/userContext';
 import { getProducts, getToppings, getTransactions, getUsers } from '../../config/api';
 import { useQuery } from 'react-query';
 import loading from '../../assets/img/loading.gif';
+import ChartOrders from './components/ChartOrders';
 
 const Admin = (props) => {
   const [state, dispatch] = useContext(UserContext);
@@ -40,7 +41,6 @@ const Admin = (props) => {
               <div class="d-flex flex-column justify-content-between info">
                 <div className="title">
                   <p class="text-uppercase m-0">Income Transaction</p>
-
                   <p>Total : {transactions.length}</p>
                 </div>
                 <div class="check">
@@ -112,7 +112,7 @@ const Admin = (props) => {
           <div class="diagram-users">
             <div class="row diagram-users d-flex justify-content-between mt-5">
               <div class="col-md-8 diagram">
-                <img src={diagram} alt="charts" class="img-fluid" />
+                <ChartOrders />
               </div>
               <div class="col-md-4 box box-users d-flex justify-content-between">
                 <div class="d-flex flex-column justify-content-between info">

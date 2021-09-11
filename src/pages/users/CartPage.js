@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
-import { API, getCarts } from '../../config/api';
+import { API, getCarts, getUser } from '../../config/api';
 import convertRupiah from 'rupiah-format';
 import { Modal, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import trash from '../../assets/img/trash.svg';
 import load from '../../assets/img/load.gif';
+import loading from '../../assets/img/loading.gif';
 
 const CartPage = () => {
   const history = useHistory();
+
+  const { data: userId, isLoading } = useQuery('getUserIdCache', getUser);
 
   const [idDelete, setIdDelete] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(null);
@@ -32,11 +35,11 @@ const CartPage = () => {
   const { data: carts, refetch } = useQuery('getCartsCache', getCarts);
 
   const [form, setForm] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    posCode: '',
-    address: '',
+    name: userId?.fullname,
+    email: userId?.email,
+    phone: userId?.phone,
+    posCode: userId?.posCode,
+    address: userId?.address,
     image: '',
   });
 
@@ -87,6 +90,14 @@ const CartPage = () => {
 
   const array = [];
 
+  if (isLoading) {
+    return (
+      <div className="custom-status">
+        <img src={loading} alt="load" width="100px" />
+      </div>
+    );
+  }
+
   if (carts?.length === 0) {
     return (
       <>
@@ -124,7 +135,7 @@ const CartPage = () => {
             <p className="text-capitalize">{data.product.title}</p>
             <div class="topping d-flex flex-row">
               {data.toppings.length === 0 ? (
-                <p className="text-topping-nf">Topping not found</p>
+                <p className="text-topping-nf">No Topping</p>
               ) : (
                 <>
                   <p className="fw-bolder">Topping : </p>
@@ -163,6 +174,31 @@ const CartPage = () => {
     }
   };
 
+  if (name === undefined) {
+    setForm({
+      name,
+    });
+  }
+  if (email === undefined) {
+    setForm({
+      email,
+    });
+  }
+  if (phone === undefined) {
+    setForm({
+      phone,
+    });
+  }
+  if (posCode === undefined) {
+    setForm({
+      posCode,
+    });
+  }
+  if (address === undefined) {
+    setForm({
+      address,
+    });
+  }
   const handlerSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -191,8 +227,6 @@ const CartPage = () => {
       };
 
       const response = await API().post('/transaction', config);
-
-      console.log(response);
 
       if (response.status === 'success') {
         handleShowOrder();
@@ -247,11 +281,11 @@ const CartPage = () => {
                     {message}
                   </div>
                 )}
-                <input type="text" name="name" id="name" placeHolder="Name" className="mb-4" required onChange={handlerInput} autoComplete="off" />
-                <input type="email" name="email" id="email" placeHolder="Email" className="mb-4" required onChange={handlerInput} autoComplete="off" />
-                <input type="number" name="phone" id="phone" placeHolder="Phone" className="mb-4" required onChange={handlerInput} />
-                <input type="number" name="posCode" id="postcode" placeHolder="Pos Code" className="mb-4" required onChange={handlerInput} />
-                <textarea name="address" id="address" cols="30" rows="10" placeHolder="Address" onChange={handlerInput}></textarea>
+                <input type="text" name="name" id="name" placeHolder="Name" defaultValue={userId.fullname} className="mb-4" required onChange={handlerInput} autoComplete="off" />
+                <input type="email" name="email" id="email" placeHolder="Email" defaultValue={userId.email} className="mb-4" required onChange={handlerInput} autoComplete="off" />
+                <input type="number" name="phone" id="phone" placeHolder="Phone" defaultValue={userId.phone} className="mb-4" required onChange={handlerInput} />
+                <input type="number" name="posCode" id="postcode" placeHolder="Pos Code" defaultValue={userId.posCode} className="mb-4" required onChange={handlerInput} />
+                <textarea name="address" id="address" cols="30" rows="10" placeHolder="Address" defaultValue={userId.address} onChange={handlerInput}></textarea>
                 <button type="submit" className="btn-pay">
                   Pay
                 </button>
@@ -274,12 +308,12 @@ const CartPage = () => {
         </Modal.Footer>
       </Modal>
 
-      <Modal show={showOrder} centered onHide={handleCloseOrder}>
+      <Modal show={showOrder} centered onHide={handleCloseOrder} className="modal-order-success">
         <Modal.Body className="d-flex justify-content-center">{order}</Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" className="btn-order" onClick={handleCloseOrder}>
+          <button className="btn-order" onClick={handleCloseOrder}>
             oke
-          </Button>
+          </button>
         </Modal.Footer>
       </Modal>
     </>

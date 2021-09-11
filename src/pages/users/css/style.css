@@ -618,6 +618,17 @@ section.cart-page p.text-topping-nf {
 section.cart-page p.text-topping {
   font-weight: 500 !important;
 }
+.modal-order-success .btn-order {
+  background-color: var(--primaryColor);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: 600;
+  padding: 5px 10px;
+}
+.modal-order-success .btn-order:hover {
+  background-color: #f70000;
+}
 
 /* Cart Page End */
 
@@ -631,6 +642,8 @@ section.profile .container-profile {
 }
 section.profile .col-md-6 img.profile {
   border-radius: 8px;
+  width: 225px;
+  height: 225px;
 }
 section.profile .col-md-6 h3,
 section.profile .col-md-6 h6 {

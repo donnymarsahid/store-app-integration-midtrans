@@ -25,9 +25,12 @@ const Profile = () => {
   const [form, setForm] = useState({
     fullname: '',
     image: '',
+    phone: '',
+    posCode: '',
+    address: '',
   });
 
-  const { fullname, image } = form;
+  const { fullname, image, phone, posCode, address } = form;
 
   const [imageChange, setImageChange] = useState(true);
   const [namePath, setNamePath] = useState('upload image');
@@ -52,6 +55,9 @@ const Profile = () => {
       const formData = new FormData();
       formData.set('image', image);
       formData.set('fullname', fullname);
+      formData.set('phone', phone);
+      formData.set('posCode', posCode);
+      formData.set('address', address);
 
       const config = {
         method: 'PUT',
@@ -130,7 +136,7 @@ const Profile = () => {
                 <div class="detail d-flex ">
                   <div class="profile-image d-flex flex-column">
                     <input type="file" name="image" id="upload" className="d-none" />
-                    <label for="upload">{imageChange ? <img src={userId?.image} alt="profile" className="profile" /> : <img src={load} alt="profile" className="profile" width="200px" />}</label>
+                    <label for="upload">{imageChange ? <img src={userId?.image} alt="profile" className="profile" /> : <img src={load} alt="profile" width="200px" />}</label>
                     <button className="btn-change-profile mt-3" onClick={handleShow}>
                       <i class="fas fa-cog pe-1"></i>setting profile
                     </button>
@@ -138,6 +144,9 @@ const Profile = () => {
                   <div class="text ps-4">
                     <p>Full Name : {userId?.fullname}</p>
                     <p>Email : {userId?.email}</p>
+                    <p>Phone : {userId?.phone}</p>
+                    <p>PosCode : {userId?.posCode}</p>
+                    <p>Address : {userId?.address}</p>
                   </div>
                 </div>
               </div>
@@ -217,15 +226,15 @@ const Profile = () => {
             <label for="phone" className="text-profile">
               Phone
             </label>
-            <input type="text" name="phone" id="phone" Value="083872239021" />
+            <input type="text" name="phone" id="phone" Value={userId?.phone} onChange={handlerInput} />
             <label for="posCode" className="text-profile">
               PosCode
             </label>
-            <input type="text" name="posCode" />
+            <input type="text" name="posCode" onChange={handlerInput} Value={userId?.posCode} />
             <label for="address" className="text-profile">
               Address
             </label>
-            <textarea name="address" id="address" cols="30" rows="10"></textarea>
+            <textarea name="address" id="address" Value={userId?.address} cols="30" rows="10" onChange={handlerInput}></textarea>
             <input type="file" name="image" id="image" className="d-none" onChange={handlerFile} required />
             <p className="m-0 mt-2 text-profile">Image</p>
             <label for="image" className="input-profile d-flex justify-content-between mb-3">

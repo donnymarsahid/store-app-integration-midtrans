@@ -102,6 +102,8 @@ const AddProduct = () => {
 
   return (
     <>
+      <title>WaysBucks | Add Product</title>
+
       <section className="add-product">
         <div class="container">
           <div class="row">
