@@ -11,7 +11,7 @@ const Contact = () => {
         <p>Contact us via</p>
         <div class="email d-flex flex-column border-lg">
           <i class="fas fa-envelope text-center"></i>
-          <a href="mailto:donnymrshd.94@gmail.com" class="ms-2">
+          <a href="mailto:waysbucks.coffee@gmail.com" class="ms-2">
             waysbucks.coffee@gmail.com
           </a>
         </div>
