@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { API, getCarts, getUser } from '../../config/api';
 import convertRupiah from 'rupiah-format';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import trash from '../../assets/img/trash.svg';
@@ -299,12 +299,12 @@ const CartPage = () => {
           <h5>Are You Sure Delete Cart?</h5>
         </Modal.Body>
         <Modal.Footer className="d-flex justify-content-center">
-          <Button variant="secondary" onClick={handleClose} className="btn-closed">
+          <button onClick={handleClose} className="btn-closed">
             cancel
-          </Button>
-          <Button variant="primary" onClick={actionDelete} className="btn-delete">
+          </button>
+          <button onClick={actionDelete} className="btn-delete">
             delete
-          </Button>
+          </button>
         </Modal.Footer>
       </Modal>
 

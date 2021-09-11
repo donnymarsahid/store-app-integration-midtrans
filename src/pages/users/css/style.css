@@ -490,6 +490,26 @@ section.cart-page {
   margin-top: 150px;
   margin-bottom: 50px;
 }
+.modal-delete .btn-closed {
+  background-color: #974a4a;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+}
+.modal-delete .btn-closed:hover {
+  background-color: #b45959;
+}
+.modal-delete {
+  color: var(--primaryColor);
+}
+.modal-delete .btn-delete {
+  background-color: var(--primaryColor);
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+}
 
 section.cart-page .container .col-md-7,
 section.cart-page .container .col-md-5 {

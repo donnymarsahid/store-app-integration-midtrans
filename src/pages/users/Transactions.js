@@ -7,6 +7,7 @@ import barcode from '../../assets/img/barcode.svg';
 import swal from 'sweetalert';
 import { convert } from 'rupiah-format';
 import moment from 'moment';
+import emptyTransaction from '../../assets/img/empty-transaction.png';
 
 const Transactions = () => {
   const { data: transactionsUser, isLoading, refetch } = useQuery('transactionsUserCache', getTransactionUser);
@@ -54,9 +55,13 @@ const Transactions = () => {
 
   if (transactionsUser?.length === 0) {
     return (
-      <div className="custom-status">
-        <h3>empty transaction</h3>
-      </div>
+      <>
+        <title>WaysBucks | Transactions</title>
+        <div className="custom-status flex-column">
+          <img src={emptyTransaction} alt="empty-transaction" width="400px" />
+          <h3 style={{ color: '#bd0707' }}>empty transaction</h3>
+        </div>
+      </>
     );
   }
 

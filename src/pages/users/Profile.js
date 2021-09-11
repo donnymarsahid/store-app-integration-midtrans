@@ -142,7 +142,7 @@ const Profile = () => {
                     </button>
                   </div>
                   <div class="text ps-4">
-                    <p>Full Name : {userId?.fullname}</p>
+                    <p>FullName : {userId?.fullname}</p>
                     <p>Email : {userId?.email}</p>
                     <p>Phone : {userId?.phone === null ? <>-</> : userId.phone}</p>
                     <p>PosCode : {userId?.posCode === null ? <>-</> : userId.posCode}</p>
