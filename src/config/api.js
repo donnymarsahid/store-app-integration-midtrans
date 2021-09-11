@@ -66,7 +66,7 @@ export const getCarts = async () => {
     },
   };
   const response = await API().get('/carts', config);
-  return response.data.carts;
+  return response.data;
 };
 
 // Transaction

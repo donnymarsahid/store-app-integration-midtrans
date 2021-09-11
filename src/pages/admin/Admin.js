@@ -87,27 +87,27 @@ const Admin = (props) => {
             </div>
           </div>
           <div class="row social-media d-flex justify-content-between mt-5">
-            <div class="col-md-4 p-0 pe-3">
+            <a class="col-md-4 p-0 pe-3 text-decoration-none followers" href="https://twitter.com/waysbucks">
               <div class="box-sosmed d-flex justify-content-between align-items-center">
                 <img src={chartsDonnut} alt="charts-donnut" />
                 <p class="text-uppercase m-0">Twitter Tweets</p>
                 <img src={twitter} alt="twitter" />
               </div>
-            </div>
-            <div class="col-md-4 pe-3 ps-3">
+            </a>
+            <a class="col-md-4 pe-3 ps-3 text-decoration-none followers" href="https://www.facebook.com/waysbucks">
               <div class="box-sosmed d-flex justify-content-between align-items-center">
                 <img src={chartsDonnut} alt="charts-donnut" />
                 <p class="text-uppercase m-0">Facebook Followers</p>
                 <img src={facebook} alt="facebook" />
               </div>
-            </div>
-            <div class="col-md-4 p-0 ps-3">
+            </a>
+            <a class="col-md-4 p-0 ps-3 text-decoration-none followers" href="http://instagram.com/waysbucks">
               <div class="box-sosmed d-flex justify-content-between align-items-center">
                 <img src={chartsDonnut} alt="charts-donnut" />
                 <p class="text-uppercase m-0">Instagram Followers</p>
                 <img src={instagram} alt="instagram" />
               </div>
-            </div>
+            </a>
           </div>
           <div class="diagram-users">
             <div class="row diagram-users d-flex justify-content-between mt-5">

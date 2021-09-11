@@ -5,10 +5,18 @@ import { useMutation, useQuery } from 'react-query';
 import { convert } from 'rupiah-format';
 import swal from 'sweetalert';
 import loading from '../../assets/img/loading.gif';
+import { Modal } from 'react-bootstrap';
 
 const IncomeTransaction = () => {
   const { data: transactions, refetch, isLoading } = useQuery('getTransactionsCache', getTransactions);
   const array = [];
+
+  const [transactionModal, setTransactionModal] = useState([]);
+  const [transaction, setTransaction] = useState({});
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const handlerOnTheWay = useMutation(async (id) => {
     try {
@@ -83,6 +91,28 @@ const IncomeTransaction = () => {
       </div>
     );
   }
+
+  const handlerDetailTransaction = async (id) => {
+    try {
+      const config = {
+        method: 'GET',
+        headers: {
+          Authorization: 'Bearer ' + localStorage.token,
+        },
+      };
+
+      const response = await API().get('/transaction/' + id, config);
+
+      if (response.status === 'success') {
+        setTransactionModal(response.data.orders);
+        setTransaction(response.data);
+        handleShow();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <title>WaysBucks | Income Transaction</title>
@@ -97,6 +127,7 @@ const IncomeTransaction = () => {
                 <th scope="col">Address</th>
                 <th scope="col">Post Code</th>
                 <th scope="col">Income</th>
+                <th scope="col">Detail</th>
                 <th scope="col">Status</th>
                 <th scope="col">Action</th>
               </tr>
@@ -110,6 +141,9 @@ const IncomeTransaction = () => {
                     <td>{data.address}</td>
                     <td>{data.posCode}</td>
                     <td className="column-price">{convert(data.total)}</td>
+                    <td className="text-check" onClick={() => handlerDetailTransaction(data.id)}>
+                      check
+                    </td>
                     <td className={`income ${data.status}`}>{data.status}</td>
                     <td className="text-center">
                       {data.status === 'waiting approve' && (
@@ -155,6 +189,39 @@ const IncomeTransaction = () => {
           </table>
         </div>
       </section>
+
+      <Modal show={show} centered onHide={handleClose} className="modal-profile">
+        <Modal.Header>
+          <Modal.Title className="update-profile">Detail Transaction</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div class="row">
+            {transactionModal.map((data) => {
+              const dataToppings = data.toppings.map((topping) => <>{topping.title},</>);
+              return (
+                <>
+                  <div class="col-md-6">
+                    <img src={data.product.image} alt="image" width="180px" />
+                    <p className="m-0 text-capitalize text-product">{data.product.title}</p>
+                    <p className="m-0 text-capitalize text-topping">{dataToppings}</p>
+                  </div>
+                </>
+              );
+            })}
+          </div>
+          <div class="attachment mt-3">
+            <img src={transaction.attachment} alt="attachment" width="80px" />
+            <a href={transaction.attachment} target="_blank" className="btn-preview">
+              Preview Attachment
+            </a>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <button className="btn-danger-profile" onClick={handleClose}>
+            Close
+          </button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };

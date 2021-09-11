@@ -27,6 +27,30 @@ section.admin .container .col-md-4.box-income-transaction {
   transform: scale(0.98);
   transition: 0.2s;
 }
+.modal-profile .text-product {
+  font-weight: 600;
+  color: var(--primaryColor);
+}
+.modal-profile .text-topping {
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--primaryColor);
+}
+.modal-profile .btn-preview {
+  background-color: transparent;
+  border: 2px solid var(--primaryColor);
+  color: var(--primaryColor);
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 3px;
+  font-size: 14px;
+  padding: 5px 10px;
+  margin: 0 0 0 10px;
+}
+.modal-profile .btn-preview:hover {
+  background-color: var(--primaryColor);
+  color: white;
+}
 
 section.admin .col-md-4.box .info {
   height: 100%;
@@ -77,6 +101,9 @@ section.admin .link-router p:hover {
 
 section.admin .container .col-md-4.box:hover {
   transform: scale(1);
+}
+section.admin .text-decoration-none.followers {
+  cursor: pointer;
 }
 /* Box 1 End */
 
@@ -205,6 +232,11 @@ section.add-product .form-check-label p {
 section.income-transaction {
   margin-top: 150px;
   margin-bottom: 150px;
+}
+
+section.income-transaction .text-check {
+  cursor: pointer;
+  color: #00a2ff;
 }
 section.income-transaction h1 {
   font-weight: 700;

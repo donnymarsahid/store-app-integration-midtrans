@@ -112,6 +112,8 @@ const CartPage = () => {
     );
   }
 
+  console.log(carts);
+
   const cartsProducts = carts?.map((data) => {
     const dataPrice = [];
 

@@ -44,9 +44,9 @@ const NavbarAdmin = () => {
               <div className="btn-group dropstart">
                 <p className="m-0 pe-2 text-nav-admin">Hai Admin!</p>
                 <div class="dropdown">
-                  <img src="logo192.png" alt="profile" width="30px" className="img-profile" data-bs-toggle="dropdown" />
+                  <img src="/logo192.png" alt="profile" width="30px" className="img-profile" data-bs-toggle="dropdown" />
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <Link to="/profile" className="text-decoration-none">
+                    <Link to="/admin" className="text-decoration-none">
                       <li className="dropdown-profile d-flex">
                         <img src={user} alt="profile" />
                         <p className="m-0">Admin</p>
