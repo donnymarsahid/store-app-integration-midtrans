@@ -13,7 +13,7 @@ const Footer = () => {
                 <a href="/">
                   Hub : 0838-7223-9021 <br />
                 </a>
-                <a href="/">Email : donnymrshd.94@gmail.com</a>
+                <a href="/">Email : waysbucks.coffee@gmail.com</a>
               </p>
             </div>
             <div className="col-md-4 text-center sosmed">
@@ -35,16 +35,16 @@ const Footer = () => {
               </a>
             </div>
             <div className="col-md-4 footer-menu">
-              <p>AVAILABLE</p>
+              <p className="text-uppercase">access rights</p>
               <ul>
                 <li>
                   <Link to="/" className="link-footer">
-                    <p>FlavorVariant</p>
+                    <p>Term & Condition</p>
                   </Link>
                 </li>
                 <li>
                   <Link to="/" className="link-footer">
-                    <p>Toppings</p>
+                    <p>Privacy Policy</p>
                   </Link>
                 </li>
               </ul>
