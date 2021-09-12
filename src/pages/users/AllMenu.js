@@ -5,6 +5,7 @@ import './css/style.css';
 import { useQuery } from 'react-query';
 import { getProducts, getTypeCoffee } from '../../config/api';
 import loading from '../../assets/img/loading.gif';
+import ModalNotAvailable from '../guest/components/ModalNotAvailable';
 
 const AllMenu = () => {
   const { data: products, isLoading, error } = useQuery('productsCache', getProducts);
@@ -64,6 +65,7 @@ const AllMenu = () => {
           <div className="row">{renderCoffee ? products?.map((data) => <CardAllCoffee coffee={data} key={data.id} />) : typeCoffee?.map((data) => <CardCoffee coffee={data} key={data.id} />)}</div>
         </div>
       </section>
+      <ModalNotAvailable />
     </>
   );
 };

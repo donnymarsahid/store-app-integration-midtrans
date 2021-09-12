@@ -11,9 +11,15 @@ const CardCoffe = ({ coffee }) => {
           <div className="image-card">
             <img src={coffee.image} alt={coffee.image} />
             <div className="overlay d-flex justify-content-center align-items-center">
-              <button data-bs-toggle="modal" data-bs-target="#exampleModalLogin">
-                ORDER NOW
-              </button>
+              {coffee.status === 'not available' ? (
+                <button data-bs-toggle="modal" data-bs-target="#exampleModalNotAvailable">
+                  Not Available
+                </button>
+              ) : (
+                <button data-bs-toggle="modal" data-bs-target="#exampleModalLogin">
+                  ORDER NOW
+                </button>
+              )}
             </div>
           </div>
           <div className="description">

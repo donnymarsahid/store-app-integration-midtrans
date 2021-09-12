@@ -16,9 +16,15 @@ const CardCoffe = ({ coffee }) => {
           <div className="image-card">
             <img src={coffee.image} alt={coffee.image} />
             <div className="overlay d-flex justify-content-center align-items-center">
-              <Link to={`/detail-page/${coffee.id}`}>
-                <button>ORDER NOW</button>
-              </Link>
+              {coffee.status === 'not available' ? (
+                <button data-bs-toggle="modal" data-bs-target="#exampleModalNotAvailable">
+                  Not Available
+                </button>
+              ) : (
+                <Link to={`/detail-page/${coffee.id}`}>
+                  <button>ORDER NOW</button>
+                </Link>
+              )}
             </div>
             <div className="whistlist d-flex align-items-center justify-content-center">
               <button className={`btn${coffee.id}`} onClick={handlerWhistlist}>

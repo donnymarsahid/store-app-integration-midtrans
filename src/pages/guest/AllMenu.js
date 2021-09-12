@@ -7,6 +7,7 @@ import './css/style.css';
 import { useQuery } from 'react-query';
 import { getProducts, getTypeCoffee } from '../../config/api';
 import loading from '../../assets/img/loading.gif';
+import ModalNotAvailable from './components/ModalNotAvailable';
 
 const AllMenu = () => {
   const { data: products, isLoading, error } = useQuery('productsCache', getProducts);
@@ -68,6 +69,7 @@ const AllMenu = () => {
       </section>
       <Login />
       <Register />
+      <ModalNotAvailable />
     </>
   );
 };
