@@ -33,7 +33,10 @@ const CardCoffe = ({ coffee }) => {
             </div>
           </div>
           <div className="description">
-            <h5 className="text-capitalize">{coffee.title}</h5>
+            <div class="title d-flex">
+              {coffee.status === 'not available' ? <h5 className="text-decoration-line-through text-capitalize">{coffee.title}</h5> : <h5 className="text-capitalize">{coffee.title}</h5>}
+              {coffee.status === 'not available' ? <p className="title-status ps-2">*{coffee.status}</p> : <></>}
+            </div>
             <p>{parsingPrice}</p>
           </div>
         </div>
