@@ -206,6 +206,61 @@ nav .dropdown-menu .dropdown-logout p {
 nav .dropdown-menu .dropdown-profile {
   border-bottom: 3px solid #a8a8a8;
 }
+nav .notification {
+  position: relative;
+}
+nav .notification span {
+  width: 15px;
+
+  height: 15px;
+  border: 2px solid white;
+  background-color: red;
+  position: absolute;
+  top: 0;
+  right: 20px;
+  border-radius: 10px;
+}
+
+nav .dropdown-menu-notif {
+  background-color: white;
+  margin-top: 100px;
+  position: absolute !important;
+  top: 28px !important;
+  left: -8px !important;
+  border: none;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.301);
+  width: 280px;
+  padding: 8px;
+}
+nav .dropdown-menu-notif .title-notif {
+  color: var(--primaryColor);
+  font-weight: 600;
+  font-size: 14px;
+  margin: 0;
+}
+nav .dropdown-menu-notif .description-notif {
+  color: var(--primaryColor);
+  font-weight: 400;
+  font-size: 12.5px;
+  margin: 0;
+}
+nav .dropdown-menu-notif .text-date {
+  color: blueviolet;
+  font-weight: 400;
+  font-size: 10px;
+  margin: 0;
+}
+nav .dropdown-menu-notif::before {
+  content: url('../../../assets/img/polygon.png');
+  position: absolute;
+  top: -35px;
+  right: 5px;
+}
+
+nav .list-notif:hover {
+  background-color: rgb(231, 231, 231);
+  cursor: pointer;
+}
 
 /* Navbar End */
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
 import { getUsers } from '../../../../config/api';
 
 const TableUser = () => {
@@ -20,6 +21,7 @@ const TableUser = () => {
                 <th scope="col">Full Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Total Order</th>
+                <th scope="col">Chat</th>
               </tr>
             </thead>
             <tbody>
@@ -30,6 +32,9 @@ const TableUser = () => {
                     <td scope="col">{user.fullname}</td>
                     <td scope="col">{user.email}</td>
                     <td scope="col">{user.transactions.length}</td>
+                    <Link to={`/admin/user/${user.id}`}>
+                      <td scope="col">go chat</td>
+                    </Link>
                   </tr>
                 );
               })}

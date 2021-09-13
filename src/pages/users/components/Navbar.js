@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../css/style.css';
 import { Link, useHistory } from 'react-router-dom';
 import logoWaysBucks from '../../../assets/img/logo-waysbucks.svg';
@@ -10,12 +10,80 @@ import { UserContext } from '../../../context/userContext';
 import { useQuery } from 'react-query';
 import { getCarts, getUser } from '../../../config/api';
 
+import { io } from 'socket.io-client';
+import { useParams } from 'react-router';
+import { API } from '../../../config/api';
+
+let socket;
+
 const Navbar = () => {
   const history = useHistory();
   const [state, dispatch] = useContext(UserContext);
+  const [messages, setMessages] = useState([]);
+  const [notif, setNotif] = useState(false);
 
   const { data: carts } = useQuery('getCartsCache', getCarts);
   const { data: userId } = useQuery('getUserIdCache', getUser);
+
+  // Connection Socket.io
+  useEffect(() => {
+    socket = io('http://localhost:3001', {
+      auth: {
+        token: localStorage.getItem('token'),
+      },
+      query: {
+        id: state.user.id,
+      },
+    });
+
+    socket.on('connect_error', (err) => {
+      console.error(err.message);
+    });
+
+    socket.on('new message', () => {
+      socket.emit('load messages', '7a7e47ff-9778-4b26-92d0-4be205a00cb2');
+      setNotif(true);
+    });
+
+    console.log(notif);
+
+    loadContact();
+    loadMessages();
+
+    return () => {
+      socket.disconnect();
+    };
+  }, [messages]);
+
+  // Load Contact
+  const loadContact = () => {
+    socket.emit('load admin contact');
+    socket.on('admin contact', (data) => {
+      // console.log(data)
+      // const dataContact = {
+      //     ...data,
+      //     message: messages.length > 0 ? messages[messages.length - 1].message: 'Click here to start message'
+      // }
+      // setContacts([dataContact])
+      socket.emit('load messages', data.id);
+    });
+  };
+
+  // Load Message
+  const loadMessages = () => {
+    socket.on('messages', (data) => {
+      if (messages.length !== data.length) {
+        if (data.length > 0) {
+          const dataMessages = data.map((item) => ({
+            idSender: item.sender.id,
+            message: item.message,
+          }));
+          setMessages(dataMessages);
+          console.log(dataMessages);
+        }
+      }
+    });
+  };
 
   const handlerLogout = () => {
     swal({
@@ -35,6 +103,10 @@ const Navbar = () => {
       }
     });
   };
+
+  const handlerNotification = () => {
+    setNotif(false);
+  };
   return (
     <>
       <nav className="fixed-top shadow-sm d-flex align-items-center">
@@ -45,7 +117,7 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="navbar-link pe-2">
-            <ul className="d-flex m-0 p-0 ps-3 justify-content-lg-around">
+            <ul className="d-flex m-0 p-0 ps-5 justify-content-lg-around">
               <Link to="/contact" className="text-decoration-none ">
                 <li className="fw-bolder">Contact</li>
               </Link>
@@ -64,10 +136,36 @@ const Navbar = () => {
             </ul>
           </div>
           <div className="access d-flex">
+            <div class="dropdown notification">
+              <i class="fas fa-bell pe-4 pt-1" style={{ fontSize: '28px' }} data-bs-toggle="dropdown" onClick={handlerNotification}></i>
+              <span className={notif === true ? `` : `d-none`}></span>
+              <ul class="dropdown-menu dropdown-menu-notif dropdown-menu-dark">
+                {messages.map((data) => {
+                  return (
+                    <>
+                      <Link to="/profile" className="text-decoration-none">
+                        <li className="d-flex mt-2 mb-2 list-notif">
+                          <div class="image me-2">
+                            <img src="/logo192.png" alt="admin" width="30px" />
+                          </div>
+                          <div class="message">
+                            <div class="d-flex flex-column">
+                              <p className="title-notif">Waysbucks-coffee</p>
+                              <p className="m-0 text-date">13-09-2021 08:56</p>
+                            </div>
+                            <p className="description-notif">{data.message}</p>
+                          </div>
+                        </li>
+                      </Link>
+                    </>
+                  );
+                })}
+              </ul>
+            </div>
             <div className="shop d-flex align-items-center">
               <Link to="/cart-page">
                 <img src={cartIcon} alt="cart" className="me-4 image-cart" width="30px" />
-                <span className="d-flex justify-content-center align-items-center">{carts?.length}</span>
+                <span className="d-flex justify-content-center align-items-center">1</span>
               </Link>
             </div>
             <div className="profile">
