@@ -29,7 +29,6 @@ import About from './pages/guest/About';
 import Transactions from './pages/users/Transactions';
 import ContactUsers from './pages/users/Contact';
 import Contact from './pages/users/Contact';
-import Chat from './pages/admin/chat/Chat';
 
 function App() {
   const [state, dispatch] = useContext(UserContext);
@@ -105,8 +104,6 @@ function App() {
           <Route path="/admin/update-topping/:id" component={UpdateTopping} />
           <Route path="/admin/user" exact component={TableUser} />
           <Route path="/admin/income-transaction" component={IncomeTransaction} />
-          {/* Chat Tester */}
-          <Route path="/admin/user/:id" component={Chat} />
           <Route path="/*" component={NoMatch} />
         </Switch>
         <Footer />

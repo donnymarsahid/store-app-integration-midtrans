@@ -39,7 +39,7 @@ const Navbar = () => {
     });
 
     socket.on('new message', () => {
-      socket.emit('load messages', '7a7e47ff-9778-4b26-92d0-4be205a00cb2');
+      socket.emit('load messages', '63d12ca0-6604-465d-b2e9-aa5838fce441');
       setNotif(true);
     });
 
