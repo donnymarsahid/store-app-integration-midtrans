@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './css/style.css';
 import { API, getTransactions } from '../../config/api';
 import { useMutation, useQuery } from 'react-query';
@@ -6,17 +6,50 @@ import { convert } from 'rupiah-format';
 import swal from 'sweetalert';
 import loading from '../../assets/img/loading.gif';
 import { Modal } from 'react-bootstrap';
+import { io } from 'socket.io-client';
+import { UserContext } from '../../context/userContext';
 
+let socket;
 const IncomeTransaction = () => {
   const { data: transactions, refetch, isLoading } = useQuery('getTransactionsCache', getTransactions);
   const array = [];
 
   const [transactionModal, setTransactionModal] = useState([]);
   const [transaction, setTransaction] = useState({});
+  const [state] = useContext(UserContext);
+  const [messages, setMessages] = useState([]);
 
   const [show, setShow] = useState(false);
+
+  const [contact, setContact] = useState(null);
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  useEffect(() => {
+    socket = io('http://localhost:3001', {
+      auth: {
+        token: localStorage.getItem('token'),
+      },
+      query: {
+        id: state.user.id,
+      },
+    });
+
+    socket.on('new message', () => {
+      socket.emit('load messages', contact?.id);
+    });
+
+    socket.on('connect_error', (err) => {
+      console.error(err.message);
+    });
+
+    loadMessages();
+
+    return () => {
+      socket.disconnect();
+    };
+  }, [messages]);
 
   const handlerOnTheWay = useMutation(async (id) => {
     try {
@@ -30,6 +63,9 @@ const IncomeTransaction = () => {
         body,
       };
 
+      const responseUser = await API().get('/user/' + id);
+      setContact(responseUser.data.userDetail.user);
+
       swal({
         title: 'Transaction already entered?',
         icon: 'warning',
@@ -37,7 +73,12 @@ const IncomeTransaction = () => {
         dangerMode: true,
       }).then(async (willDelete) => {
         if (willDelete) {
-          const response = await API().put('/transaction/' + id, config);
+          await API().put('/transaction/' + id, config);
+          const data = {
+            idRecipient: responseUser.data.userDetail.user.id,
+            message: `hello ${responseUser.data.userDetail.user.fullname} your order is being shipped, have a nice wait`,
+          };
+          socket.emit('send message', data);
           refetch();
           swal('Transaction success approve!', {
             icon: 'success',
@@ -51,6 +92,20 @@ const IncomeTransaction = () => {
     }
   });
 
+  const loadMessages = () => {
+    socket.on('messages', (data) => {
+      if (messages.length !== data.length) {
+        if (data.length > 0) {
+          const dataMessages = data.map((item) => ({
+            idSender: item.sender.id,
+            message: item.message,
+          }));
+          setMessages(dataMessages);
+        }
+      }
+    });
+  };
+
   const handlerCancel = useMutation(async (id) => {
     try {
       const body = JSON.stringify({ status: 'cancel' });
@@ -62,6 +117,10 @@ const IncomeTransaction = () => {
         },
         body,
       };
+
+      const responseUser = await API().get('/user/' + id);
+      setContact(responseUser.data.userDetail.user);
+
       swal({
         title: 'Are you sure cancel?',
         text: 'transaction will be canceled!',
@@ -70,7 +129,14 @@ const IncomeTransaction = () => {
         dangerMode: true,
       }).then(async (willDelete) => {
         if (willDelete) {
-          const response = await API().put('/transaction/' + id, config);
+          await API().put('/transaction/' + id, config);
+
+          const data = {
+            idRecipient: responseUser.data.userDetail.user.id,
+            message: `hello ${responseUser.data.userDetail.user.fullname} your order has been cancelled`,
+          };
+
+          socket.emit('send message', data);
           refetch();
           swal('Transaction has been deleted', {
             icon: 'success',
@@ -200,8 +266,8 @@ const IncomeTransaction = () => {
               const dataToppings = data.toppings.map((topping) => <>{topping.title},</>);
               return (
                 <>
-                  <div class="col-md-6">
-                    <img src={data.product.image} alt="image" width="180px" />
+                  <div class="col-md-4">
+                    <img src={data.product.image} alt="image" width="100%" />
                     <p className="m-0 text-capitalize text-product">{data.product.title}</p>
                     <p className="m-0 text-capitalize text-topping">{dataToppings}</p>
                   </div>

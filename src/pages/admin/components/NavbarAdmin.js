@@ -47,12 +47,12 @@ const NavbarAdmin = () => {
                   <img src="/logo192.png" alt="profile" width="30px" className="img-profile" data-bs-toggle="dropdown" />
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <Link to="/admin" className="text-decoration-none">
-                      <li className="dropdown-profile d-flex">
+                      <li className="sort-dropdown  dropdown-profile d-flex">
                         <img src={user} alt="profile" />
                         <p className="m-0">Admin</p>
                       </li>
                     </Link>
-                    <li className="dropdown-logout d-flex" onClick={handlerLogout}>
+                    <li className="sort-dropdown dropdown-logout d-flex" onClick={handlerLogout}>
                       <img src={logout} alt="profile" />
                       <p className="m-0">Logout</p>
                     </li>

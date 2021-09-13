@@ -30,10 +30,11 @@ section.admin .container .col-md-4.box-income-transaction {
 .modal-profile .text-product {
   font-weight: 600;
   color: var(--primaryColor);
+  font-size: 12px;
 }
 .modal-profile .text-topping {
   font-weight: 500;
-  font-size: 14px;
+  font-size: 12px;
   color: var(--primaryColor);
 }
 .modal-profile .btn-preview {

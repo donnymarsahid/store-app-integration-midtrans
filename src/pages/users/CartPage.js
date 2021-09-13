@@ -34,6 +34,8 @@ const CartPage = () => {
 
   const { data: carts, refetch } = useQuery('getCartsCache', getCarts);
 
+  console.log(order);
+
   const [form, setForm] = useState({
     name: userId?.fullname,
     email: userId?.email,
@@ -313,9 +315,17 @@ const CartPage = () => {
       <Modal show={showOrder} centered onHide={handleCloseOrder} className="modal-order-success">
         <Modal.Body className="d-flex justify-content-center">{order}</Modal.Body>
         <Modal.Footer>
-          <button className="btn-order" onClick={handleCloseOrder}>
-            oke
-          </button>
+          {order !== 'Thank you for ordering in us, please wait to verify you order' ? (
+            <>
+              <button className="btn-order d-none"></button>
+            </>
+          ) : (
+            <>
+              <button className="btn-order" onClick={handleCloseOrder}>
+                oke
+              </button>
+            </>
+          )}
         </Modal.Footer>
       </Modal>
     </>

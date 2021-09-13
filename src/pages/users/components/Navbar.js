@@ -9,17 +9,15 @@ import swal from 'sweetalert';
 import { UserContext } from '../../../context/userContext';
 import { useQuery } from 'react-query';
 import { getCarts, getUser } from '../../../config/api';
-
+import moment from 'moment';
 import { io } from 'socket.io-client';
-import { useParams } from 'react-router';
-import { API } from '../../../config/api';
 
 let socket;
 
 const Navbar = () => {
   const history = useHistory();
   const [state, dispatch] = useContext(UserContext);
-  const [messages, setMessages] = useState([]);
+  let [messages, setMessages] = useState([]);
   const [notif, setNotif] = useState(false);
 
   const { data: carts } = useQuery('getCartsCache', getCarts);
@@ -46,6 +44,7 @@ const Navbar = () => {
     });
 
     console.log(notif);
+    console.log(messages);
 
     loadContact();
     loadMessages();
@@ -77,6 +76,7 @@ const Navbar = () => {
           const dataMessages = data.map((item) => ({
             idSender: item.sender.id,
             message: item.message,
+            createdAt: item.createdAt,
           }));
           setMessages(dataMessages);
           console.log(dataMessages);
@@ -107,6 +107,7 @@ const Navbar = () => {
   const handlerNotification = () => {
     setNotif(false);
   };
+
   return (
     <>
       <nav className="fixed-top shadow-sm d-flex align-items-center">
@@ -140,32 +141,42 @@ const Navbar = () => {
               <i class="fas fa-bell pe-4 pt-1" style={{ fontSize: '28px' }} data-bs-toggle="dropdown" onClick={handlerNotification}></i>
               <span className={notif === true ? `` : `d-none`}></span>
               <ul class="dropdown-menu dropdown-menu-notif dropdown-menu-dark">
-                {messages.map((data) => {
-                  return (
-                    <>
-                      <Link to="/profile" className="text-decoration-none">
-                        <li className="d-flex mt-2 mb-2 list-notif">
-                          <div class="image me-2">
-                            <img src="/logo192.png" alt="admin" width="30px" />
-                          </div>
-                          <div class="message">
-                            <div class="d-flex flex-column">
-                              <p className="title-notif">Waysbucks-coffee</p>
-                              <p className="m-0 text-date">13-09-2021 08:56</p>
+                {messages.length === 0 ? (
+                  <>
+                    <li className="d-flex justify-content-center align-items-center no-notification" style={{ height: '200px', color: '#3d3d3d' }}>
+                      {' '}
+                      No Notification <i class="fas fa-bell-slash"></i>
+                    </li>
+                  </>
+                ) : (
+                  messages.slice(0, 4).map((data) => {
+                    console.log(data);
+                    return (
+                      <>
+                        <Link to="/profile" className="text-decoration-none">
+                          <li className="d-flex mt-2 mb-2 list-notif">
+                            <div class="image me-2">
+                              <img src="/logo192.png" alt="admin" width="30px" />
                             </div>
-                            <p className="description-notif">{data.message}</p>
-                          </div>
-                        </li>
-                      </Link>
-                    </>
-                  );
-                })}
+                            <div class="message">
+                              <div class="d-flex flex-column">
+                                <p className="title-notif">Waysbucks-coffee</p>
+                                <p className="m-0 text-date">{moment(data.createdAt).format('lll')}</p>
+                              </div>
+                              <p className="description-notif">{data.message}</p>
+                            </div>
+                          </li>
+                        </Link>
+                      </>
+                    );
+                  })
+                )}
               </ul>
             </div>
             <div className="shop d-flex align-items-center">
               <Link to="/cart-page">
                 <img src={cartIcon} alt="cart" className="me-4 image-cart" width="30px" />
-                <span className="d-flex justify-content-center align-items-center">1</span>
+                {carts?.length === 0 ? <></> : <span className="d-flex justify-content-center align-items-center">{carts?.length}</span>}
               </Link>
             </div>
             <div className="profile">
@@ -173,12 +184,12 @@ const Navbar = () => {
                 <img src={userId?.image} alt="profile" width="30px" className="img-profile" data-bs-toggle="dropdown" />
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                   <Link to="/profile" className="text-decoration-none">
-                    <li className="dropdown-profile d-flex">
+                    <li className="sort-dropdown dropdown-profile d-flex">
                       <img src={user} alt="profile" />
                       <p className="m-0">Profile</p>
                     </li>
                   </Link>
-                  <li className="dropdown-logout d-flex" onClick={handlerLogout}>
+                  <li className="sort-dropdown dropdown-logout d-flex" onClick={handlerLogout}>
                     <img src={logout} alt="profile" />
                     <p className="m-0">Logout</p>
                   </li>

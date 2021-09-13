@@ -197,6 +197,9 @@ nav .dropdown-menu .dropdown-profile p {
   letter-spacing: 1px;
   font-size: 17px;
 }
+nav .sort-dropdown:hover {
+  background-color: rgb(231, 231, 231);
+}
 nav .dropdown-menu .dropdown-logout p {
   padding-left: 8px;
   font-size: 17px;
@@ -257,9 +260,20 @@ nav .dropdown-menu-notif::before {
   right: 5px;
 }
 
+nav .list-notif {
+  padding: 3px 4px;
+}
 nav .list-notif:hover {
   background-color: rgb(231, 231, 231);
   cursor: pointer;
+}
+nav li.no-notification {
+  color: rgba(0, 0, 0, 0.3) !important;
+  font-weight: 500;
+}
+nav li.no-notification i {
+  color: rgba(0, 0, 0, 0.3) !important;
+  font-size: 18px;
 }
 
 /* Navbar End */
